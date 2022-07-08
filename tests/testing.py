@@ -12,7 +12,8 @@ fan = ahus.AHUComponent(idf.Fan_OnOff[0], 'Fan:OnOff')
 #print(fan)
 #print(idf.AirLoopHVAC[0])
 parser.getListComponents(idf.Branch[0], 'component', 'name')
-parser.untangleAirLoop(idf.AirLoopHVAC[0])
+parser.untangleAirLoopSupply(idf.AirLoopHVAC[0], idf)
+parser.untangleAirLoopZones(idf)
 #for element in idf.AirLoopHVAC:
 #    print(element.branch_list_name)
 #

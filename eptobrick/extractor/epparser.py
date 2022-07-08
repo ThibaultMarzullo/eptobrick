@@ -57,7 +57,7 @@ class Extractor():
         for ahu in idf.AirLoopHVAC:
             self.printMessage(f'{ahu.name}', lvl='debug')
             self.graph.add(self.BUILDING[ahu.name], RDF['type'], self.BRICK['AHU'])
-            airloop = self.untangleAirLoop(ahu)
+            airloop = self.untangleAirLoop(ahu, idf)
 
         pass
     
@@ -72,11 +72,51 @@ class Extractor():
                 break
         return list(filter(None, components)) #sometimes we end up with trailing 'None' values
 
-    def untangleAirLoop(self, idfahu):
+    def untangleAirLoopZones(self, idf):
+        zoneequipment = []
+        for zone in idf.ZoneHVAC_EquipmentConnections:
+            inlets = []
+            outlets = []
+            for nodelist in idf.NodeList:
+                if nodelist.name == zone.zone_air_inlet_node_or_nodelist_name:
+                    inlets.extend(self.getListComponents(nodelist, 'node', 'name'))
+                elif nodelist.name == zone.zone_return_air_node_or_nodelist_name or nodelist.name == zone.zone_air_exhaust_node_or_nodelist_name:
+                    outlets.extend(self.getListComponents(nodelist, 'node', 'name'))
+            # If the 'node or nodelist' did not refer to a nodelist, it means it is a single node.
+            if inlets == []:
+                inlets.append(zone.zone_air_inlet_node_or_nodelist_name)
+            if outlets == []:
+                if zone.zone_return_air_node_or_nodelist_name is not None:
+                    outlets.append(zone.zone_return_air_node_or_nodelist_name)
+                if zone.zone_air_exhaust_node_or_nodelist_name is not None:
+                    outlets.append(zone.zone_air_exhaust_node_or_nodelist_name)
+            curzone = [ahus.ThermalZone(zone, self.getEPType(zone), inlets, outlets).create()]
+            adus = self.getListComponents(zone.zone_conditioning_equipment_list_name, 'zone_equipment', 'name')
+            for adu in adus:
+                terminalunit = adu.air_terminal_name
+                curzone.append(ahus.AHUComponent(terminalunit, self.getEPType(terminalunit)).create())
+            # search Core_ZN Direct Air ADU in IDF
+            self.printMessage(f'Extracted zone and ADU nodes for {zone.zone_name.name}', lvl='debug')
+
+            self.printMessage(f'\t{zone.zone_name.name} outlets: {curzone[0].air_outlets}', lvl='debug')
+            self.printMessage(f'\t{terminalunit.name} inlets: {curzone[-1].air_inlets}', lvl='debug')
+
+
+        
+        return zoneequipment
+
+    def untangleAirLoopSupply(self, idfahu, idf):
         supply_inlet = idfahu.supply_side_inlet_node_name
         supply_outlet = idfahu.supply_side_outlet_node_names
         demand_inlet = idfahu.demand_side_inlet_node_names
         demand_outlet = idfahu.demand_side_outlet_node_name
+
+        conns = {
+            'sin' : supply_inlet,
+            'sout' : supply_outlet,
+            'din' : demand_inlet,
+            'dout' : demand_outlet
+        }
 
         ## SUPPLY ##
         branches = self.getListComponents(idfahu.branch_list_name, 'branch', 'name')
@@ -93,23 +133,31 @@ class Extractor():
                         filtered.append(ahus.AHUComponent(component, self.getEPType(component)).create())
                     ### This is where we check for component type! There is no further nesting.
         
-        self.printMessage('Extracted supply branch containing the following objects:', lvl='debug')
-        self.printMessage(f'\tObjects: {[comp.type for comp in filtered]}', lvl='debug')
-        self.printMessage(f'\tSupply inlets: {filtered[0].air_inlets}', lvl='debug')
-        self.printMessage(f'\tSupply outlets: {filtered[-1].air_outlets}', lvl='debug')
+        self.printMessage(f'Extracted supply branch for {idfahu.name}:\n\tObjects: {[comp.type for comp in filtered]}', lvl='debug')
+        self.printMessage(f'\tSupply inlets: {filtered[0].air_inlets}\n\tSupply outlets: {filtered[-1].air_outlets}', lvl='debug')
 
         ## DEMAND ##
 
-        
+        for supplypath in idf.AirLoopHVAC_SupplyPath:
+            if supplypath.supply_air_path_inlet_node_name == demand_inlet:
+                splitters = self.getListComponents(supplypath, 'component', 'name')
+                for splitter in splitters:
+                    filtered.append(ahus.AHUComponent(splitter, self.getEPType(splitter)).create())
 
-        #demand inlet = supply outlet / demand outlet = supply inlet
+        self.printMessage(f'Extracted supply path for {idfahu.name}\n\tSupply path starts at: {filtered[-1].air_inlets}', lvl='debug')
+        self.printMessage(f'\tSupply path ends at: {filtered[-1].air_outlets}', lvl='debug')
+                
+        for returnpath in idf.AirLoopHVAC_ReturnPath:
 
-        # untangle demand side
-            # this is where the mixers, splitters, terminal units and zones will be
-            # dig into nested lists until we arrive to the equipment
+            if returnpath.return_air_path_outlet_node_name == demand_outlet:
+                mixers = self.getListComponents(returnpath, 'component', 'name')
+                for mixer in mixers:
+                    filtered.append(ahus.AHUComponent(mixer, self.getEPType(mixer)).create())
 
-        # if necessary, fix the supply -> demand and demand -> supply joining nodes, so that the equipment inlet/outlets point to those of the
-        # next equipment in line
+        self.printMessage(f'Extracted return path for {idfahu.name}\n\tReturn path starts at: {filtered[-1].air_inlets}', lvl='debug')
+        self.printMessage(f'\tReturn path ends at: {filtered[-1].air_outlets}', lvl='debug')
+
+        return filtered, conns
 
     def componentEdgeCases(self, idfobj):
         filtered = []
@@ -133,40 +181,3 @@ class Extractor():
             return None 
 
 
-    def walkAirLoop(self, airloop_in):
-        branch_lists = airloop_in.branch_list_name
-        branches = []
-        systems = []
-        for i in range(1, 100):
-            if hasattr(branch_lists, f"component_{i}_name"):
-                branches.append(branch_lists[f"branch_{i}_name"])
-            else:
-                if self.debug > 2:
-                    print("No more branches to explore")
-                break
-        for branch in branches:
-            for i in range(1, 100):
-                if hasattr(branch, f"component_{i}_name"):
-                    components = self.getSystemsInBranch(
-                        branch[f"component_{i}_name"], 
-                        branch[f"component_{i}_object_type"], 
-                        branch[f"component_{i}_inlet_node_name"], 
-                        branch[f"component_{i}_outlet_node_name"]
-                        )
-                    systems.append(components)
-                else:
-                    break
-        return branches
-
-    def getSystemsInBranch(self, airloop, type, inlet, outlet):
-
-        # this should start populating the BRICK model instead of recording architectures.
-
-        systems = {
-            'inlet' : inlet,
-            'outlet' : outlet,
-            'type' : getBRICKType(type),
-            'elements' : []
-        }
-        systems['elements'] = getElementsByType()
-        return None

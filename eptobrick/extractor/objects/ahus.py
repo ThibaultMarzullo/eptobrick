@@ -28,6 +28,17 @@ class AHUComponent():
         else:
             getattr(self, conn).append(name)
 
+    def getListComponents(self, idflist, type, value):
+        components = []
+        i = 1
+        while True:
+            try:
+                components.append(getattr(idflist, f'{type}_{i}_{value}'))
+                i += 1
+            except:
+                break
+        return list(filter(None, components))
+
     def create(self):
         subtype = self.type.split(':')[0]
         subsubtype = self.type.split(':')[1]
@@ -40,6 +51,11 @@ class AHUComponent():
             self.addTerminal()
         elif subtype == 'Coil':
             self.addCoil()
+        elif subtype == 'AirLoopHVAC':
+            if subsubtype == 'ZoneSplitter':
+                self.addSplitter()
+            elif subsubtype == 'ZoneMixer':
+                self.addMixer()
         #elif subtype == 'AirLoopHVAC':
         #    if subsubtype == 'UnitaryHeatPump':
         #        self.addUHP()
@@ -83,7 +99,7 @@ class AHUComponent():
 
     def addOAS(self):
         if self.type.split(':')[1] == 'Mixer':
-            self.btype = 'UndefinedOAS'
+            self.btype = None
             self.add_inlet(self.idfElement.outdoor_air_stream_node_name)
             self.add_inlet(self.idfElement.return_air_stream_node_name)
             self.add_outlet(self.idfElement.mixed_air_node_name)
@@ -95,7 +111,7 @@ class AHUComponent():
         self.add_inlet(self.idfElement.air_inlet_node_name)
         self.add_outlet(self.idfElement.air_outlet_node_name)
         if self.type.split(':')[1] == 'SingleDuct':
-            self.SingleDuctTerminal()
+            self.singleDuctTerminal()
 
     def singleDuctTerminal(self):
 
@@ -108,6 +124,34 @@ class AHUComponent():
             self.btype = 'CAV'
             #modelicabindings.CVNoReheat()
 
+    #### OTHER ZONE EQUIPMENT ####
+
+    def addSplitter(self):
+        self.btype = None
+        for outlet in self.getListComponents(self.idfElement, 'outlet', 'node_name'):
+            self.add_outlet(outlet)
+        self.add_inlet(self.idfElement.inlet_node_name)
+
+    def addMixer(self):
+        self.btype = None
+        for inlet in self.getListComponents(self.idfElement, 'inlet', 'node_name'):
+            self.add_inlet(inlet)
+        self.add_outlet(self.idfElement.outlet_node_name)
+
+class ThermalZone(AHUComponent):
+
+    def __init__(self, idfobj, objtype, inlets, outlets) -> None:
+        self.idfElement = idfobj
+        self.name = idfobj.zone_name
+        self.type = objtype
+        self.air_inlets = inlets
+        self.air_outlets = outlets
+        self.data = {}
+        self.btype = None
+
+    def create(self):
+        self.btype = 'HVAC_Zone'
+        return self
 
 
 
