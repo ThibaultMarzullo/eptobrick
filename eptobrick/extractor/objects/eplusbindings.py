@@ -6,7 +6,7 @@ class AHUComponent():
         
         #define base properties here
         self.idfElement = idfobj
-        self.name = idfobj.name
+        self.name = idfobj.name.replace(' ', '~')
         self.type = objtype
         self.air_inlets = None
         self.air_outlets = None
@@ -33,7 +33,7 @@ class AHUComponent():
         subsubtype = self.type.split(':')[1]
         # Find type, generally speaking (e.g. fan, coil, terminal unit, etc.)
         if subtype == 'Fan':
-            self.addFan()
+            self.addFan(subsubtype)
         elif subtype == 'OutdoorAir':
             self.addOAS()
         elif subtype == 'AirTerminal':
@@ -57,16 +57,21 @@ class AHUComponent():
 
     #### FANS ####
 
-    def addFan(self):
-        self.btype = 'Fan'
+    def addFan(self, subtype):
+        
         self.add_property('fanEfficiency', float(self.idfElement.fan_total_efficiency))
-        self.add_property('motorEfficiency', float(self.idfElement.motor_efficiency))
-        self.add_property('cooledByFluid', bool(float(self.idfElement.motor_in_airstream_fraction)))
         self.add_inlet(self.idfElement.air_inlet_node_name)
         self.add_outlet(self.idfElement.air_outlet_node_name)
+
+        if subtype == 'OnOff':
+            self.btype = 'Fan'
+            self.add_property('motorEfficiency', float(self.idfElement.motor_efficiency))
+            self.add_property('cooledByFluid', bool(float(self.idfElement.motor_in_airstream_fraction)))
+        if subtype == 'ZoneExhaust':
+            self.btype = 'Exhaust_Fan'
+        
+        
         return self
-        #if self.type.split[1] == 'OnOff':
-        #    modelicabindings.FanOnOff()
 
     #### COILS ####
 
@@ -88,7 +93,7 @@ class AHUComponent():
 
     def addOAS(self):
         if self.type.split(':')[1] == 'Mixer':
-            self.btype = None
+            self.btype = 'HVAC_Equipment'
             self.add_inlet(self.idfElement.outdoor_air_stream_node_name)
             self.add_inlet(self.idfElement.return_air_stream_node_name)
             self.add_outlet(self.idfElement.mixed_air_node_name)
@@ -108,21 +113,19 @@ class AHUComponent():
             self.CVTerminal()
 
     def CVTerminal(self):
-
+        self.btype = 'CAV'
         if self.type.split(':')[1] == 'NoReheat':
-            self.btype = 'CAV'
+            pass
             #modelicabindings.CVNoReheat()
 
     #### OTHER ZONE EQUIPMENT ####
 
     def addSplitter(self):
-        self.btype = None
         for outlet in ut.getListComponents(self.idfElement, 'outlet', 'node_name'):
             self.add_outlet(outlet)
         self.add_inlet(self.idfElement.inlet_node_name)
 
     def addMixer(self):
-        self.btype = None
         for inlet in ut.getListComponents(self.idfElement, 'inlet', 'node_name'):
             self.add_inlet(inlet)
         self.add_outlet(self.idfElement.outlet_node_name)

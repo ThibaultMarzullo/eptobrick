@@ -24,5 +24,9 @@ class Nuncius():
     def printMessage(self, message, lvl='info'):
             if lvl == 'info':
                 print(colored(f'Info:\t{message}', 'blue'))
-            elif self.debug > 2:
+            elif lvl == 'debug' and self.debug > 2:
                 print(colored(f'Debug:\t{message}', 'yellow'))
+            elif lvl == 'success':
+                print(colored(f'Success:\t{message}', 'green'))
+            elif lvl == 'failure':
+                print(colored(f'Failed:\t{message}', 'red'))

@@ -3,6 +3,55 @@ from ..utils import utils as ut
 
 m = ut.Nuncius(debug=3)
 
+def bypassElements(airloop, sdconn):
+    #conns = {
+    #    'sin' : supply_inlet,
+    #    'sout' : supply_outlet,
+    #    'din' : demand_inlet,
+    #    'dout' : demand_outlet
+    #}
+    #for element in airloop:
+
+    for element in airloop:
+        if element.btype is not None:
+            newairloop = [element]
+            break
+    
+    for element in airloop:
+        if sdconn['sout'] in element.air_outlets:
+            element.air_outlets.append(sdconn['din'])
+            element.air_outlets = [item for item in element.air_outlets if item != sdconn['sout']]
+        if sdconn['sin'] in element.air_inlets:
+            element.air_inlets.append(sdconn['dout'])
+            element.air_inlets = [item for item in element.air_outlets if item != sdconn['sin']]
+
+    noNones = [item for item in airloop if item.btype is not None]
+
+    # Error somewhere below #
+    while True:
+        for fe in newairloop:
+            for se in airloop:
+                if any([item in fe.air_outlets for item in se.air_inlets]):
+                    if se.btype is not None and se not in newairloop:
+                        newairloop.append(se)
+                    elif se.btype is None:
+                        jump = [item for item in fe.air_outlets if item not in se.air_inlets]
+                        if jump == []:
+                            fe.air_outlets = se.air_outlets
+                        else:
+                            fe.air_outlets = jump.append(se.air_outlets) ## ICI##
+        if all(item in newairloop for item in noNones):
+            return newairloop
+
+
+def joinSupplyDemand(airloop, zones):
+    for zone in zones:
+        for ze in zone:
+            for ae in airloop:
+                if any(item in ae.air_inlets for item in ze.air_outlets) or any(item in ze.air_inlets for item in ae.air_outlets):
+                    airloop.extend(zone)
+                    return airloop
+
 def untangleAirLoopZones(idf):
     zoneequipment = []
     for zone in idf.ZoneHVAC_EquipmentConnections:
@@ -24,8 +73,12 @@ def untangleAirLoopZones(idf):
         curzone = [epb.ThermalZone(zone, ut.getEPType(zone), inlets, outlets).create()]
         adus = ut.getListComponents(zone.zone_conditioning_equipment_list_name, 'zone_equipment', 'name')
         for adu in adus:
-            terminalunit = adu.air_terminal_name
-            curzone.append(epb.AHUComponent(terminalunit, ut.getEPType(terminalunit)).create())
+            if ut.getEPType(adu) == 'ZoneHVAC:AirDistributionUnit':
+                terminalunit = adu.air_terminal_name
+                curzone.append(epb.AHUComponent(terminalunit, ut.getEPType(terminalunit)).create())
+            else:
+                curzone.append(epb.AHUComponent(adu, ut.getEPType(adu)).create())
+        zoneequipment.append(curzone)
         m.printMessage(f'Extracted zone and ADU nodes for {zone.zone_name.name}', lvl='debug')
         m.printMessage(f'\t{zone.zone_name.name} outlets: {curzone[0].air_outlets}', lvl='debug')
         m.printMessage(f'\t{terminalunit.name} inlets: {curzone[-1].air_inlets}', lvl='debug')

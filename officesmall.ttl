@@ -1,0 +1,141 @@
+@prefix bf: <https://brickschema.org/schema/1.0.1/BrickFrame#> .
+@prefix brick1: <https://brickschema.org/schema/1.0.1/Brick#> .
+@prefix officesmall: <http://change.me#> .
+
+<http://change.me#psz-ac:1> a brick1:AHU ;
+    bf:hasPart <http://change.me#core_zn~direct~air>,
+        <http://change.me#psz-ac:1_oamixing~box>,
+        <http://change.me#psz-ac:1~fan>,
+        <http://change.me#psz-ac:1~heat~pump~dx~cooling~coil>,
+        <http://change.me#psz-ac:1~heat~pump~dx~heating~coil>,
+        <http://change.me#psz-ac:1~heat~pump~dx~supp~heating~coil> .
+
+<http://change.me#psz-ac:2> a brick1:AHU ;
+    bf:hasPart <http://change.me#perimeter_zn_1~direct~air>,
+        <http://change.me#psz-ac:2_oamixing~box>,
+        <http://change.me#psz-ac:2~fan>,
+        <http://change.me#psz-ac:2~heat~pump~dx~cooling~coil>,
+        <http://change.me#psz-ac:2~heat~pump~dx~heating~coil>,
+        <http://change.me#psz-ac:2~heat~pump~dx~supp~heating~coil> .
+
+<http://change.me#psz-ac:3> a brick1:AHU ;
+    bf:hasPart <http://change.me#perimeter_zn_2~direct~air>,
+        <http://change.me#psz-ac:3_oamixing~box>,
+        <http://change.me#psz-ac:3~fan>,
+        <http://change.me#psz-ac:3~heat~pump~dx~cooling~coil>,
+        <http://change.me#psz-ac:3~heat~pump~dx~heating~coil>,
+        <http://change.me#psz-ac:3~heat~pump~dx~supp~heating~coil> .
+
+<http://change.me#psz-ac:4> a brick1:AHU ;
+    bf:hasPart <http://change.me#perimeter_zn_3~direct~air>,
+        <http://change.me#psz-ac:4_oamixing~box>,
+        <http://change.me#psz-ac:4~fan>,
+        <http://change.me#psz-ac:4~heat~pump~dx~cooling~coil>,
+        <http://change.me#psz-ac:4~heat~pump~dx~heating~coil>,
+        <http://change.me#psz-ac:4~heat~pump~dx~supp~heating~coil> .
+
+<http://change.me#psz-ac:5> a brick1:AHU ;
+    bf:hasPart <http://change.me#perimeter_zn_4~direct~air>,
+        <http://change.me#psz-ac:5_oamixing~box>,
+        <http://change.me#psz-ac:5~fan>,
+        <http://change.me#psz-ac:5~heat~pump~dx~cooling~coil>,
+        <http://change.me#psz-ac:5~heat~pump~dx~heating~coil>,
+        <http://change.me#psz-ac:5~heat~pump~dx~supp~heating~coil> .
+
+<http://change.me#core_zn~direct~air> a brick1:CAV ;
+    bf:feeds officesmall: .
+
+<http://change.me#perimeter_zn_1~direct~air> a brick1:CAV ;
+    bf:feeds officesmall: .
+
+<http://change.me#perimeter_zn_2~direct~air> a brick1:CAV ;
+    bf:feeds officesmall: .
+
+<http://change.me#perimeter_zn_3~direct~air> a brick1:CAV ;
+    bf:feeds officesmall: .
+
+<http://change.me#perimeter_zn_4~direct~air> a brick1:CAV ;
+    bf:feeds officesmall: .
+
+<http://change.me#psz-ac:1_oamixing~box> a brick1:HVAC_Equipment ;
+    bf:feeds <http://change.me#psz-ac:1_oamixing~box>,
+        <http://change.me#psz-ac:1~fan> .
+
+<http://change.me#psz-ac:1~fan> a brick1:Fan ;
+    bf:feeds <http://change.me#psz-ac:1~heat~pump~dx~cooling~coil> .
+
+<http://change.me#psz-ac:1~heat~pump~dx~cooling~coil> a brick1:Cooling_Coil ;
+    bf:feeds <http://change.me#psz-ac:1~heat~pump~dx~heating~coil> .
+
+<http://change.me#psz-ac:1~heat~pump~dx~heating~coil> a brick1:Heating_Coil ;
+    bf:feeds <http://change.me#psz-ac:1~heat~pump~dx~supp~heating~coil> .
+
+<http://change.me#psz-ac:1~heat~pump~dx~supp~heating~coil> a brick1:Heating_Coil ;
+    bf:feeds <http://change.me#core_zn~direct~air> .
+
+<http://change.me#psz-ac:2_oamixing~box> a brick1:HVAC_Equipment ;
+    bf:feeds <http://change.me#psz-ac:2_oamixing~box>,
+        <http://change.me#psz-ac:2~fan> .
+
+<http://change.me#psz-ac:2~fan> a brick1:Fan ;
+    bf:feeds <http://change.me#psz-ac:2~heat~pump~dx~cooling~coil> .
+
+<http://change.me#psz-ac:2~heat~pump~dx~cooling~coil> a brick1:Cooling_Coil ;
+    bf:feeds <http://change.me#psz-ac:2~heat~pump~dx~heating~coil> .
+
+<http://change.me#psz-ac:2~heat~pump~dx~heating~coil> a brick1:Heating_Coil ;
+    bf:feeds <http://change.me#psz-ac:2~heat~pump~dx~supp~heating~coil> .
+
+<http://change.me#psz-ac:2~heat~pump~dx~supp~heating~coil> a brick1:Heating_Coil ;
+    bf:feeds <http://change.me#perimeter_zn_1~direct~air> .
+
+<http://change.me#psz-ac:3_oamixing~box> a brick1:HVAC_Equipment ;
+    bf:feeds <http://change.me#psz-ac:3_oamixing~box>,
+        <http://change.me#psz-ac:3~fan> .
+
+<http://change.me#psz-ac:3~fan> a brick1:Fan ;
+    bf:feeds <http://change.me#psz-ac:3~heat~pump~dx~cooling~coil> .
+
+<http://change.me#psz-ac:3~heat~pump~dx~cooling~coil> a brick1:Cooling_Coil ;
+    bf:feeds <http://change.me#psz-ac:3~heat~pump~dx~heating~coil> .
+
+<http://change.me#psz-ac:3~heat~pump~dx~heating~coil> a brick1:Heating_Coil ;
+    bf:feeds <http://change.me#psz-ac:3~heat~pump~dx~supp~heating~coil> .
+
+<http://change.me#psz-ac:3~heat~pump~dx~supp~heating~coil> a brick1:Heating_Coil ;
+    bf:feeds <http://change.me#perimeter_zn_2~direct~air> .
+
+<http://change.me#psz-ac:4_oamixing~box> a brick1:HVAC_Equipment ;
+    bf:feeds <http://change.me#psz-ac:4_oamixing~box>,
+        <http://change.me#psz-ac:4~fan> .
+
+<http://change.me#psz-ac:4~fan> a brick1:Fan ;
+    bf:feeds <http://change.me#psz-ac:4~heat~pump~dx~cooling~coil> .
+
+<http://change.me#psz-ac:4~heat~pump~dx~cooling~coil> a brick1:Cooling_Coil ;
+    bf:feeds <http://change.me#psz-ac:4~heat~pump~dx~heating~coil> .
+
+<http://change.me#psz-ac:4~heat~pump~dx~heating~coil> a brick1:Heating_Coil ;
+    bf:feeds <http://change.me#psz-ac:4~heat~pump~dx~supp~heating~coil> .
+
+<http://change.me#psz-ac:4~heat~pump~dx~supp~heating~coil> a brick1:Heating_Coil ;
+    bf:feeds <http://change.me#perimeter_zn_3~direct~air> .
+
+<http://change.me#psz-ac:5_oamixing~box> a brick1:HVAC_Equipment ;
+    bf:feeds <http://change.me#psz-ac:5_oamixing~box>,
+        <http://change.me#psz-ac:5~fan> .
+
+<http://change.me#psz-ac:5~fan> a brick1:Fan ;
+    bf:feeds <http://change.me#psz-ac:5~heat~pump~dx~cooling~coil> .
+
+<http://change.me#psz-ac:5~heat~pump~dx~cooling~coil> a brick1:Cooling_Coil ;
+    bf:feeds <http://change.me#psz-ac:5~heat~pump~dx~heating~coil> .
+
+<http://change.me#psz-ac:5~heat~pump~dx~heating~coil> a brick1:Heating_Coil ;
+    bf:feeds <http://change.me#psz-ac:5~heat~pump~dx~supp~heating~coil> .
+
+<http://change.me#psz-ac:5~heat~pump~dx~supp~heating~coil> a brick1:Heating_Coil ;
+    bf:feeds <http://change.me#perimeter_zn_4~direct~air> .
+
+officesmall: a brick1:HVAC_Zone .
+
