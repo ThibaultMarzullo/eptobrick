@@ -1,7 +1,6 @@
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 from eptobrick.extractor import epparser
-from eptobrick.extractor.objects import ahus
 from eptobrick.extractor.utils import utils
 import opyplus as op
 import random as rd
