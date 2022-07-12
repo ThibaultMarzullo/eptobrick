@@ -100,3 +100,12 @@ class Tests():
         except Exception as e:
             m.printMessage(f'{name} failed with the following error: {e}', lvl='failure')
             return [False, name, self.idfp]
+
+    def saveGraph(self):
+        name = 'saveGraph'
+        try:
+            self.parser.saveGraph()
+            return [True, name, self.idfp]
+        except Exception as e:
+            m.printMessage(f'{name} failed with the following error: {e}', lvl='failure')
+            return [False, name, self.idfp]

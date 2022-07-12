@@ -12,7 +12,6 @@ class AHUComponent():
         self.air_outlets = None
         self.data = {}
         self.btype = None
-        
 
     def add_property(self, property, values):
         self.data[property] = values
@@ -129,6 +128,7 @@ class AHUComponent():
     
     def VAVTerminal(self):
         self.btype = 'VAV'
+        self.air_outlets = [] # get rid of outlets, or the Damper will be bypassed
         self.add_outlet(self.idfElement.damper_air_outlet_node_name)
         if self.type.split(':')[1] == 'NoReheat':
             pass

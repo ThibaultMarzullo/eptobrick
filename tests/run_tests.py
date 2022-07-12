@@ -4,9 +4,9 @@ from testing import SMALLOFFICE, MEDIUMOFFICE, HOSPITAL, m
 successes = []
 failures = []
 cases = [
-    #SMALLOFFICE, 
+    SMALLOFFICE, 
     MEDIUMOFFICE, 
-    #HOSPITAL
+    HOSPITAL
     ]
 
 for case in cases:
@@ -14,7 +14,8 @@ for case in cases:
     tests = [
         t.loadIDF(),
         t.bindBuilding(),
-        t.createAHUs()
+        t.createAHUs(),
+        t.saveGraph()
     ]
     _, fa, su = t.runTests(tests)
     successes.append(su)

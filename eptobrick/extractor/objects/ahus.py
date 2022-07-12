@@ -4,13 +4,6 @@ from ..utils import utils as ut
 m = ut.Nuncius(debug=3)
 
 def bypassElements(airloop, sdconn):
-    #conns = {
-    #    'sin' : supply_inlet,
-    #    'sout' : supply_outlet,
-    #    'din' : demand_inlet,
-    #    'dout' : demand_outlet
-    #}
-    #for element in airloop:
 
     for element in airloop:
         if element.btype is not None:
@@ -27,7 +20,6 @@ def bypassElements(airloop, sdconn):
 
     noNones = [item for item in airloop if item.btype is not None]
 
-    # Error somewhere below #
     while True:
         for fe in newairloop:
             for se in airloop:
@@ -75,7 +67,11 @@ def untangleAirLoopZones(idf):
         for adu in adus:
             if ut.getEPType(adu) == 'ZoneHVAC:AirDistributionUnit':
                 terminalunit = adu.air_terminal_name
-                curzone.append(epb.AHUComponent(terminalunit, ut.getEPType(terminalunit)).create())
+                edgecase = componentEdgeCases(terminalunit)
+                if edgecase is not None:
+                    curzone.extend(edgecase)
+                else:
+                    curzone.append(epb.AHUComponent(terminalunit, ut.getEPType(terminalunit)).create())
             else:
                 curzone.append(epb.AHUComponent(adu, ut.getEPType(adu)).create())
         zoneequipment.append(curzone)
@@ -108,7 +104,7 @@ def untangleAirLoopSupply(idfahu, idf):
         components.append(ut.getListComponents(branch, 'component', 'name'))
         for componentlist in components:
             for component in componentlist:
-                edgecases = componentEdgeCases(component, idf)
+                edgecases = componentEdgeCases(component)
                 if edgecases is not None:
                     filtered.extend(edgecases)
                 else:
@@ -126,7 +122,7 @@ def untangleAirLoopSupply(idfahu, idf):
         if supplypath.supply_air_path_inlet_node_name == demand_inlet:
             splitters = ut.getListComponents(supplypath, 'component', 'name')
             for splitter in splitters:
-                edgecases = componentEdgeCases(splitter, idf)
+                edgecases = componentEdgeCases(splitter)
                 if edgecases is None:
                     filtered.append(epb.AHUComponent(splitter, ut.getEPType(splitter)).create())
                 else:
@@ -149,14 +145,13 @@ def untangleAirLoopSupply(idfahu, idf):
 
     return filtered, conns
 
-def componentEdgeCases(idfobj, idf):
+def componentEdgeCases(idfobj):
     filtered = []
     gettype = ut.getEPType(idfobj).split(':')
     if ut.getEPType(idfobj) == 'AirLoopHVAC:OutdoorAirSystem':
         oacomponents = ut.getListComponents(idfobj.outdoor_air_equipment_list_name, 'component', 'name')
         for oacomponent in oacomponents:
             filtered.append(epb.AHUComponent(oacomponent, ut.getEPType(oacomponent)).create())
-        return filtered
     elif gettype[1] == 'UnitaryHeatPump':
         hpcomponents = [
             idfobj.supply_air_fan_name,
@@ -166,87 +161,17 @@ def componentEdgeCases(idfobj, idf):
         ]
         for hpcomponent in hpcomponents:
             filtered.append(epb.AHUComponent(hpcomponent, ut.getEPType(hpcomponent)).create())
-        return filtered
-
     elif gettype[0] == 'CoilSystem':
         coilcomponents = idfobj.cooling_coil_name
         filtered.append(epb.AHUComponent(coilcomponents, ut.getEPType(coilcomponents)).create())
-        return filtered
-
     elif gettype[0] == 'AirLoopHVAC' and gettype[1] == 'ZoneSplitter':
         filtered.append(epb.AHUComponent(idfobj, ut.getEPType(idfobj)).create())
-        outlets = ut.getListComponents(idfobj, 'outlet', 'node_name')
-        for outlet in outlets:
-            for terminal in # test all terminals:
-                if terminal.inlet_node_name == outlet:
-                    filtered.append(epb.AHUComponent(terminal, ut.getEPType(terminal)).create())
-        return filtered
-
-    elif gettype[1] == 'AirTerminal':
+    elif gettype[0] == 'AirTerminal':
         if gettype[3] == 'Reheat':
-            filtered.append(epb.AHUComponent(idfobj, ut.getEPType(idfobj)).create())
             filtered.append(epb.AHUComponent(idfobj.reheat_coil_name, ut.getEPType(idfobj.reheat_coil_name)).create())
-            return filtered
+            filtered.append(epb.AHUComponent(idfobj, ut.getEPType(idfobj)).create())
 
-
-    else:
+    if filtered == []:
         return None 
-
-######## DANGER ZONE ######
-class FluidConnectionMap():
-
-    def __init__(self) -> None:
-        self.map = {}
-
-    def add_point(self, inlet, outlet, name):
-        if name not in self.map.keys():
-            self.map[name] = {'in' : [], 'out' : [], 'isFedBy' : None, 'feeds' : None}
-        self.map[name]['in'].append(inlet)
-        self.map[name]['out'].append(outlet)
-
-    def findConnections(self, start, how='feeds'):
-        connections = []
-        if self.map[start][how] is None:
-            for key in self.map.keys():
-                if how == 'downstream':
-                    if any(self.map[key]['in']) in self.map[start]['out']:
-                        connections.append(key)
-                else:
-                    if any(self.map[key]['out']) in self.map[start]['in']:
-                        connections.append(key)
-            self.map[start][how] = connections
-        else:
-            connections.extend(self.map[start][how])
-        return connections
-        
-
-
-
-def findAirLoops(self, idf):
-    '''
-    Find all HVAC airloops in an IDF
-    Parameters:
-    idf
-        opyplus IDF object
-    Returns:
-    list
-        List of opyplus IDF Records
-    '''
-    return [airloop for airloop in idf.AirLoopHVAC]
-
-def findBranchComponents(branch, type):
-    '''
-    Find branch components, depending from system type
-    Parameters:
-    branch:
-        opyplus Record
-    type (str):
-        Branch type as defined in EnergyPlus
-    Returns:
-    list:
-        List of opyplus records
-    '''
-    if type == 'AirLoopHVAC:OutdoorAirSystem':
-        oas = findOAS(branch)
-    elif type == '':
-        'Complete all fields'
+    else:
+        return filtered

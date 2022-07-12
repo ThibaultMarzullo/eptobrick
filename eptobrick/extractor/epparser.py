@@ -44,6 +44,7 @@ class Extractor():
         self.BUILDING = Namespace('http://change.me#')
         self.bldg = idf.Building[0].name.lower().replace(' ', '')
         self.graph.bind(self.bldg, self.BUILDING)
+        self.bldgname = idf.Building[0].name.lower().replace(' ', '')
         return self.graph
 
     def bindAHUs(self, zones, airloop, sdconn, ahuname):
@@ -55,15 +56,16 @@ class Extractor():
         for first_element in airloop:
             if first_element.btype != 'HVAC_Zone':
                 self.graph.add((self.BUILDING[ahuname], self.BF['hasPart'], self.BUILDING[first_element.name]))
+                self.graph.add((self.BUILDING[first_element.name], self.BF['isPartOf'], self.BUILDING[ahuname]))
             for second_element in airloop:
                 if any(item in first_element.air_outlets for item in second_element.air_inlets):
                     self.graph.add((self.BUILDING[first_element.name], self.BF['feeds'], self.BUILDING[second_element.name]))
+                    self.graph.add((self.BUILDING[second_element.name], self.BF['isFedBy'], self.BUILDING[first_element.name]))
                 if any(item in second_element.air_outlets for item in first_element.air_inlets):
                     self.graph.add((self.BUILDING[second_element.name], self.BF['feeds'], self.BUILDING[first_element.name]))
+                    self.graph.add((self.BUILDING[first_element.name], self.BF['isFedBy'], self.BUILDING[second_element.name]))
 
-            # Here, check inlets and outlets and define relationship.
         return airloop
-        
 
     def createAHUs(self, idf):
         # for ahu in ahus untangle
@@ -74,8 +76,13 @@ class Extractor():
             m.printMessage(f'Parsing {ahu.name}...', lvl='debug')
             self.graph.add((self.BUILDING[ahu.name], RDF['type'], self.BRICK['AHU']))
             airloop, sdconn = ahus.untangleAirLoopSupply(ahu, idf)
-            sensor_bindings = sensors.parseSensors(idf, airloop)
             ahus_stitched.append(self.bindAHUs(zones, airloop, sdconn, ahu.name))
-        outname = idf.Building[0].name.lower().replace(' ', '')
-        self.graph.serialize(destination=f'{outname}.ttl', format='turtle')
+        return ahus_stitched
+
+    def createSensors(self, airloop, idf):
+        sensor_bindings = sensors.parseSensors(idf, airloop)
+        return sensor_bindings
+
+    def saveGraph(self):
+        self.graph.serialize(destination=f'{self.bldgname}.ttl', format='turtle')
         return self.graph
