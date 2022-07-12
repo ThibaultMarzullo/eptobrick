@@ -42,20 +42,30 @@
         <http://change.me#psz-ac:5~heat~pump~dx~heating~coil>,
         <http://change.me#psz-ac:5~heat~pump~dx~supp~heating~coil> .
 
+officesmall:core_zn a brick1:HVAC_Zone .
+
+officesmall:perimeter_zn_1 a brick1:HVAC_Zone .
+
+officesmall:perimeter_zn_2 a brick1:HVAC_Zone .
+
+officesmall:perimeter_zn_3 a brick1:HVAC_Zone .
+
+officesmall:perimeter_zn_4 a brick1:HVAC_Zone .
+
 <http://change.me#core_zn~direct~air> a brick1:CAV ;
-    bf:feeds officesmall: .
+    bf:feeds officesmall:core_zn .
 
 <http://change.me#perimeter_zn_1~direct~air> a brick1:CAV ;
-    bf:feeds officesmall: .
+    bf:feeds officesmall:perimeter_zn_1 .
 
 <http://change.me#perimeter_zn_2~direct~air> a brick1:CAV ;
-    bf:feeds officesmall: .
+    bf:feeds officesmall:perimeter_zn_2 .
 
 <http://change.me#perimeter_zn_3~direct~air> a brick1:CAV ;
-    bf:feeds officesmall: .
+    bf:feeds officesmall:perimeter_zn_3 .
 
 <http://change.me#perimeter_zn_4~direct~air> a brick1:CAV ;
-    bf:feeds officesmall: .
+    bf:feeds officesmall:perimeter_zn_4 .
 
 <http://change.me#psz-ac:1_oamixing~box> a brick1:HVAC_Equipment ;
     bf:feeds <http://change.me#psz-ac:1_oamixing~box>,
@@ -136,6 +146,4 @@
 
 <http://change.me#psz-ac:5~heat~pump~dx~supp~heating~coil> a brick1:Heating_Coil ;
     bf:feeds <http://change.me#perimeter_zn_4~direct~air> .
-
-officesmall: a brick1:HVAC_Zone .
 

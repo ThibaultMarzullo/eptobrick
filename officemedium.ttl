@@ -1,0 +1,91 @@
+@prefix bf: <https://brickschema.org/schema/1.0.1/BrickFrame#> .
+@prefix brick1: <https://brickschema.org/schema/1.0.1/Brick#> .
+@prefix officemedium: <http://change.me#> .
+
+officemedium:pacu_vav_bot a brick1:AHU ;
+    bf:hasPart <http://change.me#core_bottom~vav~box~component>,
+        officemedium:firstfloor_return_plenum,
+        <http://change.me#pacu_vav_bot_coolc~dxcoil>,
+        officemedium:pacu_vav_bot_heatc,
+        <http://change.me#pacu_vav_bot_oamixing~box>,
+        <http://change.me#pacu_vav_bot~fan> .
+
+officemedium:pacu_vav_mid a brick1:AHU ;
+    bf:hasPart <http://change.me#core_mid~vav~box~component>,
+        officemedium:midfloor_return_plenum,
+        <http://change.me#pacu_vav_mid_coolc~dxcoil>,
+        officemedium:pacu_vav_mid_heatc,
+        <http://change.me#pacu_vav_mid_oamixing~box>,
+        <http://change.me#pacu_vav_mid~fan> .
+
+officemedium:pacu_vav_top a brick1:AHU ;
+    bf:hasPart <http://change.me#core_top~vav~box~component>,
+        <http://change.me#pacu_vav_top_coolc~dxcoil>,
+        officemedium:pacu_vav_top_heatc,
+        <http://change.me#pacu_vav_top_oamixing~box>,
+        <http://change.me#pacu_vav_top~fan>,
+        officemedium:topfloor_return_plenum .
+
+officemedium:core_bottom a brick1:HVAC_Zone ;
+    bf:feeds officemedium:firstfloor_return_plenum .
+
+officemedium:core_mid a brick1:HVAC_Zone ;
+    bf:feeds officemedium:midfloor_return_plenum .
+
+officemedium:core_top a brick1:HVAC_Zone ;
+    bf:feeds officemedium:topfloor_return_plenum .
+
+<http://change.me#core_bottom~vav~box~component> a brick1:VAV ;
+    bf:feeds officemedium:core_bottom .
+
+<http://change.me#core_mid~vav~box~component> a brick1:VAV ;
+    bf:feeds officemedium:core_mid .
+
+<http://change.me#core_top~vav~box~component> a brick1:VAV ;
+    bf:feeds officemedium:core_top .
+
+officemedium:firstfloor_return_plenum a brick1:Air_Plenum ;
+    bf:feeds <http://change.me#pacu_vav_bot_oamixing~box> .
+
+officemedium:midfloor_return_plenum a brick1:Air_Plenum ;
+    bf:feeds <http://change.me#pacu_vav_mid_oamixing~box> .
+
+<http://change.me#pacu_vav_bot_coolc~dxcoil> a brick1:Cooling_Coil ;
+    bf:feeds officemedium:pacu_vav_bot_heatc .
+
+officemedium:pacu_vav_bot_heatc a brick1:Heating_Coil ;
+    bf:feeds <http://change.me#pacu_vav_bot~fan> .
+
+<http://change.me#pacu_vav_bot_oamixing~box> a brick1:HVAC_Equipment ;
+    bf:feeds <http://change.me#pacu_vav_bot_coolc~dxcoil> .
+
+<http://change.me#pacu_vav_bot~fan> a brick1:Fan ;
+    bf:feeds <http://change.me#core_bottom~vav~box~component> .
+
+<http://change.me#pacu_vav_mid_coolc~dxcoil> a brick1:Cooling_Coil ;
+    bf:feeds officemedium:pacu_vav_mid_heatc .
+
+officemedium:pacu_vav_mid_heatc a brick1:Heating_Coil ;
+    bf:feeds <http://change.me#pacu_vav_mid~fan> .
+
+<http://change.me#pacu_vav_mid_oamixing~box> a brick1:HVAC_Equipment ;
+    bf:feeds <http://change.me#pacu_vav_mid_coolc~dxcoil> .
+
+<http://change.me#pacu_vav_mid~fan> a brick1:Fan ;
+    bf:feeds <http://change.me#core_mid~vav~box~component> .
+
+<http://change.me#pacu_vav_top_coolc~dxcoil> a brick1:Cooling_Coil ;
+    bf:feeds officemedium:pacu_vav_top_heatc .
+
+officemedium:pacu_vav_top_heatc a brick1:Heating_Coil ;
+    bf:feeds <http://change.me#pacu_vav_top~fan> .
+
+<http://change.me#pacu_vav_top_oamixing~box> a brick1:HVAC_Equipment ;
+    bf:feeds <http://change.me#pacu_vav_top_coolc~dxcoil> .
+
+<http://change.me#pacu_vav_top~fan> a brick1:Fan ;
+    bf:feeds <http://change.me#core_top~vav~box~component> .
+
+officemedium:topfloor_return_plenum a brick1:Air_Plenum ;
+    bf:feeds <http://change.me#pacu_vav_top_oamixing~box> .
+

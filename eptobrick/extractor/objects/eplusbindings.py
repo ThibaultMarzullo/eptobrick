@@ -12,6 +12,7 @@ class AHUComponent():
         self.air_outlets = None
         self.data = {}
         self.btype = None
+        
 
     def add_property(self, property, values):
         self.data[property] = values
@@ -45,6 +46,8 @@ class AHUComponent():
                 self.addSplitter()
             elif subsubtype == 'ZoneMixer':
                 self.addMixer()
+            elif subsubtype == 'ReturnPlenum':
+                self.addReturnPlenum()
         #elif subtype == 'AirLoopHVAC':
         #    if subsubtype == 'UnitaryHeatPump':
         #        self.addUHP()
@@ -69,6 +72,9 @@ class AHUComponent():
             self.add_property('cooledByFluid', bool(float(self.idfElement.motor_in_airstream_fraction)))
         if subtype == 'ZoneExhaust':
             self.btype = 'Exhaust_Fan'
+        if subtype == 'VariableVolume':
+            self.btype = 'Fan'
+
         
         
         return self
@@ -110,13 +116,25 @@ class AHUComponent():
     def singleDuctTerminal(self):
 
         if self.type.split(':')[2] == 'ConstantVolume':
-            self.CVTerminal()
+            self.CAVTerminal()
+        if self.type.split(':')[2] == 'VAV':
+            self.VAVTerminal()
+        
 
-    def CVTerminal(self):
+    def CAVTerminal(self):
         self.btype = 'CAV'
         if self.type.split(':')[1] == 'NoReheat':
             pass
             #modelicabindings.CVNoReheat()
+    
+    def VAVTerminal(self):
+        self.btype = 'VAV'
+        self.add_outlet(self.idfElement.damper_air_outlet_node_name)
+        if self.type.split(':')[1] == 'NoReheat':
+            pass
+        if self.type.split(':')[1] == 'Reheat':
+            
+            pass
 
     #### OTHER ZONE EQUIPMENT ####
 
@@ -130,11 +148,21 @@ class AHUComponent():
             self.add_inlet(inlet)
         self.add_outlet(self.idfElement.outlet_node_name)
 
+    def addReturnPlenum(self):
+        self.btype = 'Air_Plenum'
+        self.add_outlet(self.idfElement.outlet_node_name)
+        for inlet in ut.getListComponents(self.idfElement, 'inlet', 'node_name'):
+            self.add_inlet(inlet)
+
+    def addSupplyPlenum():
+        print("Hello, I am a supply plenum. Please implement me!")
+        pass
+
 class ThermalZone(AHUComponent):
 
     def __init__(self, idfobj, objtype, inlets, outlets) -> None:
         self.idfElement = idfobj
-        self.name = idfobj.zone_name
+        self.name = idfobj.zone_name.name
         self.type = objtype
         self.air_inlets = inlets
         self.air_outlets = outlets

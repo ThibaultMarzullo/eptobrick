@@ -23,7 +23,7 @@ def bypassElements(airloop, sdconn):
             element.air_outlets = [item for item in element.air_outlets if item != sdconn['sout']]
         if sdconn['sin'] in element.air_inlets:
             element.air_inlets.append(sdconn['dout'])
-            element.air_inlets = [item for item in element.air_outlets if item != sdconn['sin']]
+            element.air_inlets = [item for item in element.air_inlets if item != sdconn['sin']]
 
     noNones = [item for item in airloop if item.btype is not None]
 
@@ -40,7 +40,7 @@ def bypassElements(airloop, sdconn):
                             fe.air_outlets = se.air_outlets
                         else:
                             fe.air_outlets = jump.append(se.air_outlets) ## ICI##
-        if all(item in newairloop for item in noNones):
+        if all([item in newairloop for item in noNones]):
             return newairloop
 
 
@@ -48,7 +48,7 @@ def joinSupplyDemand(airloop, zones):
     for zone in zones:
         for ze in zone:
             for ae in airloop:
-                if any(item in ae.air_inlets for item in ze.air_outlets) or any(item in ze.air_inlets for item in ae.air_outlets):
+                if any([item in ae.air_inlets for item in ze.air_outlets]) or any([item in ze.air_inlets for item in ae.air_outlets]):
                     airloop.extend(zone)
                     return airloop
 
@@ -108,7 +108,7 @@ def untangleAirLoopSupply(idfahu, idf):
         components.append(ut.getListComponents(branch, 'component', 'name'))
         for componentlist in components:
             for component in componentlist:
-                edgecases = componentEdgeCases(component)
+                edgecases = componentEdgeCases(component, idf)
                 if edgecases is not None:
                     filtered.extend(edgecases)
                 else:
@@ -126,7 +126,11 @@ def untangleAirLoopSupply(idfahu, idf):
         if supplypath.supply_air_path_inlet_node_name == demand_inlet:
             splitters = ut.getListComponents(supplypath, 'component', 'name')
             for splitter in splitters:
-                filtered.append(epb.AHUComponent(splitter, ut.getEPType(splitter)).create())
+                edgecases = componentEdgeCases(splitter, idf)
+                if edgecases is None:
+                    filtered.append(epb.AHUComponent(splitter, ut.getEPType(splitter)).create())
+                else:
+                    filtered.extend(edgecases)
 
     m.printMessage(f'Extracted supply path for {idfahu.name}', lvl='debug')
     m.printMessage(f'\tSupply path starts at: {filtered[-1].air_inlets}', lvl='debug')
@@ -145,7 +149,7 @@ def untangleAirLoopSupply(idfahu, idf):
 
     return filtered, conns
 
-def componentEdgeCases(idfobj):
+def componentEdgeCases(idfobj, idf):
     filtered = []
     gettype = ut.getEPType(idfobj).split(':')
     if ut.getEPType(idfobj) == 'AirLoopHVAC:OutdoorAirSystem':
@@ -153,7 +157,7 @@ def componentEdgeCases(idfobj):
         for oacomponent in oacomponents:
             filtered.append(epb.AHUComponent(oacomponent, ut.getEPType(oacomponent)).create())
         return filtered
-    elif ut.getEPType(idfobj).split(':')[1] == 'UnitaryHeatPump':
+    elif gettype[1] == 'UnitaryHeatPump':
         hpcomponents = [
             idfobj.supply_air_fan_name,
             idfobj.heating_coil_name,
@@ -163,6 +167,28 @@ def componentEdgeCases(idfobj):
         for hpcomponent in hpcomponents:
             filtered.append(epb.AHUComponent(hpcomponent, ut.getEPType(hpcomponent)).create())
         return filtered
+
+    elif gettype[0] == 'CoilSystem':
+        coilcomponents = idfobj.cooling_coil_name
+        filtered.append(epb.AHUComponent(coilcomponents, ut.getEPType(coilcomponents)).create())
+        return filtered
+
+    elif gettype[0] == 'AirLoopHVAC' and gettype[1] == 'ZoneSplitter':
+        filtered.append(epb.AHUComponent(idfobj, ut.getEPType(idfobj)).create())
+        outlets = ut.getListComponents(idfobj, 'outlet', 'node_name')
+        for outlet in outlets:
+            for terminal in # test all terminals:
+                if terminal.inlet_node_name == outlet:
+                    filtered.append(epb.AHUComponent(terminal, ut.getEPType(terminal)).create())
+        return filtered
+
+    elif gettype[1] == 'AirTerminal':
+        if gettype[3] == 'Reheat':
+            filtered.append(epb.AHUComponent(idfobj, ut.getEPType(idfobj)).create())
+            filtered.append(epb.AHUComponent(idfobj.reheat_coil_name, ut.getEPType(idfobj.reheat_coil_name)).create())
+            return filtered
+
+
     else:
         return None 
 

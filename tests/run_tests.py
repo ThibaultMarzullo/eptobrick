@@ -3,7 +3,11 @@ from testing import SMALLOFFICE, MEDIUMOFFICE, HOSPITAL, m
 
 successes = []
 failures = []
-cases = [SMALLOFFICE, MEDIUMOFFICE, HOSPITAL]
+cases = [
+    #SMALLOFFICE, 
+    MEDIUMOFFICE, 
+    #HOSPITAL
+    ]
 
 for case in cases:
     t = testing.Tests(case)
