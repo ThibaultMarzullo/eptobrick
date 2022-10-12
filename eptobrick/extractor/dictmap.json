@@ -1,0 +1,610 @@
+{
+    "Building": {
+        "BrickType" : "Building",
+        "modelica": {},
+        "rules": {}
+    },
+    "Zone": {
+        "BrickType": "Zone",
+        "modelica": {},
+        "rules": {}
+    },
+    
+    "ZoneControl:Thermostat": {
+        "BrickType": "Thermostat",
+        "modelica": {},
+        "rules": {
+            "isPointof": ["zone_or_zonelist_name"],
+            "getSetpoint": ["control"]}
+    },
+    "ThermostatSetpoint:SingleHeating": {
+        "BrickType": "Zone_Air_Heating_Temperature_Setpoint",
+        "modelica": {},
+        "rules": {
+            "getValueFromSchedule": "setpoint_temperature_schedule_name" 
+        }
+    },
+    "ThermostatSetpoint:SingleCooling": {
+        "BrickType": "Zone_Air_Cooling_Temperature_Setpoint",
+        "modelica": {},
+        "rules": {
+            "getValueFromSchedule": "setpoint_temperature_schedule_name" 
+        }
+    },
+    "ThermostatSetpoint:DualSetpoint": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "dualSetpoint": ["heating_setpoint_temperature_schedule_name", "cooling_setpoint_temperature_schedule_name"] 
+        }
+    },
+    "ZoneHVAC:FourPipeFanCoil": {
+        "BrickType": "Fan_Coil_Unit",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"]
+        }
+    },
+    "ZoneHVAC:WindowAirConditioner": {
+        "BrickType": "AHU",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"]
+        }
+    },
+    "ZoneHVAC:PackagedTerminalAirConditioner": {
+        "BrickType": "AHU",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"]
+        }
+    },
+    "ZoneHVAC:PackagedTerminalHeatPump": {
+        "BrickType": "AHU",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"]
+        }
+    },
+    "ZoneHVAC:WaterToAirHeatPump": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+        }
+    },
+    "ZoneHVAC:UnitVentilator": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "unpackFanCoilSystem": ["supply_air_fan_name", "heating_coil_name", "cooling_coil_name"],
+            "addInlets": ["air_inlet_node_name", "outdoor_air_node_name", "mixed_air_node_name"],
+            "addOutlets": ["air_outlet_node_name", "exhaust_air_node_name"]
+        }
+    },
+    "ZoneHVAC:UnitHeater": {
+        "BrickType": "Space_Heater",
+        "modelica": {},
+        "rules": {
+            "unpackFanCoilSystem": ["supply_air_fan_name", "heating_coil_name"],
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"]
+        }
+    },
+    "ZoneHVAC:EvaporativeCoolerUnit": {
+        "BrickType": "Evaporative_Heat_Exchanger",
+        "modelica": {},
+        "rules": {
+            "unpackFanCoilSystem": ["supply_air_fan_name", "first_evaporative_cooler_object_name", "second_evaporative_cooler_name"],
+            "addInlets": ["outdoor_air_inlet_node_name", "zone_relief_air_node_name"],
+            "addOutlets": ["cooler_outlet_node_name"]
+        }
+    },
+    "ZoneHVAC:OutdoorAirUnit": {
+        "BrickType": "ToDo",
+        "modelica": {},
+        "rules": {}
+    },
+    "AirTerminal:SingleDuct:ConstantVolume:Reheat": {
+        "BrickType": "CAV",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"],
+            "unpackReheatSystem": ["reheat_coil_name"]
+        }
+    },
+    "AirTerminal:SingleDuct:ConstantVolume:NoReheat": {
+        "BrickType": "CAV",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"]
+        }
+    },
+    "AirTerminal:SingleDuct:VAV:NoReheat": {
+        "BrickType": "VAV",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"]
+        }
+    },
+    "AirTerminal:SingleDuct:VAV:Reheat": {
+        "BrickType": "RVAV",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"],
+            "unpackReheatSystem": ["reheat_coil_name"]
+        }
+    },
+    "AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan": {
+        "BrickType": "RVAV",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"],
+            "unpackReheatSystem": ["fan_name", "heating_coil_name"]
+        }
+    },
+    "AirTerminal:SingleDuct:VAV:HeatAndCool:NoReheat": {
+        "BrickType": "VAV",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"]
+        }
+    },
+    "AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"],
+            "unpackReheatSystem": ["reheat_coil_name"]
+        }
+    },
+    "ZoneHVAC:AirDistributionUnit": {
+        "BrickType": "Terminal_Unit",
+        "modelica": {},
+        "rules": {
+            "addOutlets": ["air_terminal_name"]
+        }
+    },
+    "ZoneHVAC:EquipmentList": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "expandList": ["zone_equipment_name"]
+        }
+    },
+    "Fan:ConstantVolume": {
+        "BrickType": "Fan",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"]
+        }
+    },
+    "Fan:VariableVolume": {
+        "BrickType": "Fan",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"]
+        }
+    },
+    "Fan:OnOff": {
+        "BrickType": "Fan",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"]
+        }
+    },
+    "Fan:ZoneExhaust": {
+        "BrickType": "Exhaust_Fan",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"]
+        }
+    },
+    "Coil:Cooling:Water": {
+        "BrickType": "Chilled_Water_Coil",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["water_inlet_node_name", "air_inlet_node_name"],
+            "addOutlets": ["water_outlet_node_name", "air_outlet_node_name"]
+        }
+    },
+    "Coil:Cooling:Water:DetailedGeometry": {
+        "BrickType": "Chilled_Water_Coil",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["water_inlet_node_name", "air_inlet_node_name"],
+            "addOutlets": ["water_outlet_node_name", "air_outlet_node_name"]
+        }
+    },
+    "CoilSystem:Cooling:Water": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "unpackCoilSystem": ["cooling_coil_name"]
+        }
+    },
+    "Coil:Cooling:DX": {
+        "BrickType": "Cooling_Coil",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["evaporator_inlet_node_name", "condenser_inlet_node_name"],
+            "addOutlets": ["evaporator_outlet_node_name", "condenser_outlet_node_name"]
+        }
+    },
+    "Coil:Cooling:DX:SingleSpeed": {
+        "BrickType": "Cooling_Coil",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"]
+        }
+    },
+    "Coil:Cooling:DX:TwoSpeed": {
+        "BrickType": "Cooling_Coil",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"]
+        }
+    },
+    "Coil:Cooling:DX:MultiSpeed": {
+        "BrickType": "Cooling_Coil",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"]
+        }
+    },
+    "Coil:Cooling:DX:VariableSpeed": {
+        "BrickType": "Cooling_Coil",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["indoor_air_inlet_node_name"],
+            "addOutlets": ["indoor_air_outlet_node_name"]
+        }
+    },
+    "Coil:Cooling:DX:VariableRefrigerantFlow": {
+        "BrickType": "Cooling_Coil",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["coil_air_inlet_node"],
+            "addOutlets": ["coil_air_outlet_node"]
+        }
+    },
+    "Coil:Cooling:DX:VariableRefrigerantFlow:FluidTemperatureControl": {
+        "BrickType": "Cooling_Coil",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["coil_air_inlet_node"],
+            "addOutlets": ["coil_air_outlet_node"]
+        }
+    },
+    "Coil:Heating:DX:VariableRefrigerantFlow ": {
+        "BrickType": "Heating_Coil",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["coil_air_inlet_node"],
+            "addOutlets": ["coil_air_outlet_node"]
+        }
+    },
+
+    "Coil:Heating:Electric ": {
+        "BrickType": "Heating_Coil",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"]
+        }
+    },
+    "Coil:Heating:Electric:MultiStage": {
+        "BrickType": "Heating_Coil",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"]
+        }
+    },
+    "Coil:Heating:Fuel": {
+        "BrickType": "Heating_Coil",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"]
+        }
+    },
+    "Coil:Heating:Gas:MultiStage": {
+        "BrickType": "Heating_Coil",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"]
+        }
+    },
+    "Coil:Heating:DX:SingleSpeed": {
+        "BrickType": "Heating_Coil",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"]
+        }
+    },
+    "Coil:Heating:DX:MultiSpeed": {
+        "BrickType": "Heating_Coil",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"]
+        }
+    },
+    "Coil:Heating:DX:VariableSpeed": {
+        "BrickType": "Heating_Coil",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"]
+        }
+    },
+    "Coil:Heating:Water": {
+        "BrickType": "Hot_Water_coil",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name", "water_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name", "water_outlet_node_name"]
+        }
+    },
+    "Coil:Heating:Steam": {
+        "BrickType": "Heating_Coil",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name", "water_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name", "water_outlet_node_name"]
+        }
+    },
+    "Coil:WaterHeating:AirToWaterHeatPump:Pumped": {
+        "BrickType": "Water_Heater",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["evaporator_air_inlet_node_name", "condenser_water_inlet_node_name"],
+            "addOutlets": ["evaporator_air_outlet_node_name", "condenser_water_outlet_node_name"]
+        }
+    },
+    "Coil:WaterHeating:AirToWaterHeatPump:Wrapped": {
+        "BrickType": "Water_Heater",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["evaporator_air_inlet_node_name"],
+            "addOutlets": ["evaporator_air_outlet_node_name"]
+        }
+    },
+    "Coil:WaterHeating:AirToWaterHeatPump:VariableSpeed": {
+        "BrickType": "Water_Heater",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["evaporator_air_inlet_node_name", "condenser_water_inlet_node_name"],
+            "addOutlets": ["evaporator_air_outlet_node_name", "condenser_water_outlet_node_name"]
+        }
+    },
+    "Coil:WaterHeating:Desuperheater": {
+        "BrickType": "Water_Heater",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["water_inlet_node_name"],
+            "addOutlets": ["water_outlet_node_name"]
+        }
+    },
+    "CoilSystem:Cooling:DX": {
+        "BrickType": "Cooling_Coil",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["dx_cooling_coil_system_inlet_node_name"],
+            "addOutlets": ["dx_cooling_coil_system_outlet_node_name"],
+            "unpackCoilSystem": ["cooling_coil_name"]
+        }
+    },
+    "CoilSystem:Heating:DX": {
+        "BrickType": "Heating_Coil",
+        "modelica": {},
+        "rules": {
+            "unpackCoilSystem": ["heating_coil_name"]
+        }
+    },
+    "CoilSystem:Cooling:Water:HeatExchangerAssisted": {
+        "BrickType": "Chilled_Water_Coil",
+        "modelica": {},
+        "rules": {
+            "unpackCoilSystem": ["heat_exchanger_name", "cooling_coil_name"]
+        }
+    },
+    "CoilSystem:Cooling:DX:HeatExchangerAssisted": {
+        "BrickType": "Cooling_Coil",
+        "modelica": {},
+        "rules": {
+            "unpackCoilSystem": ["heat_exchanger_name", "cooling_coil_name"]
+        }
+    },
+    "CoilSystem:IntegratedHeatPump:AirSource": {
+        "BrickType": "HVAC_Equipment",
+        "modelica": {},
+        "rules": {
+            "unpackCoilSystem": ["space_cooling_coil_name", "space_heating_coil_name", "dedicated_water_heating_coil_name", "scwh_coil_name", "scdwh_cooling_coil_name", "scdwh_water_heating_coil_name", "shdwh_heating_coil_name", "shdwh_water_heating_coil_name"]
+        }
+    },
+    "Coil:Cooling:DX:SingleSpeed:ThermalStorage": {
+        "BrickType": "HVAC_Equipment",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["evaporator_air_inlet_node_name", "condenser_air_inlet_node_name", "storage_tank_plant_connection_inlet_node_name"],
+            "addOutlets": ["evaporator_air_outlet_node_name", "condenser_air_outlet_node_name", "storage_tank_plant_connection_outlet_node_name"],
+            "unpackStorage": ["supply_water_storage_tank_name", "condensate_collection_water_storage_tank_name"]
+        }
+    },
+    "Humidifier:Steam:Electric": {
+        "BrickType": "Humidifier",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"],
+            "unpackStorage": ["water_storage_tank_name"]
+        }
+    },
+    "Humidifier:Steam:Gas": {
+        "BrickType": "Humidifier",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"],
+            "unpackStorage": ["water_storage_tank_name"]
+        }
+    },
+    "Dehumidifier:Desiccant:NoFans": {
+        "BrickType": "Heat_Wheel",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["process_air_inlet_node_name", "regeneration_air_inlet_node_name"],
+            "addOutlets": ["process_air_outlet_node_name", "regeneration_fan_inlet_node_name"],
+            "unpackFanCoilSystem": ["regeneration_coil_name", "regeneration_fan_name"]
+
+        }
+    },
+    "Dehumidifier:Desiccant:System": {
+        "BrickType": "Heat_Wheel",
+        "modelica": {},
+        "rules": {
+            "unpackFanCoilSystem": ["desiccant_heat_exchanger_name", "regeneration_air_fan_name", "regeneration_air_heater_name", "companion_cooling_coil_name"]
+        }
+    },
+    "HeatExchanger:AirToAir:FlatPlate": {
+        "BrickType": "Heat_Exchanger",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["supply_air_inlet_node_name", "secondary_air_inlet_node_name"],
+            "addOutlets": ["supply_air_outlet_node_name", "secondary_air_outlet_node_name"]
+        }
+    },
+    "AirLoopHVAC:UnitarySystem": {
+        "BrickType": "AHU",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name", "heat_recovery_water_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name", "heat_recovery_water_outlet_node_name"],
+            "unpackUnitarySystem": ["supply_fan_name", "heating_coil_name", "cooling_coil_name", "supplemental_heating_coil_name", ""]
+        }
+    },
+    "AirLoopHVAC:Unitary:Furnace:HeatOnly": {
+        "BrickType": "AHU",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["furnace_air_inlet_node_name"],
+            "addOutlets": ["furnace_air_outlet_node_name"],
+            "unpackFanCoilSystem": ["supply_fan_name", "heating_coil_name"]
+        }
+    },
+    "AirLoopHVAC:Unitary:Furnace:HeatCool": {
+        "BrickType": "AHU",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["furnace_air_inlet_node_name"],
+            "addOutlets": ["furnace_air_outlet_node_name"],
+            "unpackFanCoilSystem": ["supply_fan_name", "heating_coil_name", "cooling_coil_name", "reheat_coil_name"]
+        }
+    },
+    "AirLoopHVAC:UnitaryHeatOnly": {
+        "BrickType": "AHU",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["unitary_system_air_inlet_node_name"],
+            "addOutlets": ["unitary_system_air_outlet_node_name"],
+            "unpackFanCoilSystem": ["supply_fan_name", "heating_coil_name"]
+        }
+    },
+    "AirLoopHVAC:UnitaryHeatCool": {
+        "BrickType": "AHU",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["unitary_system_air_inlet_node_name"],
+            "addOutlets": ["unitary_system_air_outlet_node_name"],
+            "unpackFanCoilSystem": ["supply_fan_name", "heating_coil_name", "cooling_coil_name", "reheat_coil_name"]
+        }
+    },
+    "AirLoopHVAC:UnitaryHeatPump:AirToAir": {
+        "BrickType": "AHU",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"],
+            "unpackFanCoilSystem": ["supply_air_fan_name", "heating_coil_name", "cooling_coil_name", "supplemental_heating_coil_name"]
+        }
+    },
+    "AirLoopHVAC:UnitaryHeatPump:WaterToAir": {
+        "BrickType": "AHU",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name"],
+            "unpackFanCoilSystem": ["supply_air_fan_name", "heating_coil_name", "cooling_coil_name", "supplemental_heating_coil_name"]
+        }
+    },
+    "AirLoopHVAC:UnitaryHeatCool:VAVChangeoverBypass": {
+        "BrickType": "AHU",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name", "bypass_duct_mixer_node_name"],
+            "addOutlets": ["air_outlet_node_name", "bypass_duct_splitter_node_name"],
+            "unpackFanCoilSystem": ["outdoor_air_mixer_name", "supply_air_fan_name", "heating_coil_name", "cooling_coil_name"]
+        }
+    },
+    "AirLoopHVAC:UnitaryHeatPump:AirToAir:MultiSpeed": {
+        "BrickType": "AHU",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_inlet_node_name", "heat_recovery_water_inlet_node_name"],
+            "addOutlets": ["air_outlet_node_name", "heat_recovery_water_outlet_node_name"],
+            "unpackFanCoilSystem": ["supply_air_fan_name", "heating_coil_name", "cooling_coil_name", "supplemental_heating_coil_name"]
+        }
+    },
+    "AirLoopHVAC": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["supply_side_inlet_node_name", "demand_side_inlet_node_names"],
+            "addOutlets": ["demand_side_outlet_node_name", "supply_side_outlet_node_names"],
+            "unpackBranch": ["branch_list_name", "connector_list_name"]
+        }
+    },
+    "AirLoopHVAC:OutdoorAirSystem": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "unpackOAS": ["outdoor_air_equipment_list_name"]
+        }
+    },
+    "AirLoopHVAC:OutdoorAirSystem:EquipmentList": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {}
+    },
+    "OutdoorAir:Mixer": {
+        "BrickType": "HVAC_Equipment",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["outdoor_air_stream_node_name", "return_air_stream_node_name"],
+            "addOutlets": ["mixed_air_node_name", "relief_air_stream_node_name"],
+            "addOAS": ["outdoor_air_stream_node_name", "return_air_stream_node_name", "mixed_air_node_name", "relief_air_stream_node_name"]
+        }
+    }
+
+}
