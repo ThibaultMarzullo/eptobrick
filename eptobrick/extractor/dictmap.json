@@ -14,7 +14,10 @@
         "BrickType": "Thermostat",
         "modelica": {},
         "rules": {
-            "isPointof": ["zone_or_zonelist_name"],
+            "manualPredicate": {
+                "predicate": "isPointOf",
+                "elements": ["zone_or_zonelist_name"]
+            },
             "getSetpoint": ["control"]}
     },
     "ThermostatSetpoint:SingleHeating": {
@@ -179,7 +182,7 @@
         "BrickType": "",
         "modelica": {},
         "rules": {
-            "expandList": ["zone_equipment_name"]
+            "zoneEquipment": ["zone_equipment_name"]
         }
     },
     "Fan:ConstantVolume": {
@@ -301,8 +304,7 @@
             "addOutlets": ["coil_air_outlet_node"]
         }
     },
-
-    "Coil:Heating:Electric ": {
+    "Coil:Heating:Electric": {
         "BrickType": "Heating_Coil",
         "modelica": {},
         "rules": {
@@ -605,6 +607,128 @@
             "addOutlets": ["mixed_air_node_name", "relief_air_stream_node_name"],
             "addOAS": ["outdoor_air_stream_node_name", "return_air_stream_node_name", "mixed_air_node_name", "relief_air_stream_node_name"]
         }
-    }
+    },
+    "HeatExchanger:AirToAir:SensibleAndLatent": {
+        "BrickType": "Heat_Exchanger",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["supply_air_inlet_node_name", "exhaust_air_inlet_node_name"],
+            "addOutlets": ["supply_air_outlet_node_name", "exhaust_air_outlet_node_name"]
+        }
+    },
+    "ZoneTerminalUnitList": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+        }
+    },
+    "AirLoopHVAC:ZoneSplitter": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["inlet_node_name"],
+            "extensibleMethod": {
+                "method" : "addOutlets",
+                "type_" : "outlet_node",
+                "attr_" : "name"
+            }
+        }
+    },
+    "AirLoopHVAC:SupplyPlenum": {
+        "BrickType": "Supply_Air_Plenum",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["inlet_node_name"],
+            "extensibleMethod": {
+                "method" : "addOutlets",
+                "type_" : "outlet_node",
+                "attr_" : "name"
+            }
+        }
+    },
+    "AirLoopHVAC:SupplyPath": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["supply_air_path_inlet_node_name"],
+            "extensibleMethod": {
+                "method" : "genericUnpack",
+                "type_" : "component",
+                "attr_" : "name"
+            }
+        }
+    },
+    "AirLoopHVAC:ZoneMixer": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "extensibleMethod": {
+                "method" : "addInlets",
+                "type_" : "inlet_node",
+                "attr_" : "name"
+            },
+            "addOutlets": ["outlet_node_name"]
+        }
+    },
+    "AirLoopHVAC:ReturnPlenum": {
+        "BrickType": "Return_Air_Plenum",
+        "modelica": {},
+        "rules": {
+            "extensibleMethod": {
+                "method" : "addInlets",
+                "type_" : "inlet_node",
+                "attr_" : "name"
+            },
+            "addOutlets": ["outlet_node_name", "induced_air_outlet_node_or_nodelist_name"]
+        }
+    },
+    "AirLoopHVAC:ReturnPath": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addOutlets": ["return_air_path_outlet_node_name"],
+            "extensibleMethod": {
+                "method" : "genericUnpack",
+                "type_" : "component",
+                "attr_" : "name"
+            }
+    },
+    "AirLoopHVAC:DedicatedOutdoorAirSystem": {
+        "BrickType": "DOAS",
+        "modelica": {},
+        "rules": {
+            "genericUnpack": ["airloophvac_outdoorairsystem_name", "airloophvac_mixer_name", "airloophvac_splitter_name"],
+            "manualPredicate": {
+                "predicate": "hasPart",
+                "elements": ["airloophvac_outdoorairsystem_name"]
+            }
+        }
+    },
+    "": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": [],
+            "addOutlets": []
+        }
+    },
+    ,
+    "": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": [],
+            "addOutlets": []
+        }
+    },
+    ,
+    "": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": [],
+            "addOutlets": []
+        }
+    },
 
 }
