@@ -118,10 +118,15 @@ class Component():
 
     def unpackList(self, eplist, type_, attr_):
         res = []
+        
         for i in range(1, 100):
+            if attr_ != "":
+                attrstr = f"{type_}_{i}_{attr_}"
+            else:
+                attrstr = f"{type_}_{i}"
             try:
-                if getattr(eplist, f"{type_}_{i}_{attr_}") is not None:
-                    res.extend([getattr(eplist, f"{type_}_{i}_{attr_}")])
+                if getattr(eplist, attrstr) is not None:
+                    res.extend([getattr(eplist, attrstr)])
             except:
                 break
         return res
@@ -181,8 +186,13 @@ class Component():
 
     def extensibleMethod(self, mdict):
         #TODO: what if there are several method extensions needed?
-        if hasattr(self, mdict["method"]):
-            mth = getattr(self, mdict["method"])
-            extendedlist = self.unpackList(self.idfelem, mdict["type_"], mdict["attr_"])
-            for elem in extendedlist:
-                mth(elem)
+        for meth in mdict:
+            if hasattr(self, meth["method"]):
+                mth = getattr(self, meth["method"])
+                extendedlist = self.unpackList(self.idfelem, meth["type_"], meth["attr_"])
+                for elem in extendedlist:
+                    mth(elem)
+
+    # def duplicateElement(self, num, epobj):
+    #     if isinstance(num, int):
+    #         pass
