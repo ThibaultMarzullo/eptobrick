@@ -107,9 +107,17 @@
         }
     },
     "ZoneHVAC:OutdoorAirUnit": {
-        "BrickType": "ToDo",
+        "BrickType": "DOAS",
         "modelica": {},
-        "rules": {}
+        "rules": {
+            "manualPredicate": {
+                "predicate": "hasLocation",
+                "elements": ["zone_name"]
+            },
+            "genericUnpack": ["supply_fan_name", "exhaust_fan_name"],
+            "addInlets": ["outdoor_air_node_name", "airinlet_node_name"],
+            "addOutlets": ["airoutlet_node_name", "supply_fanoutlet_node_name"]
+        }
     },
     "AirTerminal:SingleDuct:ConstantVolume:Reheat": {
         "BrickType": "CAV",
@@ -245,7 +253,11 @@
         "modelica": {},
         "rules": {
             "addInlets": ["evaporator_inlet_node_name", "condenser_inlet_node_name"],
-            "addOutlets": ["evaporator_outlet_node_name", "condenser_outlet_node_name"]
+            "addOutlets": ["evaporator_outlet_node_name", "condenser_outlet_node_name"],
+            "manualPredicate": {
+                "predicate": "hasLocation",
+                "elements": ["zone_name_for_condenser_placement"]
+            }
         }
     },
     "Coil:Cooling:DX:SingleSpeed": {
@@ -253,7 +265,15 @@
         "modelica": {},
         "rules": {
             "addInlets": ["air_inlet_node_name"],
-            "addOutlets": ["air_outlet_node_name"]
+            "addOutlets": ["air_outlet_node_name"],
+            "manualPredicate": {
+                "predicate": "hasLocation",
+                "elements": ["condenser_zone_name"],
+                "manualPredicate": {
+                    "predicate": "hasLocation",
+                    "elements": ["zone_name_for_condenser_placement"]
+                }
+            }
         }
     },
     "Coil:Cooling:DX:TwoSpeed": {
@@ -261,7 +281,11 @@
         "modelica": {},
         "rules": {
             "addInlets": ["air_inlet_node_name"],
-            "addOutlets": ["air_outlet_node_name"]
+            "addOutlets": ["air_outlet_node_name"],
+            "manualPredicate": {
+                "predicate": "hasLocation",
+                "elements": ["zone_name_for_condenser_placement"]
+            }
         }
     },
     "Coil:Cooling:DX:MultiSpeed": {
@@ -269,7 +293,11 @@
         "modelica": {},
         "rules": {
             "addInlets": ["air_inlet_node_name"],
-            "addOutlets": ["air_outlet_node_name"]
+            "addOutlets": ["air_outlet_node_name"],
+            "manualPredicate": {
+                "predicate": "hasLocation",
+                "elements": ["zone_name_for_condenser_placement"]
+            }
         }
     },
     "Coil:Cooling:DX:VariableSpeed": {
@@ -341,7 +369,11 @@
         "modelica": {},
         "rules": {
             "addInlets": ["air_inlet_node_name"],
-            "addOutlets": ["air_outlet_node_name"]
+            "addOutlets": ["air_outlet_node_name"],
+            "manualPredicate": {
+                "predicate": "hasLocation",
+                "elements": ["zone_name_for_evaporator_placement"]
+            }
         }
     },
     "Coil:Heating:DX:MultiSpeed": {
@@ -349,7 +381,11 @@
         "modelica": {},
         "rules": {
             "addInlets": ["air_inlet_node_name"],
-            "addOutlets": ["air_outlet_node_name"]
+            "addOutlets": ["air_outlet_node_name"],
+            "manualPredicate": {
+                "predicate": "hasLocation",
+                "elements": ["zone_name_for_evaporator_placement"]
+            }
         }
     },
     "Coil:Heating:DX:VariableSpeed": {
@@ -627,11 +663,11 @@
         "modelica": {},
         "rules": {
             "addInlets": ["inlet_node_name"],
-            "extensibleMethod": {
+            "extensibleMethod": [{
                 "method" : "addOutlets",
                 "type_" : "outlet_node",
                 "attr_" : "name"
-            }
+            }]
         }
     },
     "AirLoopHVAC:SupplyPlenum": {
@@ -639,10 +675,14 @@
         "modelica": {},
         "rules": {
             "addInlets": ["inlet_node_name"],
-            "extensibleMethod": {
+            "extensibleMethod": [{
                 "method" : "addOutlets",
                 "type_" : "outlet_node",
                 "attr_" : "name"
+            }],
+            "manualPredicate":{
+                "predicate": "hasLocation",
+                "elements": ["zone_name"]
             }
         }
     },
@@ -651,22 +691,22 @@
         "modelica": {},
         "rules": {
             "addInlets": ["supply_air_path_inlet_node_name"],
-            "extensibleMethod": {
+            "extensibleMethod": [{
                 "method" : "genericUnpack",
                 "type_" : "component",
                 "attr_" : "name"
-            }
+            }]
         }
     },
     "AirLoopHVAC:ZoneMixer": {
         "BrickType": "",
         "modelica": {},
         "rules": {
-            "extensibleMethod": {
+            "extensibleMethod": [{
                 "method" : "addInlets",
                 "type_" : "inlet_node",
                 "attr_" : "name"
-            },
+            }],
             "addOutlets": ["outlet_node_name"]
         }
     },
@@ -674,12 +714,16 @@
         "BrickType": "Return_Air_Plenum",
         "modelica": {},
         "rules": {
-            "extensibleMethod": {
+            "extensibleMethod": [{
                 "method" : "addInlets",
                 "type_" : "inlet_node",
                 "attr_" : "name"
-            },
-            "addOutlets": ["outlet_node_name", "induced_air_outlet_node_or_nodelist_name"]
+            }],
+            "addOutlets": ["outlet_node_name", "induced_air_outlet_node_or_nodelist_name"],
+            "manualPredicate":{
+                "predicate": "hasLocation",
+                "elements": ["zone_name"]
+            }
         }
     },
     "AirLoopHVAC:ReturnPath": {
@@ -687,11 +731,11 @@
         "modelica": {},
         "rules": {
             "addOutlets": ["return_air_path_outlet_node_name"],
-            "extensibleMethod": {
+            "extensibleMethod": [{
                 "method" : "genericUnpack",
                 "type_" : "component",
                 "attr_" : "name"
-            }
+            }]
     },
     "AirLoopHVAC:DedicatedOutdoorAirSystem": {
         "BrickType": "DOAS",
@@ -704,6 +748,870 @@
             }
         }
     },
+    "AirLoopHVAC:Mixer": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "extensibleMethod": {
+                "method" : "addInlets",
+                "type_" : "inlet_node",
+                "attr_" : "name"
+            },
+            "addOutlets": ["outlet_node_name"]
+        }
+    },
+    "AirLoopHVAC:Splitter": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["inlet_node_name"],
+            "extensibleMethod": [{
+                "method" : "addOutlets",
+                "type_" : "outlet_node",
+                "attr_" : "name"
+            }]
+        }
+    },
+    "Connector:Splitter": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "unpackBranch": ["inlet_branch_name"],
+            "extensibleMethod": {
+                "method" : "unpackBranch",
+                "type_" : "outlet_branch",
+                "attr_" : "name"
+            },
+            "TODO": "assign inlet/outlet branches to inlet/outlet"
+        }
+    },
+    "Connector:Mixer": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "unpackBranch": ["outlet_branch_name"],
+            "extensibleMethod": [{
+                "method" : "unpackBranch",
+                "type_" : "inlet_branch",
+                "attr_" : "name"
+            }],
+            "TODO": "assign inlet/outlet branches to inlet/outlet"
+        }
+    },
+    "ConnectorList": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "extensibleMethod": [{
+                "method" : "genericUnpack",
+                "type_" : "connector",
+                "attr_" : "name"
+            }]
+        }
+    },
+    "NodeList": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "extensibleMethod": [
+                {
+                "method" : "genericUnpack",
+                "type_" : "node",
+                "attr_" : "name"
+            }
+        ],
+            "TODO" : "Manage nodelists. Maybe we should ignore."
+        }
+    },
+    "OutdoorAir:Node": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+        },
+        "TODO": "Use this as a modelica boundary condition"
+    },
+    "Pipe:Adiabatic": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["inlet_node_name"],
+            "addOutlets": ["outlet_node_name"]
+        },
+        "TODO": "Modelica"
+    },
+    "Pipe:Adiabatic:Steam": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["inlet_node_name"],
+            "addOutlets": ["outlet_node_name"]
+        },
+        "TODO": "Modelica"
+    },
+    "Pipe:Indoor": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["fluid_inlet_node_name"],
+            "addOutlets": ["fluid_outlet_node_name"],
+            "manualPredicate":{
+                "predicate": "hasLocation",
+                "elements": ["ambient_temperature_zone_name"]
+            }
+        },
+        "TODO": "Modelica"
+    },
+    "Pipe:Outdoor": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["fluid_inlet_node_name"],
+            "addOutlets": ["fluid_outlet_node_name"]
+        },
+        "TODO": "Modelica"
+    },
+    "Pipe:Underground": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["fluid_inlet_node_name"],
+            "addOutlets": ["fluid_outlet_node_name"]
+        },
+        "TODO": "Modelica"
+    },
+    "Pump:VariableSpeed": {
+        "BrickType": "Pump",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["inlet_node_name"],
+            "addOutlets": ["outlet_node_name"],
+            "manualPredicate":{
+                "predicate": "hasLocation",
+                "elements": ["zone_name"]
+            }
+        }
+    },
+    "Pump:ConstantSpeed": {
+        "BrickType": "Pump",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["inlet_node_name"],
+            "addOutlets": ["outlet_node_name"],
+            "manualPredicate":{
+                "predicate": "hasLocation",
+                "elements": ["zone_name"]
+            }
+        }
+    },
+    "Pump:VariableSpeed:Condensate": {
+        "BrickType": "Pump",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["inlet_node_name"],
+            "addOutlets": ["outlet_node_name"],
+            "manualPredicate":{
+                "predicate": "hasLocation",
+                "elements": ["zone_name"]
+            }
+        }
+    },
+    "HeaderedPumps:ConstantSpeed": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["inlet_node_name"],
+            "addOutlets": ["outlet_node_name"],
+            "TODO": "duplicateElement:number_of_pumps_in_bank",
+            "manualPredicate":{
+                "predicate": "hasLocation",
+                "elements": ["zone_name"]
+            }
+        }
+    },
+    "HeaderedPumps:VariableSpeed": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["inlet_node_name"],
+            "addOutlets": ["outlet_node_name"],
+            "TODO": "duplicateElement:number_of_pumps_in_bank",
+            "manualPredicate":{
+                "predicate": "hasLocation",
+                "elements": ["zone_name"]
+            }
+        }
+    },
+    "SolarCollector:FlatPlate:Water": {
+        "BrickType": "Solar_Thermal_Collector",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["inlet_node_name"],
+            "addOutlets": ["outlet_node_name"]
+        }
+    },
+    "SolarCollector:FlatPlate:PhotovoltaicThermal": {
+        "BrickType": "PVT_Panel",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["water_inlet_node_name", "air_inlet_node_name"],
+            "addOutlets": ["water_outlet_node_name", "air_outlet_node_name"]
+        }
+    },
+    "SolarCollectorPerformance:PhotovoltaicThermal:Simple": {
+        "BrickType": "PVT_Panel",
+        "modelica": {},
+        "rules": {
+        }
+    },
+    "SolarCollector:IntegralCollectorStorage": {
+        "BrickType": "Solar_Thermal_Collector",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["inlet_node_name"],
+            "addOutlets": ["outlet_node_name"]
+        }
+    },
+    "SolarCollector:UnglazedTranspired": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["inlet_node_name"],
+            "addOutlets": ["outlet_node_name"]
+        }
+    },
+    "SolarCollector:UnglazedTranspired:Multisystem": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "extensibleMethod": [
+                {
+                "method" : "addInlets",
+                "type_" : "outdoor_air_system",
+                "attr_" : "collector_inlet_node"
+            },
+            {
+                "method" : "addInlets",
+                "type_" : "outdoor_air_system",
+                "attr_" : "zone_node"
+            },
+            {
+                "method" : "addOutlets",
+                "type_" : "outdoor_air_system",
+                "attr_" : "collector_outlet_node"
+            },
+            {
+                "method" : "addOutlets",
+                "type_" : "outdoor_air_system",
+                "attr_" : "mixed_air_node"
+            }
+        ]
+        }
+    },
+    "Boiler:HotWater": {
+        "BrickType": "Boiler",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["boiler_water_inlet_node_name"],
+            "addOutlets": ["boiler_water_outlet_node_name"]
+        }
+    },
+    "Boiler:Steam": {
+        "BrickType": "Boiler",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["water_inlet_node_name"],
+            "addOutlets": ["steam_outlet_node_name"]
+        }
+    },
+    "Chiller:Electric:EIR": {
+        "BrickType": "Chiller",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["chilled_water_inlet_node_name", "condenser_inlet_node_name"],
+            "addOutlets": ["chilled_water_outlet_node_name", "condenser_outlet_node_name"]
+        }
+    },
+    "Chiller:Electric:ReformulatedEIR": {
+        "BrickType": "Chiller",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["chilled_water_inlet_node_name", "condenser_inlet_node_name"],
+            "addOutlets": ["chilled_water_outlet_node_name", "condenser_outlet_node_name"]
+        }
+    },
+    "Chiller:Electric": {
+        "BrickType": "Chiller",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["chilled_water_inlet_node_name", "condenser_inlet_node_name"],
+            "addOutlets": ["chilled_water_outlet_node_name", "condenser_outlet_node_name"]
+        }
+    },
+    "Chiller:Absorption:Indirect": {
+        "BrickType": "Absorption_Chiller",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["chilled_water_inlet_node_name", "condenser_inlet_node_name"],
+            "addOutlets": ["chilled_water_outlet_node_name", "condenser_outlet_node_name"]
+        }
+    },
+    "Chiller:Absorption": {
+        "BrickType": "Absorption_Chiller",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["chilled_water_inlet_node_name", "condenser_inlet_node_name"],
+            "addOutlets": ["chilled_water_outlet_node_name", "condenser_outlet_node_name"]
+        }
+    },
+    "Chiller:ConstantCOP": {
+        "BrickType": "Chiller",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["chilled_water_inlet_node_name", "condenser_inlet_node_name"],
+            "addOutlets": ["chilled_water_outlet_node_name", "condenser_outlet_node_name"]
+        }
+    },
+    "Chiller:EngineDriven": {
+        "BrickType": "Chiller",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["chilled_water_inlet_node_name", "condenser_inlet_node_name"],
+            "addOutlets": ["chilled_water_outlet_node_name", "condenser_outlet_node_name"]
+        }
+    },
+    "Chiller:CombustionTurbine": {
+        "BrickType": "Chiller",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["chilled_water_inlet_node_name", "condenser_inlet_node_name"],
+            "addOutlets": ["chilled_water_outlet_node_name", "condenser_outlet_node_name"]
+        }
+    },
+    "ChillerHeater:Absorption:DirectFired": {
+        "BrickType": "Absorption_Chiller",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["chilled_water_inlet_node_name", "condenser_inlet_node_name", "hot_water_inlet_node_name"],
+            "addOutlets": ["chilled_water_outlet_node_name", "condenser_outlet_node_name", "hot_water_outlet_node_name"]
+        }
+    },
+    "ChillerHeater:Absorption:DoubleEffect": {
+        "BrickType": "Absorption_Chiller",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["chilled_water_inlet_node_name", "condenser_inlet_node_name", "hot_water_inlet_node_name"],
+            "addOutlets": ["chilled_water_outlet_node_name", "condenser_outlet_node_name", "hot_water_outlet_node_name"]
+        }
+    },
+    "HeatPump:PlantLoop:EIR:Cooling": {
+        "BrickType": "HVAC_Equipment",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["load_side_inlet_node_name", "source_side_inlet_node_name"],
+            "addOutlets": ["load_side_outlet_node_name", "source_side_outlet_node_name"]
+        }
+    },
+    "HeatPump:PlantLoop:EIR:Heating": {
+        "BrickType": "HVAC_Equipment",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["load_side_inlet_node_name", "source_side_inlet_node_name"],
+            "addOutlets": ["load_side_outlet_node_name", "source_side_outlet_node_name"]
+        }
+    },
+    "HeatPump:WaterToWater:EquationFit:Heating": {
+        "BrickType": "HVAC_Equipment",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["load_side_inlet_node_name", "source_side_inlet_node_name"],
+            "addOutlets": ["load_side_outlet_node_name", "source_side_outlet_node_name"]
+        }
+    },
+    "HeatPump:WaterToWater:EquationFit:Cooling": {
+        "BrickType": "HVAC_Equipment",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["load_side_inlet_node_name", "source_side_inlet_node_name"],
+            "addOutlets": ["load_side_outlet_node_name", "source_side_outlet_node_name"]
+        }
+    },
+    "HeatPump:WaterToWater:ParameterEstimation:Cooling": {
+        "BrickType": "HVAC_Equipment",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["load_side_inlet_node_name", "source_side_inlet_node_name"],
+            "addOutlets": ["load_side_outlet_node_name", "source_side_outlet_node_name"]
+        }
+    },
+    "HeatPump:WaterToWater:ParameterEstimation:Heating": {
+        "BrickType": "HVAC_Equipment",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["load_side_inlet_node_name", "source_side_inlet_node_name"],
+            "addOutlets": ["load_side_outlet_node_name", "source_side_outlet_node_name"]
+        }
+    },
+    "DistrictCooling": {
+        "BrickType": "Water_Distribution",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["chilled_water_inlet_node_name"],
+            "addOutlets": ["chilled_water_outlet_node_name"]
+        }
+    },
+    "DistrictHeating": {
+        "BrickType": "Water_Distribution",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["hot_water_inlet_node_name"],
+            "addOutlets": ["hot_water_outlet_node_name"]
+        }
+    },
+    "PlantComponent:TemperatureSource": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["inlet_node"],
+            "addOutlets": ["outlet_node"]
+        }
+    },
+    "CentralHeatPumpSystem": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["cooling_loop_inlet_node_name", "source_loop_inlet_node_name", "heating_loop_inlet_node_name"],
+            "addOutlets": ["cooling_loop_outlet_node_name", "source_loop_outlet_node_name", "heating_loop_outlet_node_name"],
+            "extensibleMethod": [
+                {
+                "method": "genericUnpack",
+                "type_": "chiller_heater_modules_performance_component_name",
+                "attr_": ""
+            }
+        ]
+        }
+    },
+    "ChillerHeaterPerformance:Electric:EIR": {
+        "BrickType": "HVAC_Equipment",
+        "modelica": {},
+        "rules": {
+        }
+    },
+    "CoolingTower:SingleSpeed": {
+        "BrickType": "Cooling_Tower",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["water_inlet_node_name", "outdoor_air_inlet_node_name"],
+            "addOutlets": ["water_outlet_node_name"],
+            "genericUnpack": ["supply_water_storage_tank_name"]
+        }
+    },
+    "CoolingTower:TwoSpeed": {
+        "BrickType": "Cooling_Tower",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["water_inlet_node_name", "outdoor_air_inlet_node_name"],
+            "addOutlets": ["water_outlet_node_name"],
+            "genericUnpack": ["supply_water_storage_tank_name"]
+        }
+    },
+    "CoolingTower:VariableSpeed:Merkel": {
+        "BrickType": "Cooling_Tower",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["water_inlet_node_name", "outdoor_air_inlet_node_name"],
+            "addOutlets": ["water_outlet_node_name"],
+            "genericUnpack": ["supply_water_storage_tank_name"]
+        }
+    },
+    "CoolingTower:VariableSpeed": {
+        "BrickType": "Cooling_Tower",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["water_inlet_node_name", "outdoor_air_inlet_node_name"],
+            "addOutlets": ["water_outlet_node_name"],
+            "genericUnpack": ["supply_water_storage_tank_name"]
+        }
+    },
+    "EvaporativeFluidCooler:SingleSpeed": {
+        "BrickType": "Evaporative_Heat_Exchanger",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["water_inlet_node_name", "outdoor_air_inlet_node_name"],
+            "addOutlets": ["water_outlet_node_name"],
+            "genericUnpack": ["supply_water_storage_tank_name"]
+        }
+    },
+    "EvaporativeFluidCooler:TwoSpeed": {
+        "BrickType": "Evaporative_Heat_Exchanger",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["water_inlet_node_name", "outdoor_air_inlet_node_name"],
+            "addOutlets": ["water_outlet_node_name"],
+            "genericUnpack": ["supply_water_storage_tank_name"]
+        }
+    },
+    "FluidCooler:SingleSpeed": {
+        "BrickType": "Evaporative_Heat_Exchanger",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["water_inlet_node_name", "outdoor_air_inlet_node_name"],
+            "addOutlets": ["water_outlet_node_name"]
+        }
+    },
+    "FluidCooler:TwoSpeed": {
+        "BrickType": "Evaporative_Heat_Exchanger",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["water_inlet_node_name", "outdoor_air_inlet_node_name"],
+            "addOutlets": ["water_outlet_node_name"]
+        }
+    },
+    "GroundHeatExchanger:System": {
+        "BrickType": "Heat_Exchanger",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["inlet_node_name"],
+            "addOutlets": ["outlet_node_name"]
+        }
+    },
+    "GroundHeatExchanger:Vertical:Properties": {
+        "BrickType": "Heat_Exchanger",
+        "modelica": {},
+        "rules": {
+        }
+    },
+    "GroundHeatExchanger:Vertical:Array": {
+        "BrickType": "Heat_Exchanger",
+        "modelica": {},
+        "rules": {
+        }
+    },
+    "GroundHeatExchanger:Vertical:Single": {
+        "BrickType": "Heat_Exchanger",
+        "modelica": {},
+        "rules": {
+        }
+    },
+    "GroundHeatExchanger:ResponseFactors": {
+        "BrickType": "Heat_Exchanger",
+        "modelica": {},
+        "rules": {
+        }
+    },
+    "GroundHeatExchanger:Pond": {
+        "BrickType": "Heat_Exchanger",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["fluid_inlet_node_name"],
+            "addOutlets": ["fluid_outlet_node_name"]
+        }
+    },
+    "GroundHeatExchanger:Surface": {
+        "BrickType": "Heat_Exchanger",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["fluid_inlet_node_name"],
+            "addOutlets": ["fluid_outlet_node_name"]
+        }
+    },
+    "GroundHeatExchanger:HorizontalTrench": {
+        "BrickType": "Heat_Exchanger",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["inlet_node_name"],
+            "addOutlets": ["outlet_node_name"]
+        }
+    },
+    "GroundHeatExchanger:Slinky": {
+        "BrickType": "Heat_Exchanger",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["inlet_node_name"],
+            "addOutlets": ["outlet_node_name"]
+        }
+    },
+    "HeatExchanger:FluidToFluid": {
+        "BrickType": "Heat_Exchanger",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["loop_demand_side_inlet_node_name", "loop_supply_side_inlet_node_name"],
+            "addOutlets": ["loop_demand_side_outlet_node_name", "loop_supply_side_outlet_node_name"]
+        }
+    },
+    "WaterHeater:Mixed": {
+        "BrickType": "Water_Heater",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["use_side_inlet_node_name", "source_side_inlet_node_name"],
+            "addOutlets": ["use_side_outlet_node_name", "source_side_outlet_node_name"],
+            "manualPredicate":{
+                "predicate": "hasLocation",
+                "elements": ["ambient_temperature_zone_name"]
+            }
+        }
+    },
+    "WaterHeater:Stratified": {
+        "BrickType": "Water_Heater",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["use_side_inlet_node_name", "source_side_inlet_node_name"],
+            "addOutlets": ["use_side_outlet_node_name", "source_side_outlet_node_name"],
+            "manualPredicate":{
+                "predicate": "hasLocation",
+                "elements": ["ambient_temperature_zone_name"]
+            }
+        }
+    },
+    "WaterHeater:HeatPump:PumpedCondenser": {
+        "BrickType": "Water_Heater",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["inlet_air_mixer_node_name", "tank_use_side_inlet_node_name", "outdoor_air_node_name", "air_inlet_node_name", "condenser_water_inlet_node_name"],
+            "addOutlets": ["outlet_air_splitter_node_name", "tank_use_side_outlet_node_name", "exhaust_air_node_name", "air_outlet_node_name", "condenser_water_outlet_node_name"],
+            "genericUnpack": ["fan_name", "dx_coil_name", "tank_name"]
+        }
+    },
+    "WaterHeater:HeatPump:WrappedCondenser": {
+        "BrickType": "Water_Heater",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["inlet_air_mixer_node_name", "tank_use_side_inlet_node_name", "outdoor_air_node_name", "air_inlet_node_name"],
+            "addOutlets": ["outlet_air_splitter_node_name", "tank_use_side_outlet_node_name", "exhaust_air_node_name", "air_outlet_node_name"],
+            "genericUnpack": ["fan_name", "dx_coil_name", "tank_name"]
+        }
+    },
+    "ThermalStorage:Ice:Simple": {
+        "BrickType": "Energy_Storage",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["inlet_node_name"],
+            "addOutlets": ["outlet_node_name"]
+        }
+    },
+    "ThermalStorage:Ice:Detailed": {
+        "BrickType": "Energy_Storage",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["inlet_node_name"],
+            "addOutlets": ["outlet_node_name"]
+        }
+    },
+    "ThermalStorage:ChilledWater:Mixed": {
+        "BrickType": "Energy_Storage",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["use_side_inlet_node_name", "source_side_inlet_node_name"],
+            "addOutlets": ["use_side_outlet_node_name", "source_side_outlet_node_name"],
+            "manualPredicate":{
+                "predicate": "hasLocation",
+                "elements": ["ambient_temperature_zone_name"]
+            }
+        }
+    },
+    "ThermalStorage:ChilledWater:Stratified": {
+        "BrickType": "Energy_Storage",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["use_side_inlet_node_name", "source_side_inlet_node_name"],
+            "addOutlets": ["use_side_outlet_node_name", "source_side_outlet_node_name"],
+            "manualPredicate":{
+                "predicate": "hasLocation",
+                "elements": ["ambient_temperature_zone_name"]
+            }
+        }
+    },
+    "PlantLoop": {
+        "BrickType": "Equipment",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["demand_side_inlet_node_name", "plant_side_inlet_node_name"],
+            "addOutlets": ["demand_side_outlet_node_name", "plant_side_outlet_node_name"],
+            "unpackBranch": ["plant_side_branch_list_name", "demand_side_branch_list_name"],
+            "unpackConnector": ["plant_side_connector_list_name", "demand_side_connector_list_name"]
+        }
+    },
+    "CondenserLoop": {
+        "BrickType": "Condenser_Water_System",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["demand_side_inlet_node_name", "condenser_side_inlet_node_name"],
+            "addOutlets": ["demand_side_outlet_node_name", "condenser_side_outlet_node_name"],
+            "unpackBranch": ["condenser_demand_side_branch_list_name", "condenser_side_branch_list_name"],
+            "unpackConnector": ["condenser_demand_side_connector_list_name", "condenser_side_connector_list_name"]
+        }
+    },
+    "PlantEquipmentList": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "extensibleMethod": [
+                {
+                "method": "genericUnpack",
+                "type_": "equipment",
+                "attr_": "name"
+            }
+        ]
+        }
+    },
+    "CondenserEquipmentList": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "extensibleMethod": [
+                {
+                "method": "genericUnpack",
+                "type_": "equipment",
+                "attr_": "name"
+            }
+        ]
+        }
+    },
+    "ZoneHVAC:ForcedAir:UserDefined": {
+        "BrickType": "HVAC_Equipment",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["secondary_air_inlet_node_name", "primary_air_inlet_node_name"],
+            "addOutlets": ["secondary_air_outlet_node_name", "primary_air_outlet_node_name"],
+            "extensibleMethod": [
+                {
+                "method": "addInlets",
+                "type_": "plant_connection",
+                "attr_": "inlet_node_name"
+            },
+            {
+                "method": "addOutlets",
+                "type_": "plant_connection",
+                "attr_": "outlet_node_name"
+            }
+            ],
+            "genericUnpack": ["supply_inlet_water_storage_tank_name", "collection_outlet_water_storage_tank_name"],
+            "manualPredicate":{
+                "predicate": "hasLocation",
+                "elements": ["ambient_zone_name"]
+            }
+        }
+    },
+    "AirTerminal:SingleDuct:UserDefined": {
+        "BrickType": "Terminal_Unit",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["secondary_air_inlet_node_name", "primary_air_inlet_node_name"],
+            "addOutlets": ["secondary_air_outlet_node_name", "primary_air_outlet_node_name"],
+            "extensibleMethod": [
+                {
+                "method": "addInlets",
+                "type_": "plant_connection",
+                "attr_": "inlet_node_name"
+            },
+            {
+                "method": "addOutlets",
+                "type_": "plant_connection",
+                "attr_": "outlet_node_name"
+            }
+            ],
+            "genericUnpack": ["supply_inlet_water_storage_tank_name", "collection_outlet_water_storage_tank_name"],
+            "manualPredicate":{
+                "predicate": "hasLocation",
+                "elements": ["ambient_zone_name"]
+            }
+        }
+    },
+    "Coil:UserDefined": {
+        "BrickType": "Coil",
+        "modelica": {},
+        "rules": {
+            "extensibleMethod": [
+                {
+                "method": "addInlets",
+                "type_": "plant_connection",
+                "attr_": "inlet_node_name"
+            },
+            {
+                "method": "addInlets",
+                "type_": "air_connection",
+                "attr_": "inlet_node_name"
+            },
+            {
+                "method": "addOutlets",
+                "type_": "plant_connection",
+                "attr_": "outlet_node_name"
+            },
+            {
+                "method": "addOutlets",
+                "type_": "air_connection",
+                "attr_": "outlet_node_name"
+            }
+            ],
+            "genericUnpack": ["supply_inlet_water_storage_tank_name", "collection_outlet_water_storage_tank_name"],
+            "manualPredicate":{
+                "predicate": "hasLocation",
+                "elements": ["ambient_zone_name"]
+            }
+        }
+    },
+    "PlantComponent:UserDefined": {
+        "BrickType": "Equipment",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["air_connection_inlet_node_name"],
+            "addOutlets": ["air_connection_outlet_node_name"],
+            "extensibleMethod": [
+                {
+                "method": "addInlets",
+                "type_": "plant_connection",
+                "attr_": "inlet_node_name"
+            },
+            {
+                "method": "addOutlets",
+                "type_": "plant_connection",
+                "attr_": "outlet_node_name"
+            }
+            ],
+            "genericUnpack": ["supply_inlet_water_storage_tank_name", "collection_outlet_water_storage_tank_name"],
+            "manualPredicate":{
+                "predicate": "hasLocation",
+                "elements": ["ambient_zone_name"]
+            }
+        }
+    },
+    "Refrigeration:Case": {
+        "BrickType": "Equipment",
+        "modelica": {},
+        "rules": {
+            "manualPredicate":{
+                "predicate": "hasLocation",
+                "elements": ["zone_name"]
+            }
+        }
+    },
+    "Refrigeration:CompressorRack": {
+        "BrickType": "Equipment",
+        "modelica": {},
+        "rules": {
+            "addInlets": ["condenser_air_inlet_node_name", "water_cooled_condenser_inlet_node_name"],
+            "addOutlets": ["water_cooled_condenser_outlet_node_name"],
+            "manualPredicate":{
+                "predicate": "hasLocation",
+                "elements": ["heat_rejection_zone_name"]
+            },
+            "TODO": "add predicate for linked refrigeration case",
+            "genericUnpack": ["refrigeration_case_name_or_walkin_name_or_caseandwalkinlist_name", "evaporative_water_supply_tank_name"]
+        }
+    },
+    "Refrigeration:CaseAndWalkInList": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "extensibleMethod":[
+                {
+                    "method": "genericUnpack",
+                    "type_": "case_or_walkin",
+                    "attr_": "name"
+
+                }
+            ]
+        }
+    },
     "": {
         "BrickType": "",
         "modelica": {},
@@ -712,7 +1620,6 @@
             "addOutlets": []
         }
     },
-    ,
     "": {
         "BrickType": "",
         "modelica": {},
@@ -721,7 +1628,94 @@
             "addOutlets": []
         }
     },
-    ,
+    "": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": [],
+            "addOutlets": []
+        }
+    },
+    "": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": [],
+            "addOutlets": []
+        }
+    },
+    "": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": [],
+            "addOutlets": []
+        }
+    },
+    "": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": [],
+            "addOutlets": []
+        }
+    },
+    "": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": [],
+            "addOutlets": []
+        }
+    },
+    "": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": [],
+            "addOutlets": []
+        }
+    },
+    "": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": [],
+            "addOutlets": []
+        }
+    },
+    "": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": [],
+            "addOutlets": []
+        }
+    },
+    "": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": [],
+            "addOutlets": []
+        }
+    },
+    "": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": [],
+            "addOutlets": []
+        }
+    },
+    "": {
+        "BrickType": "",
+        "modelica": {},
+        "rules": {
+            "addInlets": [],
+            "addOutlets": []
+        }
+    },
     "": {
         "BrickType": "",
         "modelica": {},
