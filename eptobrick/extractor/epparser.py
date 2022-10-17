@@ -93,45 +93,64 @@ class Extractor():
 
     def cleanupPredicates(self):
         for component in self.components.values():
-            print(f"{component.name}, a {component.etype}")
+            print(f"{component.name}, a {component.btype}")
             for predicate in component.bpredicates.keys():
                 for obj in component.bpredicates[predicate]:
                     if not isinstance(obj, Component):
+                        m.printMessage(f"Converting {obj.name} to a eptobrick component.")
                         for cobj in self.components.values():
                             if (cobj.idfelem == obj):# and (cobj.etype == ut.getEPType(obj)):
                                 component.bpredicates[predicate] = [i for i in component.bpredicates[predicate] if i != obj]
                                 obj = cobj
                                 component.bpredicates[predicate].append(obj)
                                 break
-                    print(f"\t{predicate} {obj.name}, a {self.components[obj.name].etype}")
-                    if self.components[obj.name].btype == "" and predicate in self.components[obj.name].bpredicates.keys():
-                        self.components[component.name].bpredicates[predicate] = self.fixPredicates(obj, predicate)
+                            if cobj == list(self.components.values())[-1]:
+                                m.printMessage(f"Warning! Could not find component matching {obj.name} or type {ut.getEPType(obj)}", lvl='error')
+                    print(f"\t{predicate} {obj.name}, a {self.components[obj.name].btype}")
+        for component in self.components.values():
+            self.components[component.name] = self.fixPredicates(component)
+                    
+                    #if self.components[obj.name].btype == "" and predicate in self.components[obj.name].bpredicates.keys():
+                    #    self.components[component.name].bpredicates[predicate] = self.fixPredicates(obj, predicate)
 
+    # def fixPredicates(self, obj, predicate):
+    #     nextinline = []
+    #     if self.components[obj.name].btype == "":
+    #         if predicate in self.components[obj.name].bpredicates.keys():
+    #             if isinstance(self.components[obj.name].bpredicates[predicate], str):
+    #                 nextinline.extend(self.fixPredicates(self.components[obj.name].bpredicates[predicate], predicate))
+    #             else:
+    #                 for nextobj in self.components[obj.name].bpredicates[predicate]:
+    #                     nextinline.extend(self.fixPredicates(nextobj, predicate))
+    #             return nextinline
+    #         return obj
+    #     else:
+    #         return obj
 
-    def fixRecursions(self, name, predicate):
-        suff = 0
-        m.printMessage(f"Fixing a recursion error in element {self.components[name]} using best guess.\n \
-             This might corrupt the model. Please use unique names in your EnergyPlus model in the future.", lvl="error")
-        while suff < 300:
-            suff += 1
-            if f"{name}__suff" in self.components.keys():
-                self.components[name].bpredicates[predicate] = [i for i in self.components[name].bpredicates[predicate] if i != name]
-                self.components[name].bpredicates[predicate].append(f"{name}__suff")
-                break
-
-
-    def fixPredicates(self, obj, predicate):
+    def fixPredicates(self, comp):
+        
         nextinline = []
-        if self.components[obj.name].btype == "":
-            if predicate in self.components[obj.name].bpredicates.keys():
-                if isinstance(self.components[obj.name].bpredicates[predicate], str):
-                    nextinline.extend(self.fixPredicates(self.components[obj.name].bpredicates[predicate], predicate))
-                else:
-                    for nextobj in self.components[obj.name].bpredicates[predicate]:
-                        nextinline.extend(self.fixPredicates(nextobj, predicate))
-                return nextinline
-        else:
-            return obj
+        cont = False
+        print(f"Fixing {comp.name}")
+        while not cont:
+            cont = True
+            for predicate in comp.bpredicates.keys():
+                for obj in comp.bpredicates[predicate]:
+                    if obj.btype == "" and obj.bpredicates != {}:
+                        print(f"Found empty object: {obj.name}")
+                        nextinline.extend([obj])
+                        cont = False
+            for nobj in nextinline:
+                for predicate in nobj.bpredicates.keys():
+                    if predicate in comp.bpredicates.keys():
+                        comp.bpredicates[predicate].extend(nobj.bpredicates[predicate])
+                    else:
+                        comp.bpredicates[predicate] = nobj.bpredicates[predicate]
+                for predicate in comp.bpredicates.keys():
+                    comp.bpredicates[predicate] = [i for i in comp.bpredicates[predicate] if i != nobj]
+            nextinline = []
+        return comp
+        
 
 
     def findNextInLine(self, obj, predicate):
