@@ -1,0 +1,46 @@
+{
+   "completed_at" : "20221129T015959Z",
+   "completed_status" : "Fail",
+   "created_at" : "20221118T161510Z",
+   "file_paths" : 
+   [
+      "/Users/tmarzull/Documents/BRICK/working/eptobrick/alfalfa/tests/PrimarySchool/primaryschool/generated_files",
+      "./weather/",
+      "./files",
+      "./weather",
+      "../../files",
+      "../../weather",
+      "./"
+   ],
+   "hash" : "C4E0466C",
+   "measure_paths" : 
+   [
+      "./measures/"
+   ],
+   "run_directory" : "./run/",
+   "seed_file" : "../primaryschool.osm",
+   "steps" : 
+   [
+      {
+         "arguments" : 
+         {
+            "building_type" : "PrimarySchool",
+            "climate_zone" : "ASHRAE 169-2013-3C",
+            "template" : "90.1-2016"
+         },
+         "description" : "Creates the DOE Reference Building Models as starting points for other analyses.",
+         "measure_dir_name" : "CreateDOEPrototypeBuilding",
+         "modeler_description" : "",
+         "name" : "Create DOE Prototype Building"
+      },
+      {
+         "arguments" : {},
+         "description" : "This method adds inputs and outputs for Alfalfa and generates a metadata model that follows the BRICK ontology.",
+         "measure_dir_name" : "alfalfameasure",
+         "modeler_description" : "",
+         "name" : "Add I/O for alfalfa from BRICK"
+      }
+   ],
+   "updated_at" : "20221129T015959Z",
+   "weather_file" : "USA_CA_Red.Bluff.Muni.AP.725910_TMY.epw"
+}
