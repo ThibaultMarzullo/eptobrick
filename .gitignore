@@ -1,1 +1,3 @@
 __pycache__
+alfalfa/tests/*
+.DS_Store
