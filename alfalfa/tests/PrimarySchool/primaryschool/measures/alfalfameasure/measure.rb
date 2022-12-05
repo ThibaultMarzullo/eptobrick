@@ -33,12 +33,15 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # *******************************************************************************
 
+
+
 # Start the measure
 class AlfalfaBRICK < OpenStudio::Measure::EnergyPlusMeasure
     require 'openstudio-standards'
-    require 'rdf/rdfxml'
-    require 'rdf/turtle'
-    require 'sparql/client'
+    require 'json'
+    # require 'rdf/rdfxml'
+    # require 'rdf/turtle'
+    # require 'sparql/client'
   
     # Define the name of the Measure.
     def name
@@ -66,23 +69,28 @@ class AlfalfaBRICK < OpenStudio::Measure::EnergyPlusMeasure
   
     def find_points(ttlpath)
       
-        pointnames = []
-  
-        graph = RDF::Graph.load(ttlpath, format:  :ttl)
-        sparql = SPARQL::Client.new(graph)
-        query = sparql.select.where([nil, nil, nil])
-        query.each_solution do |solution|
-          solution.to_h.each do |key, value|
-            newstr = value.to_s.split('#')[-1].gsub('&58', ':').gsub('&20', ' ')
-            if (newstr.include? "_Sensor" or newstr.include? "_Setpoint")
-              newstr = newstr
-              pointnames << newstr
-            else
-              break
-            end
-          end
+        #pointnames = []
+        pointnames = `python3 ./resources/getpoints.py #{ttlpath}`
+        # graph = RDF::Graph.load(ttlpath, format:  :ttl)
+        # sparql = SPARQL::Client.new(graph)
+        # query = sparql.select.where([nil, nil, nil])
+        # query.each_solution do |solution|
+        #   solution.to_h.each do |key, value|
+        #     newstr = value.to_s.split('#')[-1].gsub('&58', ':').gsub('&20', ' ')
+        #     if (newstr.include? "_Sensor" or newstr.include? "_Setpoint")
+        #       newstr = newstr
+        #       pointnames << newstr
+        #     else
+        #       break
+        #     end
+        #   end
     
-        end
+        # end
+        
+        puts "PATH: #{ttlpath}"
+        puts "POINT NAMES: #{pointnames}"
+        pointnames = JSON.parse("#{pointnames.gsub('\'', '"')}")
+        puts "UNIQUE POINTS: #{pointnames.uniq}"
         return pointnames.uniq
   
   
@@ -193,7 +201,7 @@ class AlfalfaBRICK < OpenStudio::Measure::EnergyPlusMeasure
     end
 
     def extract_graph(idf_file)
-      ttlpath = `python3 ../resources/runparser.py #{idf_file}`
+      ttlpath = `python3 ./resources/runparser.py #{idf_file}`
       return idf_file.to_s.gsub('.idf', '.ttl')
     end
 

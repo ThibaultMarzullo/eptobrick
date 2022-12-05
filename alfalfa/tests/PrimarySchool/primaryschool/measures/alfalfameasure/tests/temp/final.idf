@@ -6735,12 +6735,93 @@ Output:Table:Monthly,
   SumOrAverage;                           !- Aggregation Type for Variable or Meter 2
 
 Output:Variable,
-  psz-ac:1 supply equipment outlet node,  !- Key Value
+  psz-ac:1&20supply&20equipment&20outlet&20node, !- Key Value
   System Node Temperature,                !- Variable Name
   TimeStep;                               !- Reporting Frequency
 
 ExternalInterface:Variable,
-  psz-ac:1 supply equipment outlet node_y, !- Name
+  psz-ac:1&20supply&20equipment&20outlet&20node_y, !- Name
+  0;                                      !- Initial Value
+
+Output:Variable,
+  psz-ac:1_coolc-psz-ac:1_heatcnode,      !- Key Value
+  System Node Temperature,                !- Variable Name
+  TimeStep;                               !- Reporting Frequency
+
+ExternalInterface:Variable,
+  psz-ac:1_coolc-psz-ac:1_heatcnode_y,    !- Name
+  0;                                      !- Initial Value
+
+Output:Variable,
+  psz-ac:2&20supply&20equipment&20outlet&20node, !- Key Value
+  System Node Temperature,                !- Variable Name
+  TimeStep;                               !- Reporting Frequency
+
+ExternalInterface:Variable,
+  psz-ac:2&20supply&20equipment&20outlet&20node_y, !- Name
+  0;                                      !- Initial Value
+
+Output:Variable,
+  psz-ac:2_coolc-psz-ac:2_heatcnode,      !- Key Value
+  System Node Temperature,                !- Variable Name
+  TimeStep;                               !- Reporting Frequency
+
+ExternalInterface:Variable,
+  psz-ac:2_coolc-psz-ac:2_heatcnode_y,    !- Name
+  0;                                      !- Initial Value
+
+Output:Variable,
+  psz-ac:3&20supply&20equipment&20outlet&20node, !- Key Value
+  System Node Temperature,                !- Variable Name
+  TimeStep;                               !- Reporting Frequency
+
+ExternalInterface:Variable,
+  psz-ac:3&20supply&20equipment&20outlet&20node_y, !- Name
+  0;                                      !- Initial Value
+
+Output:Variable,
+  psz-ac:3_coolc-psz-ac:3_heatcnode,      !- Key Value
+  System Node Temperature,                !- Variable Name
+  TimeStep;                               !- Reporting Frequency
+
+ExternalInterface:Variable,
+  psz-ac:3_coolc-psz-ac:3_heatcnode_y,    !- Name
+  0;                                      !- Initial Value
+
+Output:Variable,
+  psz-ac:4&20supply&20equipment&20outlet&20node, !- Key Value
+  System Node Temperature,                !- Variable Name
+  TimeStep;                               !- Reporting Frequency
+
+ExternalInterface:Variable,
+  psz-ac:4&20supply&20equipment&20outlet&20node_y, !- Name
+  0;                                      !- Initial Value
+
+Output:Variable,
+  psz-ac:4_coolc-psz-ac:4_heatcnode,      !- Key Value
+  System Node Temperature,                !- Variable Name
+  TimeStep;                               !- Reporting Frequency
+
+ExternalInterface:Variable,
+  psz-ac:4_coolc-psz-ac:4_heatcnode_y,    !- Name
+  0;                                      !- Initial Value
+
+Output:Variable,
+  psz-ac:5&20supply&20equipment&20outlet&20node, !- Key Value
+  System Node Temperature,                !- Variable Name
+  TimeStep;                               !- Reporting Frequency
+
+ExternalInterface:Variable,
+  psz-ac:5&20supply&20equipment&20outlet&20node_y, !- Name
+  0;                                      !- Initial Value
+
+Output:Variable,
+  psz-ac:5_coolc-psz-ac:5_heatcnode,      !- Key Value
+  System Node Temperature,                !- Variable Name
+  TimeStep;                               !- Reporting Frequency
+
+ExternalInterface:Variable,
+  psz-ac:5_coolc-psz-ac:5_heatcnode_y,    !- Name
   0;                                      !- Initial Value
 
 EnergyManagementSystem:GlobalVariable,
@@ -6791,15 +6872,6 @@ ExternalInterface:Variable,
   psz-ac:1 supply equipment outlet node_Enable_Value, !- Name
   0;                                      !- Initial Value
 
-Output:Variable,
-  psz-ac:1_coolc-psz-ac:1_heatcnode,      !- Key Value
-  System Node Temperature,                !- Variable Name
-  TimeStep;                               !- Reporting Frequency
-
-ExternalInterface:Variable,
-  psz-ac:1_coolc-psz-ac:1_heatcnode_y,    !- Name
-  0;                                      !- Initial Value
-
 EnergyManagementSystem:GlobalVariable,
   psz-ac:1_coolc-psz-ac:1_heatcnode;      !- Erl Variable Name 1
 
@@ -6846,15 +6918,6 @@ Output:Variable,
 
 ExternalInterface:Variable,
   psz-ac:1_coolc-psz-ac:1_heatcnode_Enable_Value, !- Name
-  0;                                      !- Initial Value
-
-Output:Variable,
-  psz-ac:2 supply equipment outlet node,  !- Key Value
-  System Node Temperature,                !- Variable Name
-  TimeStep;                               !- Reporting Frequency
-
-ExternalInterface:Variable,
-  psz-ac:2 supply equipment outlet node_y, !- Name
   0;                                      !- Initial Value
 
 EnergyManagementSystem:GlobalVariable,
@@ -6905,15 +6968,6 @@ ExternalInterface:Variable,
   psz-ac:2 supply equipment outlet node_Enable_Value, !- Name
   0;                                      !- Initial Value
 
-Output:Variable,
-  psz-ac:2_coolc-psz-ac:2_heatcnode,      !- Key Value
-  System Node Temperature,                !- Variable Name
-  TimeStep;                               !- Reporting Frequency
-
-ExternalInterface:Variable,
-  psz-ac:2_coolc-psz-ac:2_heatcnode_y,    !- Name
-  0;                                      !- Initial Value
-
 EnergyManagementSystem:GlobalVariable,
   psz-ac:2_coolc-psz-ac:2_heatcnode;      !- Erl Variable Name 1
 
@@ -6960,15 +7014,6 @@ Output:Variable,
 
 ExternalInterface:Variable,
   psz-ac:2_coolc-psz-ac:2_heatcnode_Enable_Value, !- Name
-  0;                                      !- Initial Value
-
-Output:Variable,
-  psz-ac:3 supply equipment outlet node,  !- Key Value
-  System Node Temperature,                !- Variable Name
-  TimeStep;                               !- Reporting Frequency
-
-ExternalInterface:Variable,
-  psz-ac:3 supply equipment outlet node_y, !- Name
   0;                                      !- Initial Value
 
 EnergyManagementSystem:GlobalVariable,
@@ -7019,15 +7064,6 @@ ExternalInterface:Variable,
   psz-ac:3 supply equipment outlet node_Enable_Value, !- Name
   0;                                      !- Initial Value
 
-Output:Variable,
-  psz-ac:3_coolc-psz-ac:3_heatcnode,      !- Key Value
-  System Node Temperature,                !- Variable Name
-  TimeStep;                               !- Reporting Frequency
-
-ExternalInterface:Variable,
-  psz-ac:3_coolc-psz-ac:3_heatcnode_y,    !- Name
-  0;                                      !- Initial Value
-
 EnergyManagementSystem:GlobalVariable,
   psz-ac:3_coolc-psz-ac:3_heatcnode;      !- Erl Variable Name 1
 
@@ -7074,15 +7110,6 @@ Output:Variable,
 
 ExternalInterface:Variable,
   psz-ac:3_coolc-psz-ac:3_heatcnode_Enable_Value, !- Name
-  0;                                      !- Initial Value
-
-Output:Variable,
-  psz-ac:4 supply equipment outlet node,  !- Key Value
-  System Node Temperature,                !- Variable Name
-  TimeStep;                               !- Reporting Frequency
-
-ExternalInterface:Variable,
-  psz-ac:4 supply equipment outlet node_y, !- Name
   0;                                      !- Initial Value
 
 EnergyManagementSystem:GlobalVariable,
@@ -7133,15 +7160,6 @@ ExternalInterface:Variable,
   psz-ac:4 supply equipment outlet node_Enable_Value, !- Name
   0;                                      !- Initial Value
 
-Output:Variable,
-  psz-ac:4_coolc-psz-ac:4_heatcnode,      !- Key Value
-  System Node Temperature,                !- Variable Name
-  TimeStep;                               !- Reporting Frequency
-
-ExternalInterface:Variable,
-  psz-ac:4_coolc-psz-ac:4_heatcnode_y,    !- Name
-  0;                                      !- Initial Value
-
 EnergyManagementSystem:GlobalVariable,
   psz-ac:4_coolc-psz-ac:4_heatcnode;      !- Erl Variable Name 1
 
@@ -7190,15 +7208,6 @@ ExternalInterface:Variable,
   psz-ac:4_coolc-psz-ac:4_heatcnode_Enable_Value, !- Name
   0;                                      !- Initial Value
 
-Output:Variable,
-  psz-ac:5 supply equipment outlet node,  !- Key Value
-  System Node Temperature,                !- Variable Name
-  TimeStep;                               !- Reporting Frequency
-
-ExternalInterface:Variable,
-  psz-ac:5 supply equipment outlet node_y, !- Name
-  0;                                      !- Initial Value
-
 EnergyManagementSystem:GlobalVariable,
   psz-ac:5 supply equipment outlet node;  !- Erl Variable Name 1
 
@@ -7245,15 +7254,6 @@ Output:Variable,
 
 ExternalInterface:Variable,
   psz-ac:5 supply equipment outlet node_Enable_Value, !- Name
-  0;                                      !- Initial Value
-
-Output:Variable,
-  psz-ac:5_coolc-psz-ac:5_heatcnode,      !- Key Value
-  System Node Temperature,                !- Variable Name
-  TimeStep;                               !- Reporting Frequency
-
-ExternalInterface:Variable,
-  psz-ac:5_coolc-psz-ac:5_heatcnode_y,    !- Name
   0;                                      !- Initial Value
 
 EnergyManagementSystem:GlobalVariable,

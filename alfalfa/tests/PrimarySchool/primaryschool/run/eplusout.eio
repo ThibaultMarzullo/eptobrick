@@ -1,0 +1,524 @@
+Program Version,EnergyPlus, Version 22.1.0-ed759b17ee, YMD=2022.11.28 22:36
+! <Version>, Version ID
+ Version, 22.1
+! <Timesteps per Hour>, #TimeSteps, Minutes per TimeStep {minutes}
+ Timesteps per Hour,  6, 10
+! <System Convergence Limits>, Minimum System TimeStep {minutes}, Max HVAC Iterations, Minimum Plant Iterations, Maximum Plant Iterations
+ System Convergence Limits, 1, 20, 2, 8
+! <Simulation Control>, Do Zone Sizing, Do System Sizing, Do Plant Sizing, Do Design Days, Do Weather Simulation, Do HVAC Sizing Simulation
+ Simulation Control, Yes, Yes, Yes, No, Yes, No
+! <Performance Precision Tradeoffs>, Use Coil Direct Simulation, Zone Radiant Exchange Algorithm, Override Mode, Number of Timestep In Hour, Force Euler Method, Minimum Number of Warmup Days, Force Suppress All Begin Environment Resets, Minimum System Timestep, MaxZoneTempDiff, MaxAllowedDelTemp
+ Performance Precision Tradeoffs, No, ScriptF, Normal, 6, No, 1, No, 1.0, 0.300, 2.0000E-003
+! <Output Reporting Tolerances>, Tolerance for Time Heating Setpoint Not Met, Tolerance for Zone Cooling Setpoint Not Met Time
+ Output Reporting Tolerances, 0.200, 0.200, 
+! <Site:GroundTemperature:BuildingSurface>,Jan{C},Feb{C},Mar{C},Apr{C},May{C},Jun{C},Jul{C},Aug{C},Sep{C},Oct{C},Nov{C},Dec{C}
+ Site:GroundTemperature:BuildingSurface,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00
+! <Site:GroundTemperature:FCfactorMethod>,Jan{C},Feb{C},Mar{C},Apr{C},May{C},Jun{C},Jul{C},Aug{C},Sep{C},Oct{C},Nov{C},Dec{C}
+ Site:GroundTemperature:FCfactorMethod,  24.20,  18.90,  15.70,  13.60,  15.50,  17.10,  21.20,  26.90,  27.60,  27.90,  27.40,  26.20
+! <Site:GroundTemperature:Shallow>,Jan{C},Feb{C},Mar{C},Apr{C},May{C},Jun{C},Jul{C},Aug{C},Sep{C},Oct{C},Nov{C},Dec{C}
+ Site:GroundTemperature:Shallow,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00
+! <Site:GroundTemperature:Deep>,Jan{C},Feb{C},Mar{C},Apr{C},May{C},Jun{C},Jul{C},Aug{C},Sep{C},Oct{C},Nov{C},Dec{C}
+ Site:GroundTemperature:Deep,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00
+! <Site:GroundReflectance>,Jan{dimensionless},Feb{dimensionless},Mar{dimensionless},Apr{dimensionless},May{dimensionless},Jun{dimensionless},Jul{dimensionless},Aug{dimensionless},Sep{dimensionless},Oct{dimensionless},Nov{dimensionless},Dec{dimensionless}
+ Site:GroundReflectance,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20
+! <Site:GroundReflectance:SnowModifier>, Normal, Daylighting {dimensionless}
+ Site:GroundReflectance:SnowModifier,   1.000,   1.000
+! <Site:GroundReflectance:Snow>,Jan{dimensionless},Feb{dimensionless},Mar{dimensionless},Apr{dimensionless},May{dimensionless},Jun{dimensionless},Jul{dimensionless},Aug{dimensionless},Sep{dimensionless},Oct{dimensionless},Nov{dimensionless},Dec{dimensionless}
+ Site:GroundReflectance:Snow,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20
+! <Site:GroundReflectance:Snow:Daylighting>,Jan{dimensionless},Feb{dimensionless},Mar{dimensionless},Apr{dimensionless},May{dimensionless},Jun{dimensionless},Jul{dimensionless},Aug{dimensionless},Sep{dimensionless},Oct{dimensionless},Nov{dimensionless},Dec{dimensionless}
+ Site:GroundReflectance:Snow:Daylighting,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20
+! <Environment:Weather Station>,Wind Sensor Height Above Ground {m},Wind Speed Profile Exponent {},Wind Speed Profile Boundary Layer Thickness {m},Air Temperature Sensor Height Above Ground {m},Wind Speed Modifier Coefficient-Internal,Temperature Modifier Coefficient-Internal
+Environment:Weather Station,10.000,0.140,270.000,1.500,1.586,9.750E-003
+! <Site:Location>, Location Name, Latitude {N+/S- Deg}, Longitude {E+/W- Deg},  Time Zone Number {GMT+/-}, Elevation {m},  Standard Pressure at Elevation {Pa}, Standard RhoAir at Elevation
+Site:Location,Tampa-MacDill AFB FL USA TMY3 WMO#=747880,27.85,-82.52,-5.00,8.00,101229,1.2032
+! <Site Water Mains Temperature Information>,Calculation Method{},Water Mains Temperature Schedule Name{},Annual Average Outdoor Air Temperature{C},Maximum Difference In Monthly Average Outdoor Air Temperatures{deltaC},Fixed Default Water Mains Temperature{C}
+Site Water Mains Temperature Information,Correlation,NA,21.85,14.30,NA
+! <Building Information>, Building Name,North Axis {deg},Terrain,  Loads Convergence Tolerance Value,Temperature Convergence Tolerance Value,  Solar Distribution,Maximum Number of Warmup Days,Minimum Number of Warmup Days
+ Building Information,-SmallOffice-ASHRAE 169-2013-2A created: 2022-11-28 22:36:10 -0700,0.000,City,4.00000E-002,0.20000,FullInteriorAndExterior,25,6
+! <Inside Convection Algorithm>, Algorithm {Simple | TARP | CeilingDiffuser | AdaptiveConvectionAlgorithm}
+Inside Convection Algorithm,TARP
+! <Outside Convection Algorithm>, Algorithm {SimpleCombined | TARP | MoWitt | DOE-2 | AdaptiveConvectionAlgorithm}
+Outside Convection Algorithm,TARP
+! <Sky Radiance Distribution>, Value {Anisotropic}
+Sky Radiance Distribution,Anisotropic
+! <Zone Air Solution Algorithm>, Value {ThirdOrderBackwardDifference | AnalyticalSolution | EulerMethod}
+ Zone Air Solution Algorithm, ThirdOrderBackwardDifference
+! <Zone Air Carbon Dioxide Balance Simulation>, Simulation {Yes/No}, Carbon Dioxide Concentration
+ Zone Air Carbon Dioxide Balance Simulation, No,N/A
+! <Zone Air Generic Contaminant Balance Simulation>, Simulation {Yes/No}, Generic Contaminant Concentration
+ Zone Air Generic Contaminant Balance Simulation, No,N/A
+! <Zone Air Mass Flow Balance Simulation>, Enforce Mass Balance, Adjust Zone Mixing and Return {AdjustMixingOnly | AdjustReturnOnly | AdjustMixingThenReturn | AdjustReturnThenMixing | None}, Adjust Zone Infiltration {AddInfiltration | AdjustInfiltration | None}, Infiltration Zones {MixingSourceZonesOnly | AllZones}
+ Zone Air Mass Flow Balance Simulation, No,N/A,N/A,N/A
+! <HVACSystemRootFindingAlgorithm>, Value {RegulaFalsi | Bisection | BisectionThenRegulaFalsi | RegulaFalsiThenBisection}
+ HVACSystemRootFindingAlgorithm, RegulaFalsi
+! <Environment:Site Atmospheric Variation>,Wind Speed Profile Exponent {},Wind Speed Profile Boundary Layer Thickness {m},Air Temperature Gradient Coefficient {K/m}
+Environment:Site Atmospheric Variation,0.330,460.000,6.500000E-003
+! <Surface Geometry>,Starting Corner,Vertex Input Direction,Coordinate System,Daylight Reference Point Coordinate System,Rectangular (Simple) Surface Coordinate System
+ Surface Geometry,UpperLeftCorner,Counterclockwise,RelativeCoordinateSystem,RelativeCoordinateSystem,RelativeToZoneOrigin
+! <Surface Heat Transfer Algorithm>, Value {CTF - ConductionTransferFunction | EMPD - MoisturePenetrationDepthConductionTransferFunction | CondFD - ConductionFiniteDifference | HAMT - CombinedHeatAndMoistureFiniteElement} - Description,Inside Surface Max Temperature Limit{C}, Surface Convection Coefficient Lower Limit {W/m2-K}, Surface Convection Coefficient Upper Limit {W/m2-K}
+Surface Heat Transfer Algorithm, CTF - ConductionTransferFunction,200,0.10,1000.0
+! <Shading Summary>, Number of Fixed Detached Shades, Number of Building Detached Shades, Number of Attached Shades
+ Shading Summary,0,0,0
+! <Zone Summary>, Number of Zones, Number of Zone Surfaces, Number of SubSurfaces
+ Zone Summary,6,72,23
+! <Zone Information>,Zone Name,North Axis {deg},Origin X-Coordinate {m},Origin Y-Coordinate {m},Origin Z-Coordinate {m},Centroid X-Coordinate {m},Centroid Y-Coordinate {m},Centroid Z-Coordinate {m},Type,Zone Multiplier,Zone List Multiplier,Minimum X {m},Maximum X {m},Minimum Y {m},Maximum Y {m},Minimum Z {m},Maximum Z {m},Ceiling Height {m},Volume {m3},Zone Inside Convection Algorithm {Simple-Detailed-CeilingDiffuser-TrombeWall},Zone Outside Convection Algorithm {Simple-Detailed-Tarp-MoWitt-DOE-2-BLAST}, Floor Area {m2},Exterior Gross Wall Area {m2},Exterior Net Wall Area {m2},Exterior Window Area {m2}, Number of Surfaces, Number of SubSurfaces, Number of Shading SubSurfaces,  Part of Total Building Area
+ Zone Information, ATTIC ZN,0.0,0.00,0.00,0.00,13.85,9.23,3.70,1,1,1,-0.60,28.29,-0.60,19.06,3.05,6.33,1.64,720.19,TARP,TARP,567.98,0.00,0.00,0.00,13,0,0,No
+ Zone Information, CORE_ZN ZN,0.0,0.00,0.00,0.00,13.85,9.23,1.53,1,1,1,5.00,22.69,5.00,13.46,0.00,3.05,3.05,456.46,TARP,TARP,149.66,0.00,0.00,0.00,6,0,0,Yes
+ Zone Information, PERIMETER_ZN_1 ZN,0.0,0.00,0.00,0.00,13.85,2.21,1.53,1,1,1,0.00,27.69,0.00,5.00,0.00,3.05,3.05,346.02,TARP,TARP,113.45,84.45,63.82,20.64,6,7,0,Yes
+ Zone Information, PERIMETER_ZN_2 ZN,0.0,0.00,0.00,0.00,25.64,9.23,1.53,1,1,1,22.69,27.69,0.00,18.46,0.00,3.05,3.05,205.27,TARP,TARP,67.30,56.30,45.15,11.16,6,4,0,Yes
+ Zone Information, PERIMETER_ZN_3 ZN,0.0,0.00,0.00,0.00,13.85,16.25,1.53,1,1,1,0.00,27.69,13.46,18.46,0.00,3.05,3.05,346.02,TARP,TARP,113.45,84.45,63.82,16.73,6,8,0,Yes
+ Zone Information, PERIMETER_ZN_4 ZN,0.0,0.00,0.00,0.00,2.05,9.23,1.53,1,1,1,0.00,5.00,0.00,18.46,0.00,3.05,3.05,205.27,TARP,TARP,67.30,56.30,45.15,11.16,6,4,0,Yes
+! <Zone Internal Gains Nominal>,Zone Name, Floor Area {m2},# Occupants,Area per Occupant {m2/person},Occupant per Area {person/m2},Interior Lighting {W/m2},Electric Load {W/m2},Gas Load {W/m2},Other Load {W/m2},Hot Water Eq {W/m2},Steam Equipment {W/m2},Sum Loads per Area {W/m2},Outdoor Controlled Baseboard Heat
+ Zone Internal Gains Nominal, ATTIC ZN,567.98,0.0,N/A,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000,No
+ Zone Internal Gains Nominal, CORE_ZN ZN,149.66,9.0,16.590,6.028E-002,9.688,6.781,0.000,0.000,0.000,0.000,16.469,No
+ Zone Internal Gains Nominal, PERIMETER_ZN_1 ZN,113.45,6.8,16.590,6.028E-002,9.688,6.781,0.000,0.000,0.000,0.000,16.469,No
+ Zone Internal Gains Nominal, PERIMETER_ZN_2 ZN,67.30,4.1,16.590,6.028E-002,9.688,6.781,0.000,0.000,0.000,0.000,16.469,No
+ Zone Internal Gains Nominal, PERIMETER_ZN_3 ZN,113.45,6.8,16.590,6.028E-002,9.688,6.781,0.000,0.000,0.000,0.000,16.469,No
+ Zone Internal Gains Nominal, PERIMETER_ZN_4 ZN,67.30,4.1,16.590,6.028E-002,9.688,6.781,0.000,0.000,0.000,0.000,16.469,No
+! <People Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Number of People {},People/Floor Area {person/m2},Floor Area per person {m2/person},Fraction Radiant,Fraction Convected,Sensible Fraction Calculation,Activity level,ASHRAE 55 Warnings,Carbon Dioxide Generation Rate,Nominal Minimum Number of People,Nominal Maximum Number of People
+ People Internal Gains Nominal, CORE_ZN ZN OFFICE WHOLEBUILDING - SM OFFICE PEOPLE,OFFICESMALL BLDG_OCC_SCH,CORE_ZN ZN,149.66,9.0,9.0,6.028E-002,16.590,0.300,0.700,AutoCalculate,OFFICESMALL ACTIVITY_SCH,No,3.8200E-008,0,9
+ People Internal Gains Nominal, PERIMETER_ZN_1 ZN OFFICE WHOLEBUILDING - SM OFFICE PEOPLE,OFFICESMALL BLDG_OCC_SCH,PERIMETER_ZN_1 ZN,113.45,6.8,6.8,6.028E-002,16.590,0.300,0.700,AutoCalculate,OFFICESMALL ACTIVITY_SCH,No,3.8200E-008,0,7
+ People Internal Gains Nominal, PERIMETER_ZN_2 ZN OFFICE WHOLEBUILDING - SM OFFICE PEOPLE,OFFICESMALL BLDG_OCC_SCH,PERIMETER_ZN_2 ZN,67.30,4.1,4.1,6.028E-002,16.590,0.300,0.700,AutoCalculate,OFFICESMALL ACTIVITY_SCH,No,3.8200E-008,0,4
+ People Internal Gains Nominal, PERIMETER_ZN_3 ZN OFFICE WHOLEBUILDING - SM OFFICE PEOPLE,OFFICESMALL BLDG_OCC_SCH,PERIMETER_ZN_3 ZN,113.45,6.8,6.8,6.028E-002,16.590,0.300,0.700,AutoCalculate,OFFICESMALL ACTIVITY_SCH,No,3.8200E-008,0,7
+ People Internal Gains Nominal, PERIMETER_ZN_4 ZN OFFICE WHOLEBUILDING - SM OFFICE PEOPLE,OFFICESMALL BLDG_OCC_SCH,PERIMETER_ZN_4 ZN,67.30,4.1,4.1,6.028E-002,16.590,0.300,0.700,AutoCalculate,OFFICESMALL ACTIVITY_SCH,No,3.8200E-008,0,4
+! <Lights Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Lighting Level {W},Lights/Floor Area {W/m2},Lights per person {W/person},Fraction Return Air,Fraction Radiant,Fraction Short Wave,Fraction Convected,Fraction Replaceable,End-Use Category,Nominal Minimum Lighting Level {W},Nominal Maximum Lighting Level {W}
+ Lights Internal Gains Nominal, CORE_ZN ZN OFFICE WHOLEBUILDING - SM OFFICE LIGHTS,OFFICESMALL BLDG_LIGHT_SCH_2010,CORE_ZN ZN,149.66,9.0,1449.809,9.688,160.714,0.000,0.700,0.200,0.100,1.000,General,0.000,1449.809
+ Lights Internal Gains Nominal, PERIMETER_ZN_1 ZN OFFICE WHOLEBUILDING - SM OFFICE LIGHTS,OFFICESMALL BLDG_LIGHT_SCH_2010,PERIMETER_ZN_1 ZN,113.45,6.8,1099.049,9.688,160.714,0.000,0.700,0.200,0.100,1.000,General,0.000,1099.049
+ Lights Internal Gains Nominal, PERIMETER_ZN_2 ZN OFFICE WHOLEBUILDING - SM OFFICE LIGHTS,OFFICESMALL BLDG_LIGHT_SCH_2010,PERIMETER_ZN_2 ZN,67.30,4.1,651.970,9.688,160.714,0.000,0.700,0.200,0.100,1.000,General,0.000,651.970
+ Lights Internal Gains Nominal, PERIMETER_ZN_3 ZN OFFICE WHOLEBUILDING - SM OFFICE LIGHTS,OFFICESMALL BLDG_LIGHT_SCH_2010,PERIMETER_ZN_3 ZN,113.45,6.8,1099.049,9.688,160.714,0.000,0.700,0.200,0.100,1.000,General,0.000,1099.049
+ Lights Internal Gains Nominal, PERIMETER_ZN_4 ZN OFFICE WHOLEBUILDING - SM OFFICE LIGHTS,OFFICESMALL BLDG_LIGHT_SCH_2010,PERIMETER_ZN_4 ZN,67.30,4.1,651.970,9.688,160.714,0.000,0.700,0.200,0.100,1.000,General,0.000,651.970
+! <ElectricEquipment Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Equipment Level {W},Equipment/Floor Area {W/m2},Equipment per person {W/person},Fraction Latent,Fraction Radiant,Fraction Lost,Fraction Convected,End-Use SubCategory,Nominal Minimum Equipment Level {W},Nominal Maximum Equipment Level {W}
+ ElectricEquipment Internal Gains Nominal, CORE_ZN ZN OFFICE WHOLEBUILDING - SM OFFICE ELEC EQUIP,OFFICESMALL BLDG_EQUIP_SCH_2010,CORE_ZN ZN,149.66,9.0,1014.866,6.781,112.500,0.000,0.500,0.000,0.500,General,0.000,1014.866
+ ElectricEquipment Internal Gains Nominal, PERIMETER_ZN_1 ZN OFFICE WHOLEBUILDING - SM OFFICE ELEC EQUIP,OFFICESMALL BLDG_EQUIP_SCH_2010,PERIMETER_ZN_1 ZN,113.45,6.8,769.334,6.781,112.500,0.000,0.500,0.000,0.500,General,0.000,769.334
+ ElectricEquipment Internal Gains Nominal, PERIMETER_ZN_2 ZN OFFICE WHOLEBUILDING - SM OFFICE ELEC EQUIP,OFFICESMALL BLDG_EQUIP_SCH_2010,PERIMETER_ZN_2 ZN,67.30,4.1,456.379,6.781,112.500,0.000,0.500,0.000,0.500,General,0.000,456.379
+ ElectricEquipment Internal Gains Nominal, PERIMETER_ZN_3 ZN OFFICE WHOLEBUILDING - SM OFFICE ELEC EQUIP,OFFICESMALL BLDG_EQUIP_SCH_2010,PERIMETER_ZN_3 ZN,113.45,6.8,769.334,6.781,112.500,0.000,0.500,0.000,0.500,General,0.000,769.334
+ ElectricEquipment Internal Gains Nominal, PERIMETER_ZN_4 ZN OFFICE WHOLEBUILDING - SM OFFICE ELEC EQUIP,OFFICESMALL BLDG_EQUIP_SCH_2010,PERIMETER_ZN_4 ZN,67.30,4.1,456.379,6.781,112.500,0.000,0.500,0.000,0.500,General,0.000,456.379
+! <Shadowing/Sun Position Calculations Annual Simulations>, Shading Calculation Method, Shading Calculation Update Frequency Method, Shading Calculation Update Frequency {days}, Maximum Figures in Shadow Overlap Calculations {}, Polygon Clipping Algorithm, Pixel Counting Resolution, Sky Diffuse Modeling Algorithm, Output External Shading Calculation Results, Disable Self-Shading Within Shading Zone Groups, Disable Self-Shading From Shading Zone Groups to Other Zones
+Shadowing/Sun Position Calculations Annual Simulations,PolygonClipping,Periodic,30,15000,SutherlandHodgman,512,SimpleSkyDiffuseModeling,No,No,No
+! <Enclosure/Window Adjacency Daylighting Counts>, Enclosure Name, Number of Exterior Windows, Number of Exterior Windows in Adjacent Enclosures
+Enclosure/Window Adjacency Daylighting Counts, PERIMETER_ZN_1 ZN,7,0
+Enclosure/Window Adjacency Daylighting Counts, PERIMETER_ZN_2 ZN,4,0
+Enclosure/Window Adjacency Daylighting Counts, PERIMETER_ZN_3 ZN,6,0
+Enclosure/Window Adjacency Daylighting Counts, PERIMETER_ZN_4 ZN,4,0
+! <Enclosure/Window Adjacency Daylighting Matrix>, Enclosure Name, Number of Adjacent Enclosures with Windows,Adjacent Enclosure Names - 1st 100 (max)
+Enclosure/Window Adjacency Daylighting Matrix, PERIMETER_ZN_1 ZN,0
+Enclosure/Window Adjacency Daylighting Matrix, PERIMETER_ZN_2 ZN,0
+Enclosure/Window Adjacency Daylighting Matrix, PERIMETER_ZN_3 ZN,0
+Enclosure/Window Adjacency Daylighting Matrix, PERIMETER_ZN_4 ZN,0
+! <Water Heater Information>,Type,Name,Volume {m3},Maximum Capacity {W},Standard Rated Recovery Efficiency, Standard Rated Energy Factor
+! <ZoneInfiltration Airflow Stats Nominal>,Name,Schedule Name,Zone Name, Zone Floor Area {m2}, # Zone Occupants,Design Volume Flow Rate {m3/s},Volume Flow Rate/Floor Area {m3/s-m2},Volume Flow Rate/Exterior Surface Area {m3/s-m2},ACH - Air Changes per Hour,Equation A - Constant Term Coefficient {},Equation B - Temperature Term Coefficient {1/C},Equation C - Velocity Term Coefficient {s/m}, Equation D - Velocity Squared Term Coefficient {s2/m2}
+ ZoneInfiltration Airflow Stats Nominal, ATTIC INFILTRATION,ALWAYS ON,ATTIC ZN,567.98,0.0,0.200,3.523E-004,3.052E-004,1.000,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ENTRY DOOR INFILTRATION,OFFICESMALL INFIL_DOOR_OPENING_SCH,PERIMETER_ZN_1 ZN,113.45,6.8,0.130,1.144E-003,1.537E-003,1.350,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, PERIMETER_ZN_1 INFILTRATION,OFFICESMALL INFIL_QUARTER_ON_SCH,PERIMETER_ZN_1 ZN,113.45,6.8,4.810E-002,4.240E-004,5.696E-004,0.500,0.000,0.000,0.224,0.000
+ ZoneInfiltration Airflow Stats Nominal, PERIMETER_ZN_2 INFILTRATION,OFFICESMALL INFIL_QUARTER_ON_SCH,PERIMETER_ZN_2 ZN,67.30,4.1,3.207E-002,4.765E-004,5.696E-004,0.562,0.000,0.000,0.224,0.000
+ ZoneInfiltration Airflow Stats Nominal, PERIMETER_ZN_3 INFILTRATION,OFFICESMALL INFIL_QUARTER_ON_SCH,PERIMETER_ZN_3 ZN,113.45,6.8,5.033E-002,4.436E-004,5.696E-004,0.524,0.000,0.000,0.224,0.000
+ ZoneInfiltration Airflow Stats Nominal, PERIMETER_ZN_4 INFILTRATION,OFFICESMALL INFIL_QUARTER_ON_SCH,PERIMETER_ZN_4 ZN,67.30,4.1,3.207E-002,4.765E-004,5.696E-004,0.562,0.000,0.000,0.224,0.000
+! <AirFlow Model>, Simple
+ AirFlow Model, Simple
+! <RoomAir Model>, Zone Name, Mixing/Mundt/UCSDDV/UCSDCV/UCSDUFI/UCSDUFE/User Defined
+RoomAir Model,ATTIC ZN,Mixing/Well-Stirred
+RoomAir Model,CORE_ZN ZN,Mixing/Well-Stirred
+RoomAir Model,PERIMETER_ZN_1 ZN,Mixing/Well-Stirred
+RoomAir Model,PERIMETER_ZN_2 ZN,Mixing/Well-Stirred
+RoomAir Model,PERIMETER_ZN_3 ZN,Mixing/Well-Stirred
+RoomAir Model,PERIMETER_ZN_4 ZN,Mixing/Well-Stirred
+! <AirflowNetwork Model:Control>, No Multizone or Distribution/Multizone with Distribution/Multizone without Distribution/Multizone with Distribution only during Fan Operation
+AirflowNetwork Model:Control,NoMultizoneOrDistribution
+! <Zone Volume Capacitance Multiplier>, Sensible Heat Capacity Multiplier, Moisture Capacity Multiplier, Carbon Dioxide Capacity Multiplier, Generic Contaminant Capacity Multiplier
+Zone Volume Capacitance Multiplier,   1.000 ,   1.000,   1.000,   1.000
+! <Load Timesteps in Zone Design Calculation Averaging Window>, Value
+ Load Timesteps in Zone Design Calculation Averaging Window,    6
+! <Heating Sizing Factor Information>, Sizing Factor ID, Value
+ Heating Sizing Factor Information, Global,   1.2000    
+ Heating Sizing Factor Information, Zone CORE_ZN ZN,   1.2000    
+ Heating Sizing Factor Information, Zone PERIMETER_ZN_1 ZN,   1.2000    
+ Heating Sizing Factor Information, Zone PERIMETER_ZN_2 ZN,   1.2000    
+ Heating Sizing Factor Information, Zone PERIMETER_ZN_3 ZN,   1.2000    
+ Heating Sizing Factor Information, Zone PERIMETER_ZN_4 ZN,   1.2000    
+! <Cooling Sizing Factor Information>, Sizing Factor ID, Value
+ Cooling Sizing Factor Information, Global,   1.2000    
+ Cooling Sizing Factor Information, Zone CORE_ZN ZN,   1.2000    
+ Cooling Sizing Factor Information, Zone PERIMETER_ZN_1 ZN,   1.2000    
+ Cooling Sizing Factor Information, Zone PERIMETER_ZN_2 ZN,   1.2000    
+ Cooling Sizing Factor Information, Zone PERIMETER_ZN_3 ZN,   1.2000    
+ Cooling Sizing Factor Information, Zone PERIMETER_ZN_4 ZN,   1.2000    
+! <Sky Daylight Factors>, Sky Type, MonthAndDay, Daylighting Control Name, Enclosure Name, Window Name, Reference Point, Daylight Factor
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_DOOR,PERIMETER_ZN_1 DAYLT SENSOR 1,2.3778E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_DOOR,PERIMETER_ZN_1 DAYLT SENSOR 2,2.7535E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_DOOR,PERIMETER_ZN_1 DAYLT SENSOR 1,2.2529E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_DOOR,PERIMETER_ZN_1 DAYLT SENSOR 2,2.5715E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_DOOR,PERIMETER_ZN_1 DAYLT SENSOR 1,1.7762E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_DOOR,PERIMETER_ZN_1 DAYLT SENSOR 2,1.9463E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_DOOR,PERIMETER_ZN_1 DAYLT SENSOR 1,1.7457E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_DOOR,PERIMETER_ZN_1 DAYLT SENSOR 2,1.9107E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_1,PERIMETER_ZN_1 DAYLT SENSOR 1,1.1341E-002
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_1,PERIMETER_ZN_1 DAYLT SENSOR 2,5.5019E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_1,PERIMETER_ZN_1 DAYLT SENSOR 1,1.0808E-002
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_1,PERIMETER_ZN_1 DAYLT SENSOR 2,4.8634E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_1,PERIMETER_ZN_1 DAYLT SENSOR 1,8.2549E-003
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_1,PERIMETER_ZN_1 DAYLT SENSOR 2,3.2266E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_1,PERIMETER_ZN_1 DAYLT SENSOR 1,8.7724E-003
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_1,PERIMETER_ZN_1 DAYLT SENSOR 2,3.7169E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_2,PERIMETER_ZN_1 DAYLT SENSOR 1,4.8418E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_2,PERIMETER_ZN_1 DAYLT SENSOR 2,2.8279E-003
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_2,PERIMETER_ZN_1 DAYLT SENSOR 1,4.4086E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_2,PERIMETER_ZN_1 DAYLT SENSOR 2,2.5405E-003
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_2,PERIMETER_ZN_1 DAYLT SENSOR 1,3.0859E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_2,PERIMETER_ZN_1 DAYLT SENSOR 2,1.6335E-003
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_2,PERIMETER_ZN_1 DAYLT SENSOR 1,3.2251E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_2,PERIMETER_ZN_1 DAYLT SENSOR 2,1.8137E-003
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_3,PERIMETER_ZN_1 DAYLT SENSOR 1,2.8774E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_3,PERIMETER_ZN_1 DAYLT SENSOR 2,6.1287E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_3,PERIMETER_ZN_1 DAYLT SENSOR 1,2.7042E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_3,PERIMETER_ZN_1 DAYLT SENSOR 2,5.5323E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_3,PERIMETER_ZN_1 DAYLT SENSOR 1,2.0830E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_3,PERIMETER_ZN_1 DAYLT SENSOR 2,3.6871E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_3,PERIMETER_ZN_1 DAYLT SENSOR 1,2.0817E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_3,PERIMETER_ZN_1 DAYLT SENSOR 2,3.7278E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_4,PERIMETER_ZN_1 DAYLT SENSOR 1,2.7916E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_4,PERIMETER_ZN_1 DAYLT SENSOR 2,3.0671E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_4,PERIMETER_ZN_1 DAYLT SENSOR 1,2.6322E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_4,PERIMETER_ZN_1 DAYLT SENSOR 2,2.8646E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_4,PERIMETER_ZN_1 DAYLT SENSOR 1,2.0450E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_4,PERIMETER_ZN_1 DAYLT SENSOR 2,2.1679E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_4,PERIMETER_ZN_1 DAYLT SENSOR 1,2.0412E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_4,PERIMETER_ZN_1 DAYLT SENSOR 2,2.1630E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_5,PERIMETER_ZN_1 DAYLT SENSOR 1,2.7805E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_5,PERIMETER_ZN_1 DAYLT SENSOR 2,2.8265E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_5,PERIMETER_ZN_1 DAYLT SENSOR 1,2.6230E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_5,PERIMETER_ZN_1 DAYLT SENSOR 2,2.6614E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_5,PERIMETER_ZN_1 DAYLT SENSOR 1,2.0402E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_5,PERIMETER_ZN_1 DAYLT SENSOR 2,2.0602E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_5,PERIMETER_ZN_1 DAYLT SENSOR 1,2.0364E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_5,PERIMETER_ZN_1 DAYLT SENSOR 2,2.0556E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_6,PERIMETER_ZN_1 DAYLT SENSOR 1,2.7780E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_6,PERIMETER_ZN_1 DAYLT SENSOR 2,2.7899E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_6,PERIMETER_ZN_1 DAYLT SENSOR 1,2.6210E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_6,PERIMETER_ZN_1 DAYLT SENSOR 2,2.6308E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_6,PERIMETER_ZN_1 DAYLT SENSOR 1,2.0392E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_6,PERIMETER_ZN_1 DAYLT SENSOR 2,2.0443E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_6,PERIMETER_ZN_1 DAYLT SENSOR 1,2.0354E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_1 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_1 ZN,PERIMETER_ZN_1_WALL_SOUTH_WINDOW_6,PERIMETER_ZN_1 DAYLT SENSOR 2,2.0402E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_1,PERIMETER_ZN_2 DAYLT SENSOR 1,9.6695E-003
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_1,PERIMETER_ZN_2 DAYLT SENSOR 2,7.4892E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_1,PERIMETER_ZN_2 DAYLT SENSOR 1,8.8482E-003
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_1,PERIMETER_ZN_2 DAYLT SENSOR 2,6.7392E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_1,PERIMETER_ZN_2 DAYLT SENSOR 1,6.8570E-003
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_1,PERIMETER_ZN_2 DAYLT SENSOR 2,4.5992E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_1,PERIMETER_ZN_2 DAYLT SENSOR 1,8.8982E-003
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_1,PERIMETER_ZN_2 DAYLT SENSOR 2,4.9744E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_2,PERIMETER_ZN_2 DAYLT SENSOR 1,5.6154E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_2,PERIMETER_ZN_2 DAYLT SENSOR 2,2.6223E-003
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_2,PERIMETER_ZN_2 DAYLT SENSOR 1,4.9723E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_2,PERIMETER_ZN_2 DAYLT SENSOR 2,2.2860E-003
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_2,PERIMETER_ZN_2 DAYLT SENSOR 1,3.4814E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_2,PERIMETER_ZN_2 DAYLT SENSOR 2,1.4801E-003
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_2,PERIMETER_ZN_2 DAYLT SENSOR 1,4.4826E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_2,PERIMETER_ZN_2 DAYLT SENSOR 2,1.9395E-003
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_3,PERIMETER_ZN_2 DAYLT SENSOR 1,4.1362E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_3,PERIMETER_ZN_2 DAYLT SENSOR 2,6.5786E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_3,PERIMETER_ZN_2 DAYLT SENSOR 1,3.7955E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_3,PERIMETER_ZN_2 DAYLT SENSOR 2,5.7488E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_3,PERIMETER_ZN_2 DAYLT SENSOR 1,2.9216E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_3,PERIMETER_ZN_2 DAYLT SENSOR 2,3.8521E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_3,PERIMETER_ZN_2 DAYLT SENSOR 1,3.3392E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_3,PERIMETER_ZN_2 DAYLT SENSOR 2,4.9853E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_4,PERIMETER_ZN_2 DAYLT SENSOR 1,4.0649E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_4,PERIMETER_ZN_2 DAYLT SENSOR 2,4.2899E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_4,PERIMETER_ZN_2 DAYLT SENSOR 1,3.7400E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_4,PERIMETER_ZN_2 DAYLT SENSOR 2,3.9158E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_4,PERIMETER_ZN_2 DAYLT SENSOR 1,2.8995E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_4,PERIMETER_ZN_2 DAYLT SENSOR 2,2.9707E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_4,PERIMETER_ZN_2 DAYLT SENSOR 1,3.2987E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_2 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_2 ZN,PERIMETER_ZN_2_WALL_EAST_WINDOW_4,PERIMETER_ZN_2 DAYLT SENSOR 2,3.4205E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_1,PERIMETER_ZN_3 DAYLT SENSOR 1,6.5911E-003
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_1,PERIMETER_ZN_3 DAYLT SENSOR 2,4.5690E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_1,PERIMETER_ZN_3 DAYLT SENSOR 1,5.4515E-003
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_1,PERIMETER_ZN_3 DAYLT SENSOR 2,3.8041E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_1,PERIMETER_ZN_3 DAYLT SENSOR 1,3.7229E-003
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_1,PERIMETER_ZN_3 DAYLT SENSOR 2,2.2915E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_1,PERIMETER_ZN_3 DAYLT SENSOR 1,8.7721E-003
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_1,PERIMETER_ZN_3 DAYLT SENSOR 2,3.7139E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_2,PERIMETER_ZN_3 DAYLT SENSOR 1,3.5148E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_2,PERIMETER_ZN_3 DAYLT SENSOR 2,1.9129E-003
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_2,PERIMETER_ZN_3 DAYLT SENSOR 1,2.9177E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_2,PERIMETER_ZN_3 DAYLT SENSOR 2,1.5348E-003
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_2,PERIMETER_ZN_3 DAYLT SENSOR 1,1.7874E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_2,PERIMETER_ZN_3 DAYLT SENSOR 2,8.0011E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_2,PERIMETER_ZN_3 DAYLT SENSOR 1,3.2221E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_2,PERIMETER_ZN_3 DAYLT SENSOR 2,1.8134E-003
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_3,PERIMETER_ZN_3 DAYLT SENSOR 1,2.0474E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_3,PERIMETER_ZN_3 DAYLT SENSOR 2,4.4081E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_3,PERIMETER_ZN_3 DAYLT SENSOR 1,1.7560E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_3,PERIMETER_ZN_3 DAYLT SENSOR 2,3.6002E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_3,PERIMETER_ZN_3 DAYLT SENSOR 1,1.2497E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_3,PERIMETER_ZN_3 DAYLT SENSOR 2,2.0168E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_3,PERIMETER_ZN_3 DAYLT SENSOR 1,2.0787E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_3,PERIMETER_ZN_3 DAYLT SENSOR 2,3.7248E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_4,PERIMETER_ZN_3 DAYLT SENSOR 1,1.9756E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_4,PERIMETER_ZN_3 DAYLT SENSOR 2,2.2001E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_4,PERIMETER_ZN_3 DAYLT SENSOR 1,1.6997E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_4,PERIMETER_ZN_3 DAYLT SENSOR 2,1.8743E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_4,PERIMETER_ZN_3 DAYLT SENSOR 1,1.2264E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_4,PERIMETER_ZN_3 DAYLT SENSOR 2,1.2951E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_4,PERIMETER_ZN_3 DAYLT SENSOR 1,2.0382E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_4,PERIMETER_ZN_3 DAYLT SENSOR 2,2.1601E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_5,PERIMETER_ZN_3 DAYLT SENSOR 1,1.9660E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_5,PERIMETER_ZN_3 DAYLT SENSOR 2,2.0052E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_5,PERIMETER_ZN_3 DAYLT SENSOR 1,1.6921E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_5,PERIMETER_ZN_3 DAYLT SENSOR 2,1.7226E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_5,PERIMETER_ZN_3 DAYLT SENSOR 1,1.2233E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_5,PERIMETER_ZN_3 DAYLT SENSOR 2,1.2353E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_5,PERIMETER_ZN_3 DAYLT SENSOR 1,2.0334E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_5,PERIMETER_ZN_3 DAYLT SENSOR 2,2.0526E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_6,PERIMETER_ZN_3 DAYLT SENSOR 1,1.9638E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_6,PERIMETER_ZN_3 DAYLT SENSOR 2,1.9741E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_6,PERIMETER_ZN_3 DAYLT SENSOR 1,1.6905E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_6,PERIMETER_ZN_3 DAYLT SENSOR 2,1.6985E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_6,PERIMETER_ZN_3 DAYLT SENSOR 1,1.2227E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_6,PERIMETER_ZN_3 DAYLT SENSOR 2,1.2258E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_6,PERIMETER_ZN_3 DAYLT SENSOR 1,2.0324E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_3 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_3 ZN,PERIMETER_ZN_3_WALL_NORTH_WINDOW_6,PERIMETER_ZN_3 DAYLT SENSOR 2,2.0372E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_1,PERIMETER_ZN_4 DAYLT SENSOR 1,7.2653E-003
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_1,PERIMETER_ZN_4 DAYLT SENSOR 2,5.7899E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_1,PERIMETER_ZN_4 DAYLT SENSOR 1,6.1640E-003
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_1,PERIMETER_ZN_4 DAYLT SENSOR 2,4.8337E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_1,PERIMETER_ZN_4 DAYLT SENSOR 1,4.4897E-003
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_1,PERIMETER_ZN_4 DAYLT SENSOR 2,2.9643E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_1,PERIMETER_ZN_4 DAYLT SENSOR 1,8.8982E-003
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_1,PERIMETER_ZN_4 DAYLT SENSOR 2,4.9744E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_2,PERIMETER_ZN_4 DAYLT SENSOR 1,5.3715E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_2,PERIMETER_ZN_4 DAYLT SENSOR 2,2.1349E-003
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_2,PERIMETER_ZN_4 DAYLT SENSOR 1,4.6723E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_2,PERIMETER_ZN_4 DAYLT SENSOR 2,1.7549E-003
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_2,PERIMETER_ZN_4 DAYLT SENSOR 1,3.2084E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_2,PERIMETER_ZN_4 DAYLT SENSOR 2,1.0183E-003
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_2,PERIMETER_ZN_4 DAYLT SENSOR 1,4.4826E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_2,PERIMETER_ZN_4 DAYLT SENSOR 2,1.9395E-003
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_3,PERIMETER_ZN_4 DAYLT SENSOR 1,3.4698E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_3,PERIMETER_ZN_4 DAYLT SENSOR 2,6.2879E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_3,PERIMETER_ZN_4 DAYLT SENSOR 1,3.0358E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_3,PERIMETER_ZN_4 DAYLT SENSOR 2,5.3983E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_3,PERIMETER_ZN_4 DAYLT SENSOR 1,2.2491E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_3,PERIMETER_ZN_4 DAYLT SENSOR 2,3.5512E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_3,PERIMETER_ZN_4 DAYLT SENSOR 1,3.3392E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_3,PERIMETER_ZN_4 DAYLT SENSOR 2,4.9853E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_4,PERIMETER_ZN_4 DAYLT SENSOR 1,3.3805E-004
+ Sky Daylight Factors,Clear Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_4,PERIMETER_ZN_4 DAYLT SENSOR 2,3.6498E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_4,PERIMETER_ZN_4 DAYLT SENSOR 1,2.9601E-004
+ Sky Daylight Factors,Clear Turbid Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_4,PERIMETER_ZN_4 DAYLT SENSOR 2,3.1859E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_4,PERIMETER_ZN_4 DAYLT SENSOR 1,2.2087E-004
+ Sky Daylight Factors,Intermediate Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_4,PERIMETER_ZN_4 DAYLT SENSOR 2,2.3273E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_4,PERIMETER_ZN_4 DAYLT SENSOR 1,3.2987E-004
+ Sky Daylight Factors,Overcast Sky,08/21,PERIMETER_ZN_4 ZN DAYLIGHTINGCONTROLS,PERIMETER_ZN_4 ZN,PERIMETER_ZN_4_WALL_WEST_WINDOW_4,PERIMETER_ZN_4 DAYLT SENSOR 2,3.4205E-004
+! <Zone Sizing Information>, Zone Name, Load Type, Calc Des Load {W}, User Des Load {W}, Calc Des Air Flow Rate {m3/s}, User Des Air Flow Rate {m3/s}, Design Day Name, Date/Time of Peak, Temperature at Peak {C}, Humidity Ratio at Peak {kgWater/kgDryAir}, Floor Area {m2}, # Occupants, Calc Outdoor Air Flow Rate {m3/s}, Calc DOAS Heat Addition Rate {W}
+ Zone Sizing Information, CORE_ZN ZN, Cooling, 3679.72076, 4415.66492, 0.26968, 0.32361, TAMPA-MACDILL.AFB_FL_USA ANN CLG .4% CONDNS DB=>MWB, 8/21 17:20:00, 32.53067, 1.65338E-002, 149.65740, 9.02103, 6.46221E-002, 0.00000
+ Zone Sizing Information, CORE_ZN ZN, Heating, 611.10300, 733.32360, 1.72410E-002, 6.46221E-002, TAMPA-MACDILL.AFB_FL_USA ANN HTG 99.6% CONDNS DB, 1/21 24:00:00, 4.60000, 5.25715E-003, 149.65740, 9.02103, 6.46221E-002, 0.00000
+ Zone Sizing Information, PERIMETER_ZN_1 ZN, Cooling, 4176.91263, 5012.29516, 0.30613, 0.36736, TAMPA-MACDILL.AFB_FL_USA ANN CLG .4% CONDNS DB=>MWB, 8/21 15:10:00, 33.82100, 1.65362E-002, 113.45000, 6.83853, 4.89877E-002, 0.00000
+ Zone Sizing Information, PERIMETER_ZN_1 ZN, Heating, 1869.33114, 2243.19737, 5.27386E-002, 6.32863E-002, TAMPA-MACDILL.AFB_FL_USA ANN HTG 99.6% CONDNS DB, 1/21 24:00:00, 4.60000, 5.25715E-003, 113.45000, 6.83853, 4.89877E-002, 0.00000
+ Zone Sizing Information, PERIMETER_ZN_2 ZN, Cooling, 3854.31702, 4625.18043, 0.28247, 0.33896, TAMPA-MACDILL.AFB_FL_USA ANN CLG .4% CONDNS DB=>MWB, 8/21 09:50:00, 30.67417, 1.65303E-002, 67.30000, 4.05670, 2.90601E-002, 0.00000
+ Zone Sizing Information, PERIMETER_ZN_2 ZN, Heating, 1143.28758, 1371.94509, 3.22550E-002, 3.87060E-002, TAMPA-MACDILL.AFB_FL_USA ANN HTG 99.6% CONDNS DB, 1/21 24:00:00, 4.60000, 5.25715E-003, 67.30000, 4.05670, 2.90601E-002, 0.00000
+ Zone Sizing Information, PERIMETER_ZN_3 ZN, Cooling, 4059.41866, 4871.30239, 0.29752, 0.35702, TAMPA-MACDILL.AFB_FL_USA ANN CLG .4% CONDNS DB=>MWB, 8/21 15:20:00, 33.74200, 1.65361E-002, 113.45000, 6.83853, 4.89877E-002, 0.00000
+ Zone Sizing Information, PERIMETER_ZN_3 ZN, Heating, 1892.26879, 2270.72255, 5.33857E-002, 6.40628E-002, TAMPA-MACDILL.AFB_FL_USA ANN HTG 99.6% CONDNS DB, 1/21 24:00:00, 4.60000, 5.25715E-003, 113.45000, 6.83853, 4.89877E-002, 0.00000
+ Zone Sizing Information, PERIMETER_ZN_4 ZN, Cooling, 4187.81741, 5025.38089, 0.30692, 0.36830, TAMPA-MACDILL.AFB_FL_USA ANN CLG .4% CONDNS DB=>MWB, 8/21 17:20:00, 32.53067, 1.65338E-002, 67.30000, 4.05670, 2.90601E-002, 0.00000
+ Zone Sizing Information, PERIMETER_ZN_4 ZN, Heating, 1131.12136, 1357.34563, 3.19117E-002, 3.82941E-002, TAMPA-MACDILL.AFB_FL_USA ANN HTG 99.6% CONDNS DB, 1/21 24:00:00, 4.60000, 5.25715E-003, 67.30000, 4.05670, 2.90601E-002, 0.00000
+! <System Sizing Information>, System Name, Load Type, Peak Load Kind, User Design Capacity, Calc Des Air Flow Rate [m3/s], User Des Air Flow Rate [m3/s], Design Day Name, Date/Time of Peak
+ System Sizing Information, CORE_ZN ZN PSZ-AC-1, Cooling, Sensible, 5074.58, 0.32361, 0.32361, TAMPA-MACDILL.AFB_FL_USA ANN CLG .4% CONDNS DB=>MWB, 8/21 05:00:00
+ System Sizing Information, CORE_ZN ZN PSZ-AC-1, Heating, Sensible, 3547.05, 6.46221E-002, 6.46221E-002, TAMPA-MACDILL.AFB_FL_USA ANN HTG 99.6% CONDNS DB, 1/21 00:10:00
+ System Sizing Information, PERIMETER_ZN_1 ZN PSZ-AC-2, Cooling, Sensible, 5526.01, 0.36736, 0.36736, TAMPA-MACDILL.AFB_FL_USA ANN CLG .4% CONDNS DB=>MWB, 8/21 05:00:00
+ System Sizing Information, PERIMETER_ZN_1 ZN PSZ-AC-2, Heating, Sensible, 3188.33, 6.32863E-002, 6.32863E-002, TAMPA-MACDILL.AFB_FL_USA ANN HTG 99.6% CONDNS DB, 1/21 24:00:00
+ System Sizing Information, PERIMETER_ZN_2 ZN PSZ-AC-3, Cooling, Sensible, 4792.04, 0.33896, 0.33896, TAMPA-MACDILL.AFB_FL_USA ANN CLG .4% CONDNS DB=>MWB, 8/21 05:00:00
+ System Sizing Information, PERIMETER_ZN_2 ZN PSZ-AC-3, Heating, Sensible, 1932.01, 3.87060E-002, 3.87060E-002, TAMPA-MACDILL.AFB_FL_USA ANN HTG 99.6% CONDNS DB, 1/21 24:00:00
+ System Sizing Information, PERIMETER_ZN_3 ZN PSZ-AC-4, Cooling, Sensible, 5383.08, 0.35702, 0.35702, TAMPA-MACDILL.AFB_FL_USA ANN CLG .4% CONDNS DB=>MWB, 8/21 05:00:00
+ System Sizing Information, PERIMETER_ZN_3 ZN PSZ-AC-4, Heating, Sensible, 3215.45, 6.40628E-002, 6.40628E-002, TAMPA-MACDILL.AFB_FL_USA ANN HTG 99.6% CONDNS DB, 1/21 24:00:00
+ System Sizing Information, PERIMETER_ZN_4 ZN PSZ-AC-5, Cooling, Sensible, 5255.58, 0.36830, 0.36830, TAMPA-MACDILL.AFB_FL_USA ANN CLG .4% CONDNS DB=>MWB, 8/21 05:00:00
+ System Sizing Information, PERIMETER_ZN_4 ZN PSZ-AC-5, Heating, Sensible, 1917.62, 3.82941E-002, 3.82941E-002, TAMPA-MACDILL.AFB_FL_USA ANN HTG 99.6% CONDNS DB, 1/21 24:00:00
+! <Component Sizing Information>, Component Type, Component Name, Input Field Description, Value
+ Component Sizing Information, AirTerminal:SingleDuct:ConstantVolume:NoReheat, CORE_ZN ZN PSZ-AC-1 DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 0.32361
+ Component Sizing Information, AirTerminal:SingleDuct:ConstantVolume:NoReheat, PERIMETER_ZN_1 ZN PSZ-AC-2 DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 0.36736
+ Component Sizing Information, AirTerminal:SingleDuct:ConstantVolume:NoReheat, PERIMETER_ZN_2 ZN PSZ-AC-3 DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 0.33896
+ Component Sizing Information, AirTerminal:SingleDuct:ConstantVolume:NoReheat, PERIMETER_ZN_3 ZN PSZ-AC-4 DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 0.35702
+ Component Sizing Information, AirTerminal:SingleDuct:ConstantVolume:NoReheat, PERIMETER_ZN_4 ZN PSZ-AC-5 DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 0.36830
+ Component Sizing Information, AirLoopHVAC, CORE_ZN ZN PSZ-AC-1, Sum of Air Terminal Maximum Heating Flow Rates [m3/s], 0.32361
+ Component Sizing Information, AirLoopHVAC, CORE_ZN ZN PSZ-AC-1, Sum of Air Terminal Minimum Heating Flow Rates [m3/s], 0.32361
+ Component Sizing Information, AirLoopHVAC, CORE_ZN ZN PSZ-AC-1, Sum of Air Terminal Maximum Flow Rates [m3/s], 0.32361
+ Component Sizing Information, AirLoopHVAC, CORE_ZN ZN PSZ-AC-1, Adjusted Heating Design Air Flow Rate [m3/s], 0.32361
+ Component Sizing Information, AirLoopHVAC, CORE_ZN ZN PSZ-AC-1, Adjusted Cooling Design Air Flow Rate [m3/s], 0.32361
+ Component Sizing Information, AirLoopHVAC, CORE_ZN ZN PSZ-AC-1, Adjusted Main Design Air Flow Rate [m3/s], 0.32361
+ Component Sizing Information, AirLoopHVAC, CORE_ZN ZN PSZ-AC-1, User Heating Air Flow Ratio [], 1.00000
+ Component Sizing Information, AirLoopHVAC, CORE_ZN ZN PSZ-AC-1, Calculated Heating Air Flow Ratio [], 1.00000
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_1 ZN PSZ-AC-2, Sum of Air Terminal Maximum Heating Flow Rates [m3/s], 0.36736
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_1 ZN PSZ-AC-2, Sum of Air Terminal Minimum Heating Flow Rates [m3/s], 0.36736
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_1 ZN PSZ-AC-2, Sum of Air Terminal Maximum Flow Rates [m3/s], 0.36736
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_1 ZN PSZ-AC-2, Adjusted Heating Design Air Flow Rate [m3/s], 0.36736
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_1 ZN PSZ-AC-2, Adjusted Cooling Design Air Flow Rate [m3/s], 0.36736
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_1 ZN PSZ-AC-2, Adjusted Main Design Air Flow Rate [m3/s], 0.36736
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_1 ZN PSZ-AC-2, User Heating Air Flow Ratio [], 1.00000
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_1 ZN PSZ-AC-2, Calculated Heating Air Flow Ratio [], 1.00000
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_2 ZN PSZ-AC-3, Sum of Air Terminal Maximum Heating Flow Rates [m3/s], 0.33896
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_2 ZN PSZ-AC-3, Sum of Air Terminal Minimum Heating Flow Rates [m3/s], 0.33896
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_2 ZN PSZ-AC-3, Sum of Air Terminal Maximum Flow Rates [m3/s], 0.33896
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_2 ZN PSZ-AC-3, Adjusted Heating Design Air Flow Rate [m3/s], 0.33896
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_2 ZN PSZ-AC-3, Adjusted Cooling Design Air Flow Rate [m3/s], 0.33896
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_2 ZN PSZ-AC-3, Adjusted Main Design Air Flow Rate [m3/s], 0.33896
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_2 ZN PSZ-AC-3, User Heating Air Flow Ratio [], 1.00000
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_2 ZN PSZ-AC-3, Calculated Heating Air Flow Ratio [], 1.00000
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_3 ZN PSZ-AC-4, Sum of Air Terminal Maximum Heating Flow Rates [m3/s], 0.35702
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_3 ZN PSZ-AC-4, Sum of Air Terminal Minimum Heating Flow Rates [m3/s], 0.35702
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_3 ZN PSZ-AC-4, Sum of Air Terminal Maximum Flow Rates [m3/s], 0.35702
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_3 ZN PSZ-AC-4, Adjusted Heating Design Air Flow Rate [m3/s], 0.35702
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_3 ZN PSZ-AC-4, Adjusted Cooling Design Air Flow Rate [m3/s], 0.35702
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_3 ZN PSZ-AC-4, Adjusted Main Design Air Flow Rate [m3/s], 0.35702
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_3 ZN PSZ-AC-4, User Heating Air Flow Ratio [], 1.00000
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_3 ZN PSZ-AC-4, Calculated Heating Air Flow Ratio [], 1.00000
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_4 ZN PSZ-AC-5, Sum of Air Terminal Maximum Heating Flow Rates [m3/s], 0.36830
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_4 ZN PSZ-AC-5, Sum of Air Terminal Minimum Heating Flow Rates [m3/s], 0.36830
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_4 ZN PSZ-AC-5, Sum of Air Terminal Maximum Flow Rates [m3/s], 0.36830
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_4 ZN PSZ-AC-5, Adjusted Heating Design Air Flow Rate [m3/s], 0.36830
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_4 ZN PSZ-AC-5, Adjusted Cooling Design Air Flow Rate [m3/s], 0.36830
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_4 ZN PSZ-AC-5, Adjusted Main Design Air Flow Rate [m3/s], 0.36830
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_4 ZN PSZ-AC-5, User Heating Air Flow Ratio [], 1.00000
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_4 ZN PSZ-AC-5, Calculated Heating Air Flow Ratio [], 1.00000
+ Component Sizing Information, AirLoopHVAC, CORE_ZN ZN PSZ-AC-1, Design Supply Air Flow Rate [m3/s], 0.32361
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_1 ZN PSZ-AC-2, Design Supply Air Flow Rate [m3/s], 0.36736
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_2 ZN PSZ-AC-3, Design Supply Air Flow Rate [m3/s], 0.33896
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_3 ZN PSZ-AC-4, Design Supply Air Flow Rate [m3/s], 0.35702
+ Component Sizing Information, AirLoopHVAC, PERIMETER_ZN_4 ZN PSZ-AC-5, Design Supply Air Flow Rate [m3/s], 0.36830
+!<Controller:MechanicalVentilation>,Name,Availability Schedule Name,Demand Controlled Ventilation {Yes/No},System Outdoor Air Method,Zone Maximum Outdoor Air Fraction,Number of Zones,Zone Name,DSOA Name,DSZAD Name
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 5,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,CORE_ZN ZN,OFFICE WHOLEBUILDING - SM OFFICE VENTILATION,
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 1,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,PERIMETER_ZN_1 ZN,OFFICE WHOLEBUILDING - SM OFFICE VENTILATION,
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 2,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,PERIMETER_ZN_2 ZN,OFFICE WHOLEBUILDING - SM OFFICE VENTILATION,
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 3,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,PERIMETER_ZN_3 ZN,OFFICE WHOLEBUILDING - SM OFFICE VENTILATION,
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 4,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,PERIMETER_ZN_4 ZN,OFFICE WHOLEBUILDING - SM OFFICE VENTILATION,
+ Component Sizing Information, Controller:OutdoorAir, CORE_ZN ZN PSZ-AC-1 OA SYSTEM CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 0.32361
+ Component Sizing Information, Controller:OutdoorAir, CORE_ZN ZN PSZ-AC-1 OA SYSTEM CONTROLLER, Minimum Outdoor Air Flow Rate [m3/s], 6.46221E-002
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, CORE_ZN ZN PSZ-AC-1 UNITARY HP, Design Size Supply Air Flow Rate [m3/s], 0.32361
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, CORE_ZN ZN PSZ-AC-1 UNITARY HP, Design Size Heating Supply Air Flow Rate [m3/s], 0.32361
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, CORE_ZN ZN PSZ-AC-1 UNITARY HP, Design Size Cooling Supply Air Flow Rate [m3/s], 0.32361
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, CORE_ZN ZN PSZ-AC-1 UNITARY HP, User-Specified No Load Supply Air Flow Rate [m3/s], 0.00000
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, CORE_ZN ZN PSZ-AC-1 UNITARY HP, Design Size Nominal Cooling Capacity [W], 8036.11648
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, CORE_ZN ZN PSZ-AC-1 UNITARY HP, Design Size Nominal Heating Capacity [W], 8036.11648
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, CORE_ZN ZN PSZ-AC-1 UNITARY HP, Design Size Maximum Supply Air Temperature [C], 50.00000
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, CORE_ZN ZN PSZ-AC-1 UNITARY HP, User-Specified Maximum Supply Air Temperature [C], 80.00000
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, CORE_ZN ZN PSZ-AC-1 UNITARY HP, User-Specified Supplemental Heating Coil Nominal Capacity [W], 8036.11648
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, CORE_ZN ZN PSZ-AC-1 UNITARY HP, Fraction of Supply Air Flow That Goes Through the Controlling Zone, 1.00000
+ Component Sizing Information, Fan:OnOff, CORE_ZN ZN PSZ-AC-1 FAN, Design Size Maximum Flow Rate [m3/s], 0.32361
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, CORE_ZN ZN PSZ-AC-1 1SPD DX HP CLG COIL 27KBTU/HR 13.0SEER, Design Size Rated Air Flow Rate [m3/s], 0.32361
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, CORE_ZN ZN PSZ-AC-1 1SPD DX HP CLG COIL 27KBTU/HR 13.0SEER, Design Size Gross Rated Total Cooling Capacity [W], 8036.11648
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, CORE_ZN ZN PSZ-AC-1 1SPD DX HP CLG COIL 27KBTU/HR 13.0SEER, Design Size Gross Rated Sensible Heat Ratio, 0.70108
+! <DX Cooling Coil Standard Rating Information>, Component Type, Component Name, Standard Rating (Net) Cooling Capacity {W}, Standard Rated Net COP {W/W}, EER {Btu/W-h}, SEER User {Btu/W-h}, SEER Standard {Btu/W-h}, IEER {Btu/W-h}
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, CORE_ZN ZN PSZ-AC-1 1SPD DX HP CLG COIL 27KBTU/HR 13.0SEER, 7784.6, 3.38, 11.52, 12.22, 11.56, 11.70
+ Component Sizing Information, Coil:Heating:DX:SingleSpeed, CORE_ZN ZN HP HTG COIL 27 CLG KBTU/HR 7.7HSPF, Design Size Rated Air Flow Rate [m3/s], 0.32361
+ Component Sizing Information, Coil:Heating:DX:SingleSpeed, CORE_ZN ZN HP HTG COIL 27 CLG KBTU/HR 7.7HSPF, Design Size Gross Rated Heating Capacity [W], 8036.11648
+! <DX Heating Coil Standard Rating Information>, Component Type, Component Name, High Temperature Heating (net) Rating Capacity {W}, Low Temperature Heating (net) Rating Capacity {W}, HSPF {Btu/W-h}, Region Number
+ DX Heating Coil Standard Rating Information, Coil:Heating:DX:SingleSpeed, CORE_ZN ZN HP HTG COIL 27 CLG KBTU/HR 7.7HSPF, 8279.2, 4089.6, 7.12, 4
+ Component Sizing Information, Coil:Heating:Fuel, CORE_ZN ZN PSZ-AC-1 GAS BACKUP HTG COIL 27KBTU/HR 0.8 THERMAL EFF, Design Size Nominal Capacity [W], 8036.11648
+ Component Sizing Information, Controller:OutdoorAir, PERIMETER_ZN_1 ZN PSZ-AC-2 OA SYSTEM CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 0.36736
+ Component Sizing Information, Controller:OutdoorAir, PERIMETER_ZN_1 ZN PSZ-AC-2 OA SYSTEM CONTROLLER, Minimum Outdoor Air Flow Rate [m3/s], 4.89877E-002
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_1 ZN PSZ-AC-2 UNITARY HP, Design Size Supply Air Flow Rate [m3/s], 0.36736
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_1 ZN PSZ-AC-2 UNITARY HP, Design Size Heating Supply Air Flow Rate [m3/s], 0.36736
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_1 ZN PSZ-AC-2 UNITARY HP, Design Size Cooling Supply Air Flow Rate [m3/s], 0.36736
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_1 ZN PSZ-AC-2 UNITARY HP, User-Specified No Load Supply Air Flow Rate [m3/s], 0.00000
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_1 ZN PSZ-AC-2 UNITARY HP, Design Size Nominal Cooling Capacity [W], 9122.35934
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_1 ZN PSZ-AC-2 UNITARY HP, Design Size Nominal Heating Capacity [W], 9122.35934
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_1 ZN PSZ-AC-2 UNITARY HP, Design Size Maximum Supply Air Temperature [C], 50.00000
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_1 ZN PSZ-AC-2 UNITARY HP, User-Specified Maximum Supply Air Temperature [C], 80.00000
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_1 ZN PSZ-AC-2 UNITARY HP, User-Specified Supplemental Heating Coil Nominal Capacity [W], 9122.35934
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_1 ZN PSZ-AC-2 UNITARY HP, Fraction of Supply Air Flow That Goes Through the Controlling Zone, 1.00000
+ Component Sizing Information, Fan:OnOff, PERIMETER_ZN_1 ZN PSZ-AC-2 FAN, Design Size Maximum Flow Rate [m3/s], 0.36736
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, PERIMETER_ZN_1 ZN PSZ-AC-2 1SPD DX HP CLG COIL 31KBTU/HR 13.0SEER, Design Size Rated Air Flow Rate [m3/s], 0.36736
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, PERIMETER_ZN_1 ZN PSZ-AC-2 1SPD DX HP CLG COIL 31KBTU/HR 13.0SEER, Design Size Gross Rated Total Cooling Capacity [W], 9122.35934
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, PERIMETER_ZN_1 ZN PSZ-AC-2 1SPD DX HP CLG COIL 31KBTU/HR 13.0SEER, Design Size Gross Rated Sensible Heat Ratio, 0.70108
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, PERIMETER_ZN_1 ZN PSZ-AC-2 1SPD DX HP CLG COIL 31KBTU/HR 13.0SEER, 8836.8, 3.38, 11.52, 12.22, 11.56, 11.70
+ Component Sizing Information, Coil:Heating:DX:SingleSpeed, PERIMETER_ZN_1 ZN HP HTG COIL 31 CLG KBTU/HR 7.7HSPF, Design Size Rated Air Flow Rate [m3/s], 0.36736
+ Component Sizing Information, Coil:Heating:DX:SingleSpeed, PERIMETER_ZN_1 ZN HP HTG COIL 31 CLG KBTU/HR 7.7HSPF, Design Size Gross Rated Heating Capacity [W], 9122.35934
+ DX Heating Coil Standard Rating Information, Coil:Heating:DX:SingleSpeed, PERIMETER_ZN_1 ZN HP HTG COIL 31 CLG KBTU/HR 7.7HSPF, 9398.3, 4642.4, 7.12, 4
+ Component Sizing Information, Coil:Heating:Fuel, PERIMETER_ZN_1 ZN PSZ-AC-2 GAS BACKUP HTG COIL 31KBTU/HR 0.8 THERMAL EFF, Design Size Nominal Capacity [W], 9122.35934
+ Component Sizing Information, Controller:OutdoorAir, PERIMETER_ZN_2 ZN PSZ-AC-3 OA SYSTEM CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 0.33896
+ Component Sizing Information, Controller:OutdoorAir, PERIMETER_ZN_2 ZN PSZ-AC-3 OA SYSTEM CONTROLLER, Minimum Outdoor Air Flow Rate [m3/s], 2.90601E-002
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_2 ZN PSZ-AC-3 UNITARY HP, Design Size Supply Air Flow Rate [m3/s], 0.33896
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_2 ZN PSZ-AC-3 UNITARY HP, Design Size Heating Supply Air Flow Rate [m3/s], 0.33896
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_2 ZN PSZ-AC-3 UNITARY HP, Design Size Cooling Supply Air Flow Rate [m3/s], 0.33896
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_2 ZN PSZ-AC-3 UNITARY HP, User-Specified No Load Supply Air Flow Rate [m3/s], 0.00000
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_2 ZN PSZ-AC-3 UNITARY HP, Design Size Nominal Cooling Capacity [W], 8417.28978
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_2 ZN PSZ-AC-3 UNITARY HP, Design Size Nominal Heating Capacity [W], 8417.28978
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_2 ZN PSZ-AC-3 UNITARY HP, Design Size Maximum Supply Air Temperature [C], 50.00000
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_2 ZN PSZ-AC-3 UNITARY HP, User-Specified Maximum Supply Air Temperature [C], 80.00000
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_2 ZN PSZ-AC-3 UNITARY HP, User-Specified Supplemental Heating Coil Nominal Capacity [W], 8417.28978
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_2 ZN PSZ-AC-3 UNITARY HP, Fraction of Supply Air Flow That Goes Through the Controlling Zone, 1.00000
+ Component Sizing Information, Fan:OnOff, PERIMETER_ZN_2 ZN PSZ-AC-3 FAN, Design Size Maximum Flow Rate [m3/s], 0.33896
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, PERIMETER_ZN_2 ZN PSZ-AC-3 1SPD DX HP CLG COIL 29KBTU/HR 13.0SEER, Design Size Rated Air Flow Rate [m3/s], 0.33896
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, PERIMETER_ZN_2 ZN PSZ-AC-3 1SPD DX HP CLG COIL 29KBTU/HR 13.0SEER, Design Size Gross Rated Total Cooling Capacity [W], 8417.28978
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, PERIMETER_ZN_2 ZN PSZ-AC-3 1SPD DX HP CLG COIL 29KBTU/HR 13.0SEER, Design Size Gross Rated Sensible Heat Ratio, 0.70108
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, PERIMETER_ZN_2 ZN PSZ-AC-3 1SPD DX HP CLG COIL 29KBTU/HR 13.0SEER, 8153.8, 3.38, 11.52, 12.22, 11.56, 11.70
+ Component Sizing Information, Coil:Heating:DX:SingleSpeed, PERIMETER_ZN_2 ZN HP HTG COIL 29 CLG KBTU/HR 7.7HSPF, Design Size Rated Air Flow Rate [m3/s], 0.33896
+ Component Sizing Information, Coil:Heating:DX:SingleSpeed, PERIMETER_ZN_2 ZN HP HTG COIL 29 CLG KBTU/HR 7.7HSPF, Design Size Gross Rated Heating Capacity [W], 8417.28978
+ DX Heating Coil Standard Rating Information, Coil:Heating:DX:SingleSpeed, PERIMETER_ZN_2 ZN HP HTG COIL 29 CLG KBTU/HR 7.7HSPF, 8671.9, 4283.6, 7.13, 4
+ Component Sizing Information, Coil:Heating:Fuel, PERIMETER_ZN_2 ZN PSZ-AC-3 GAS BACKUP HTG COIL 29KBTU/HR 0.8 THERMAL EFF, Design Size Nominal Capacity [W], 8417.28978
+ Component Sizing Information, Controller:OutdoorAir, PERIMETER_ZN_3 ZN PSZ-AC-4 OA SYSTEM CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 0.35702
+ Component Sizing Information, Controller:OutdoorAir, PERIMETER_ZN_3 ZN PSZ-AC-4 OA SYSTEM CONTROLLER, Minimum Outdoor Air Flow Rate [m3/s], 4.89877E-002
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_3 ZN PSZ-AC-4 UNITARY HP, Design Size Supply Air Flow Rate [m3/s], 0.35702
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_3 ZN PSZ-AC-4 UNITARY HP, Design Size Heating Supply Air Flow Rate [m3/s], 0.35702
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_3 ZN PSZ-AC-4 UNITARY HP, Design Size Cooling Supply Air Flow Rate [m3/s], 0.35702
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_3 ZN PSZ-AC-4 UNITARY HP, User-Specified No Load Supply Air Flow Rate [m3/s], 0.00000
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_3 ZN PSZ-AC-4 UNITARY HP, Design Size Nominal Cooling Capacity [W], 8865.76120
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_3 ZN PSZ-AC-4 UNITARY HP, Design Size Nominal Heating Capacity [W], 8865.76120
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_3 ZN PSZ-AC-4 UNITARY HP, Design Size Maximum Supply Air Temperature [C], 50.00000
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_3 ZN PSZ-AC-4 UNITARY HP, User-Specified Maximum Supply Air Temperature [C], 80.00000
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_3 ZN PSZ-AC-4 UNITARY HP, User-Specified Supplemental Heating Coil Nominal Capacity [W], 8865.76120
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_3 ZN PSZ-AC-4 UNITARY HP, Fraction of Supply Air Flow That Goes Through the Controlling Zone, 1.00000
+ Component Sizing Information, Fan:OnOff, PERIMETER_ZN_3 ZN PSZ-AC-4 FAN, Design Size Maximum Flow Rate [m3/s], 0.35702
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, PERIMETER_ZN_3 ZN PSZ-AC-4 1SPD DX HP CLG COIL 30KBTU/HR 13.0SEER, Design Size Rated Air Flow Rate [m3/s], 0.35702
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, PERIMETER_ZN_3 ZN PSZ-AC-4 1SPD DX HP CLG COIL 30KBTU/HR 13.0SEER, Design Size Gross Rated Total Cooling Capacity [W], 8865.76120
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, PERIMETER_ZN_3 ZN PSZ-AC-4 1SPD DX HP CLG COIL 30KBTU/HR 13.0SEER, Design Size Gross Rated Sensible Heat Ratio, 0.70108
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, PERIMETER_ZN_3 ZN PSZ-AC-4 1SPD DX HP CLG COIL 30KBTU/HR 13.0SEER, 8588.2, 3.38, 11.52, 12.22, 11.56, 11.70
+ Component Sizing Information, Coil:Heating:DX:SingleSpeed, PERIMETER_ZN_3 ZN HP HTG COIL 30 CLG KBTU/HR 7.7HSPF, Design Size Rated Air Flow Rate [m3/s], 0.35702
+ Component Sizing Information, Coil:Heating:DX:SingleSpeed, PERIMETER_ZN_3 ZN HP HTG COIL 30 CLG KBTU/HR 7.7HSPF, Design Size Gross Rated Heating Capacity [W], 8865.76120
+ DX Heating Coil Standard Rating Information, Coil:Heating:DX:SingleSpeed, PERIMETER_ZN_3 ZN HP HTG COIL 30 CLG KBTU/HR 7.7HSPF, 9133.9, 4511.9, 7.12, 4
+ Component Sizing Information, Coil:Heating:Fuel, PERIMETER_ZN_3 ZN PSZ-AC-4 GAS BACKUP HTG COIL 30KBTU/HR 0.8 THERMAL EFF, Design Size Nominal Capacity [W], 8865.76120
+ Component Sizing Information, Controller:OutdoorAir, PERIMETER_ZN_4 ZN PSZ-AC-5 OA SYSTEM CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 0.36830
+ Component Sizing Information, Controller:OutdoorAir, PERIMETER_ZN_4 ZN PSZ-AC-5 OA SYSTEM CONTROLLER, Minimum Outdoor Air Flow Rate [m3/s], 2.90601E-002
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_4 ZN PSZ-AC-5 UNITARY HP, Design Size Supply Air Flow Rate [m3/s], 0.36830
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_4 ZN PSZ-AC-5 UNITARY HP, Design Size Heating Supply Air Flow Rate [m3/s], 0.36830
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_4 ZN PSZ-AC-5 UNITARY HP, Design Size Cooling Supply Air Flow Rate [m3/s], 0.36830
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_4 ZN PSZ-AC-5 UNITARY HP, User-Specified No Load Supply Air Flow Rate [m3/s], 0.00000
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_4 ZN PSZ-AC-5 UNITARY HP, Design Size Nominal Cooling Capacity [W], 9145.77774
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_4 ZN PSZ-AC-5 UNITARY HP, Design Size Nominal Heating Capacity [W], 9145.77774
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_4 ZN PSZ-AC-5 UNITARY HP, Design Size Maximum Supply Air Temperature [C], 50.00000
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_4 ZN PSZ-AC-5 UNITARY HP, User-Specified Maximum Supply Air Temperature [C], 80.00000
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_4 ZN PSZ-AC-5 UNITARY HP, User-Specified Supplemental Heating Coil Nominal Capacity [W], 9145.77774
+ Component Sizing Information, AirLoopHVAC:UnitarySystem, PERIMETER_ZN_4 ZN PSZ-AC-5 UNITARY HP, Fraction of Supply Air Flow That Goes Through the Controlling Zone, 1.00000
+ Component Sizing Information, Fan:OnOff, PERIMETER_ZN_4 ZN PSZ-AC-5 FAN, Design Size Maximum Flow Rate [m3/s], 0.36830
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, PERIMETER_ZN_4 ZN PSZ-AC-5 1SPD DX HP CLG COIL 31KBTU/HR 13.0SEER, Design Size Rated Air Flow Rate [m3/s], 0.36830
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, PERIMETER_ZN_4 ZN PSZ-AC-5 1SPD DX HP CLG COIL 31KBTU/HR 13.0SEER, Design Size Gross Rated Total Cooling Capacity [W], 9145.77774
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, PERIMETER_ZN_4 ZN PSZ-AC-5 1SPD DX HP CLG COIL 31KBTU/HR 13.0SEER, Design Size Gross Rated Sensible Heat Ratio, 0.70108
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, PERIMETER_ZN_4 ZN PSZ-AC-5 1SPD DX HP CLG COIL 31KBTU/HR 13.0SEER, 8859.5, 3.38, 11.52, 12.22, 11.56, 11.70
+ Component Sizing Information, Coil:Heating:DX:SingleSpeed, PERIMETER_ZN_4 ZN HP HTG COIL 31 CLG KBTU/HR 7.7HSPF, Design Size Rated Air Flow Rate [m3/s], 0.36830
+ Component Sizing Information, Coil:Heating:DX:SingleSpeed, PERIMETER_ZN_4 ZN HP HTG COIL 31 CLG KBTU/HR 7.7HSPF, Design Size Gross Rated Heating Capacity [W], 9145.77774
+ DX Heating Coil Standard Rating Information, Coil:Heating:DX:SingleSpeed, PERIMETER_ZN_4 ZN HP HTG COIL 31 CLG KBTU/HR 7.7HSPF, 9422.4, 4654.4, 7.12, 4
+ Component Sizing Information, Coil:Heating:Fuel, PERIMETER_ZN_4 ZN PSZ-AC-5 GAS BACKUP HTG COIL 31KBTU/HR 0.8 THERMAL EFF, Design Size Nominal Capacity [W], 9145.77774
+Water Heater Information,WaterHeater:Mixed,40GAL ELECTRICITY WATER HEATER - 40KBTU/HR 1.0 THERM EFF,0.1514,11722.8,0.981,0.4610
+ Component Sizing Information, PlantLoop, MAIN SERVICE WATER LOOP, Maximum Loop Flow Rate [m3/s], 4.03777E-006
+ Component Sizing Information, PlantLoop, MAIN SERVICE WATER LOOP, Plant Loop Volume [m3], 4.84533E-004
+ Component Sizing Information, Pump:VariableSpeed, MAIN SERVICE WATER LOOP WATER MAINS PRESSURE DRIVEN, Design Flow Rate [m3/s], 4.03777E-006
+ Component Sizing Information, Pump:VariableSpeed, MAIN SERVICE WATER LOOP WATER MAINS PRESSURE DRIVEN, Design Power Consumption [W], 6.05454E-009
+ Component Sizing Information, WaterHeater:Mixed, 40GAL ELECTRICITY WATER HEATER - 40KBTU/HR 1.0 THERM EFF, Use Side Design Flow Rate [m3/s], 4.03777E-006
+! <Environment>,Environment Name,Environment Type, Start Date, End Date, Start DayOfWeek, Duration {#days}, Source:Start DayOfWeek,  Use Daylight Saving, Use Holidays, Apply Weekend Holiday Rule,  Use Rain Values, Use Snow Values, Sky Temperature Model
+! <Environment:Special Days>, Special Day Name, Special Day Type, Source, Start Date, Duration {#days}
+! <Environment:Daylight Saving>, Daylight Saving Indicator, Source, Start Date, End Date
+! <Environment:WarmupDays>, NumberofWarmupDays
+Environment,RUN PERIOD 1,WeatherFileRunPeriod,01/01/2006,12/31/2006,Sunday,365,Use RunPeriod Specified Day,No,No,No,Yes,Yes,Clark and Allen
+Environment:Daylight Saving,Yes,InputFile,03/12,11/05
+Environment:WarmupDays, 13
+! <Tabular Report>,Style,Unit Conversion
+Tabular Report,HTML,None
+! <Warmup Convergence Information>,Zone Name,Environment Type/Name,Average Warmup Temperature Difference {deltaC},Std Dev Warmup Temperature Difference {deltaC},Max Temperature Pass/Fail Convergence,Min Temperature Pass/Fail Convergence,Average Warmup Load Difference {W},Std Dev Warmup Load Difference {W},Heating Load Pass/Fail Convergence,Cooling Load Pass/Fail Convergence
+ Warmup Convergence Information,ATTIC ZN,RunPeriod: RUN PERIOD 1,0.2339369277,0.1831351353,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
+ Warmup Convergence Information,CORE_ZN ZN,RunPeriod: RUN PERIOD 1,1.0994940373E-002,6.0766364456E-003,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
+ Warmup Convergence Information,PERIMETER_ZN_1 ZN,RunPeriod: RUN PERIOD 1,8.4210546021E-002,7.1160305447E-002,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
+ Warmup Convergence Information,PERIMETER_ZN_2 ZN,RunPeriod: RUN PERIOD 1,4.3228253553E-002,6.2354784699E-002,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
+ Warmup Convergence Information,PERIMETER_ZN_3 ZN,RunPeriod: RUN PERIOD 1,2.5874899036E-002,2.0167973535E-002,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
+ Warmup Convergence Information,PERIMETER_ZN_4 ZN,RunPeriod: RUN PERIOD 1,5.7763245155E-002,6.1610660607E-002,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
+! <Program Control Information:Threads/Parallel Sims>, Threading Supported,Maximum Number of Threads, Env Set Threads (OMP_NUM_THREADS), EP Env Set Threads (EP_OMP_NUM_THREADS), IDF Set Threads, Number of Threads Used (Interior Radiant Exchange), Number Nominal Surfaces, Number Parallel Sims
+Program Control:Threads/Parallel Sims, No,1, N/A, N/A, N/A, N/A, N/A, N/A
+End of Data
