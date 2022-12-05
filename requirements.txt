@@ -1,2 +1,4 @@
-eppy
 brickschema
+opyplus
+rdflib
+termcolor
