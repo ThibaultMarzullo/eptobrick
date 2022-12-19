@@ -207,7 +207,7 @@ class AddAlfalfaIOFromBRICK < OpenStudio::Measure::ModelMeasure
 
       # Make sure no names are too long
       model.modelObjects.each do |mobj|
-      mobj.setName(SecureRandom.hex(15))
+      mobj.setName(SecureRandom.hex(10))
       end
 
       temp_idf = File.join(temp_files, 'initial.idf')
